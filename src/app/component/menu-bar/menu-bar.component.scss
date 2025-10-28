@@ -1,0 +1,17 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+
+/* Create a custom class for your primary toolbar */
+.my-primary-toolbar {
+    /* Use the theme's CSS variables */
+    background-color: var(--mat-primary-container);
+    color: var(--mat-on-primary-container);
+}
+
+/* You could also use the "default" primary color, which is stronger */
+.my-primary-toolbar.strong {
+    background-color: var(--mat-primary);
+    color: var(--mat-on-primary);
+}
