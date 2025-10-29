@@ -28,9 +28,8 @@
 
     <hr class="border-t border-gray-300 mt-5 mb-5">
 
-    <!-- <div class="bg-white rounded-[5px] border border-gray-200 p-2"> -->
-
-    <table mat-table [dataSource]="dataSource">
+    <label class="block mb-1 text-sm font-medium text-gray-700">Tabel cu directive personalizate</label>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 resizable-table">
 
         <!-- Position Column -->
         <ng-container matColumnDef="position">
@@ -59,9 +58,5 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
-
-
-    <!-- </div> -->
 
 </div>

@@ -54,27 +54,47 @@
 
 
 
-/* handle-ul care apare la marginea header-ului */
-.column-resizer-handle {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 6px;
-    height: 100%;
-    cursor: col-resize;
-    user-select: none;
-    z-index: 10;
-}
+/* Pune acest cod în fișierul .css al componentei tale */
+:host ::ng-deep {
 
-/* asigură că header-ul suportă poziționare handle */
-th.mat-header-cell {
-    position: relative;
-    overflow: hidden;
-}
+    /* 1. Stilizarea mânerului de redimensionare (span-ul creat de directivă) */
+    .resize-handle {
+        position: absolute;
+        top: 0;
+        /* Îl poziționează jumătate înăuntru, jumătate în afară */
+        right: -2.5px;
+        bottom: 0;
+        /* Lățimea zonei pe care o poți "prinde" cu mouse-ul */
+        width: 5px;
+        cursor: col-resize;
+        /* Setează cursorul corect */
+        z-index: 10;
+        /* Să fie deasupra altor elemente */
 
-/* opțional: forțează layout fixed ca să fie predictibil */
-table.mat-table {
-    table-layout: fixed;
-    /* sau auto - testează ambele */
-    width: 100%;
+        /* Opțional: un indicator vizual la hover */
+        transition: background-color 0.2s ease;
+    }
+
+    // /* Indicatorul vizual la hover */
+    // .resize-handle:hover {
+    //     background-color: #007bff;
+    //     /* Sau culoarea ta de accent (ex. 'primary') */
+    // }
+
+    /* 2. Forțarea tabelului să respecte lățimile (FOARTE IMPORTANT) */
+    .resizable-table {
+        width: 100%;
+        /* Aceasta este regula CHEIE. Fără ea, tabelul ignoră lățimea <th> */
+        table-layout: fixed;
+        overflow: hidden;
+    }
+
+    /* 3. Asigurarea că mânerul nu e ascuns de header */
+    .mat-mdc-header-cell,
+    .mat-header-cell {
+        /* Directiva adaugă 'position: relative' automat, deci nu e nevoie aici */
+
+        /* Previne ascunderea mânerului. Unele teme Material au 'overflow: hidden' */
+        overflow: visible;
+    }
 }
