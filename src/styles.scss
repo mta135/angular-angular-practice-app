@@ -12,16 +12,23 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.column-resizer-handle {
+.resize-handle {
     position: absolute;
     top: 0;
-    right: 0;
+    right: -2.5px;
+    /* Îl poziționează jumătate înăuntru, jumătate în afară */
+    bottom: 0;
     width: 5px;
-    height: 100%;
     cursor: col-resize;
-    user-select: none;
+    /* Cursorul specific pentru redimensionare */
+    z-index: 10;
+
+    /* Opțional: un indicator vizual subtil */
+    /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
-th.mat-header-cell {
-    position: relative;
+/* Opțional: adaugă un efect la hover */
+.resize-handle:hover {
+    // background-color: #007bff;
+    /* Sau culoarea ta de accent */
 }
