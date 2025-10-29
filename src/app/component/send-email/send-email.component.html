@@ -3,9 +3,27 @@
 </h1> -->
 
 
-<div class="flex justify-center p-10 w-full">
+<div class="w-[50%] mx-auto mt-5 rounded-[10px] border border-gray-200 bg-white p-4">
 
-    <mat-card class="mat-card w-full" appearance="outlined">
-        <mat-card-content>Simple card</mat-card-content>
-    </mat-card>
+    <div class="w-[90%] mx-auto p-3 bg-white border border-gray-300 rounded-[10px]">
+
+        <label class="block mb-2 text-sm font-medium text-gray-700">
+            Încărcare Document
+        </label>
+
+        <div class="flex items-center space-x-4">
+            <input type="file" id="file-upload" class="sr-only" (change)="onFileSelected($event)">
+
+            <label for="file-upload"
+                class="cursor-pointer rounded-md bg-white px-3.5 py-2.5 text-sm font-medium text-gray-700  ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                Alege fișier
+            </label>
+
+            <span class="text-sm text-gray-600">
+                {{ selectedFile ? selectedFile.name : 'Niciun fișier selectat' }}
+            </span>
+        </div>
+
+    </div>
+
 </div>

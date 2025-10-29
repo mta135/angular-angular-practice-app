@@ -1,9 +1,4 @@
 <mat-toolbar class="custom-toolbar">
-    <button mat-icon-button>
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span style="margin-left: 5px;">Menu bar</span>
-    <span class="example-spacer"></span>
     <button routerLink="/home" mat-button>Home</button>
     <button [matMenuTriggerFor]="lbl1Master" mat-button>Master</button>
 
@@ -21,8 +16,5 @@
 
     <button [routerLink]="['/input']" mat-button>Input</button>
     <button mat-button>Contact</button>
-
-
-    <button mat-raised-button> Sign Up</button>
 
 </mat-toolbar>

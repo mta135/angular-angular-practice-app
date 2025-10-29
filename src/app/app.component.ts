@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuBarComponent } from "./component/menu-bar/menu-bar.component";
+import { SendEmailComponent } from "./component/send-email/send-email.component";
 
 
 @Component({
@@ -13,4 +14,3 @@ import { MenuBarComponent } from "./component/menu-bar/menu-bar.component";
 export class AppComponent {
   title = 'angular-practice';
 }
-``

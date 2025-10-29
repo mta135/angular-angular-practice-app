@@ -5,9 +5,6 @@ import { InputComponent } from './component/input/input.component';
 
 export const routes: Routes = [
 
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-
-    { path: 'home', component: HomeComponent },
-    { path: 'input', component: InputComponent },
-    { path: 'send-email', component: SendEmailComponent },
+    { path: '', redirectTo: '/sendemail', pathMatch: 'full' },
+    { path: 'sendemail', component: SendEmailComponent },
 ];
