@@ -7,12 +7,22 @@
     <button routerLink="/home" mat-button>Home</button>
     <button [matMenuTriggerFor]="lbl1Master" mat-button>Master</button>
 
-    <mat-menu #lbl1Master="matMenu">
-        <button mat-menu-item>Company</button>
+    <mat-menu #lbl1Master="matMenu" class="menu-master">
+        <button [matMenuTriggerFor]="lblcompany" mat-menu-item>Company</button>
         <button mat-menu-item>Customer</button>
         <button mat-menu-item>Product</button>
     </mat-menu>
 
+    <mat-menu #lblcompany="matMenu" class="menu-master" [xPosition]="'after'" [yPosition]="'below'">
+        <button mat-menu-item>Term</button>
+        <button mat-menu-item>Tax</button>
+        <button mat-menu-item>Currency</button>
+    </mat-menu>
+
     <button [routerLink]="['/input']" mat-button>Input</button>
     <button mat-button>Contact</button>
+
+
+    <button mat-raised-button> Sign Up</button>
+
 </mat-toolbar>
