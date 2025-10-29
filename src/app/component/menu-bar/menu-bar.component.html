@@ -1,3 +1,10 @@
-<mat-toolbar color="primary">
-    <button mat-button>Home</button>
+<mat-toolbar class="custom-toolbar">
+    <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span style="margin-left: 5px;">Menu bar</span>
+    <span class="example-spacer"></span>
+    <button routerLink="/home" mat-button>Home</button>
+    <button [routerLink]="['/input']" mat-button>Input</button>
+    <button mat-button>Contact</button>
 </mat-toolbar>

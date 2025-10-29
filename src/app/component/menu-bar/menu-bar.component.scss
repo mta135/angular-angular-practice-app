@@ -1,17 +1,29 @@
 .example-spacer {
     flex: 1 1 auto;
+    color: white;
 }
 
 
-/* Create a custom class for your primary toolbar */
-.my-primary-toolbar {
-    /* Use the theme's CSS variables */
-    background-color: var(--mat-primary-container);
-    color: var(--mat-on-primary-container);
+
+
+mat-toolbar.custom-toolbar {
+    background-color: #03396c !important;
+    /* fundal albastru */
+    color: #ffffff !important;
+    /* text alb */
 }
 
-/* You could also use the "default" primary color, which is stronger */
-.my-primary-toolbar.strong {
-    background-color: var(--mat-primary);
-    color: var(--mat-on-primary);
+mat-toolbar.custom-toolbar mat-icon {
+    color: #ffffff !important;
+    /* iconițe albe */
+}
+
+mat-toolbar.custom-toolbar button {
+    color: #ffffff !important;
+    /* text butoane alb */
+}
+
+mat-toolbar.custom-toolbar button:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    /* efect hover fin */
 }
