@@ -1,18 +1,80 @@
-.mat-mdc-header-row,
-.mat-header-row {
-    background-color: white;
+/* Folosim :host ::ng-deep pentru a suprascrie 
+   stilurile de bază ale Angular Material */
+:host ::ng-deep {
+
+    /* === BORDURI ORIZONTALE (Linii) === */
+
+    .mat-mdc-header-row,
+    .mat-header-row {
+        background-color: white;
+
+        /* Linia de SUS a tabelului */
+        border-top: 1px solid #ddd;
+
+        /* Linia de SUB header */
+        border-bottom: 1px solid #ddd;
+    }
+
+    .mat-mdc-row,
+    .mat-row {
+        /* Stilurile tale originale */
+        height: 15px !important;
+        background-color: white;
+        font-size: 12px;
+
+        /* Linia de SUB fiecare rând de date */
+        border-bottom: 1px solid #ddd;
+    }
+
+
+    /* === BORDURI VERTICALE (Coloane) === */
+
+    .mat-mdc-header-cell,
+    .mat-header-cell {
+        /* Linia din DREAPTA fiecărei celule de header */
+        border-right: 1px solid #ddd;
+    }
+
+    .mat-mdc-cell,
+    .mat-cell {
+        /* Stilurile tale originale */
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+
+        /* Linia din DREAPTA fiecărei celule de date */
+        border-right: 1px solid #ddd;
+    }
+
+    /* Adaugă bordura din stânga doar pentru PRIMA COLOANĂ */
+    .mat-mdc-header-cell:first-of-type,
+    .mat-mdc-cell:first-of-type {
+        border-left: 1px solid #ddd;
+    }
 }
 
-.mat-mdc-row,
-.mat-row {
-    height: 15px !important;
-    background-color: white;
-    font-size: 12px;
+
+
+/* handle-ul care apare la marginea header-ului */
+.column-resizer-handle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    cursor: col-resize;
+    user-select: none;
+    z-index: 10;
 }
 
+/* asigură că header-ul suportă poziționare handle */
+th.mat-header-cell {
+    position: relative;
+    overflow: hidden;
+}
 
-.mat-mdc-cell,
-.mat-cell {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
+/* opțional: forțează layout fixed ca să fie predictibil */
+table.mat-table {
+    table-layout: fixed;
+    /* sau auto - testează ambele */
+    width: 100%;
 }

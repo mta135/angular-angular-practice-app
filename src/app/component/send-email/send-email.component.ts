@@ -3,6 +3,8 @@ import { MatCardModule } from '@angular/material/card';
 
 
 import { MatTableModule } from '@angular/material/table';
+import { ColumnResizeDirective } from '../../directives/column-resize.directive';
+
 
 
 export interface PeriodicElement {
@@ -29,9 +31,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 @Component({
   selector: 'app-send-email',
-  imports: [MatCardModule, MatTableModule],
+  standalone: true,
+  imports: [MatCardModule, MatTableModule, ColumnResizeDirective],
   templateUrl: './send-email.component.html',
-  styleUrl: './send-email.component.scss'
+  styleUrls: ['./send-email.component.scss']
 })
 
 
