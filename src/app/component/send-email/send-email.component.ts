@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
 
 
-import { MatTableModule } from '@angular/material/table';
+
+import { ButtonModule } from 'primeng/button';
 import { ColumnResizeDirective } from '../../directives/column-resize.directive';
 
 
@@ -32,7 +32,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-send-email',
   standalone: true,
-  imports: [MatCardModule, MatTableModule, ColumnResizeDirective],
+  imports: [ButtonModule],
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss']
 })
