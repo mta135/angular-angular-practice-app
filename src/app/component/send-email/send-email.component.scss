@@ -1,54 +1,18 @@
-.mat-card {
+.mat-mdc-header-row,
+.mat-header-row {
     background-color: white;
-    max-width: 100%;
+}
+
+.mat-mdc-row,
+.mat-row {
+    height: 15px !important;
+    background-color: white;
+    font-size: 12px;
 }
 
 
-
-.table-container {
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* ======================
-   COMPACT TABLE STYLING
-   ====================== */
-.compact-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-
-    /* Header */
-    th.mat-mdc-header-cell {
-        background-color: #f8f9fa;
-        color: #333;
-        font-weight: 600;
-        padding: 4px 8px;
-        /* mai mic decât default */
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    /* Cell styling */
-    td.mat-mdc-cell {
-        background-color: #ffffff;
-        padding: 4px 8px;
-        /* 🔸 reduce înălțimea rândurilor */
-        border-bottom: 1px solid #f0f0f0;
-        line-height: 1.2;
-        /* 🔸 micșorează spațiul vertical intern */
-    }
-
-    /* Hover efect */
-    tr.mat-mdc-row:hover td {
-        background-color: #f5faff;
-    }
-
-    /* Text alignment */
-    th.mat-mdc-header-cell,
-    td.mat-mdc-cell {
-        text-align: left;
-        vertical-align: middle;
-    }
+.mat-mdc-cell,
+.mat-cell {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
 }
