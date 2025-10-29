@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 
 import { ButtonModule } from 'primeng/button';
-import { ColumnResizeDirective } from '../../directives/column-resize.directive';
+
 
 
 
