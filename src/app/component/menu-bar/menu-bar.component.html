@@ -5,6 +5,14 @@
     <span style="margin-left: 5px;">Menu bar</span>
     <span class="example-spacer"></span>
     <button routerLink="/home" mat-button>Home</button>
+    <button [matMenuTriggerFor]="lbl1Master" mat-button>Master</button>
+
+    <mat-menu #lbl1Master="matMenu">
+        <button mat-menu-item>Company</button>
+        <button mat-menu-item>Customer</button>
+        <button mat-menu-item>Product</button>
+    </mat-menu>
+
     <button [routerLink]="['/input']" mat-button>Input</button>
     <button mat-button>Contact</button>
 </mat-toolbar>
