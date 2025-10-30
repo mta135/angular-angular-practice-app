@@ -33,21 +33,22 @@
     </div> -->
 
     <div class="card">
-        <p-table [value]="dataSource" showGridlines [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table [value]="dataSource" showGridlines [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
+            [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template #header>
                 <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Quantity</th>
+                    <th pResizableColumn>Position</th>
+                    <th pResizableColumn>Name</th>
+                    <th pResizableColumn>Weight</th>
+                    <th pResizableColumn>Symbol</th>
                 </tr>
             </ng-template>
             <ng-template #body let-product>
                 <tr>
-                    <td>{{ product.code }}</td>
+                    <td>{{ product.position }}</td>
                     <td>{{ product.name }}</td>
-                    <td>{{ product.category }}</td>
-                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.weight }}</td>
+                    <td>{{ product.symbol }}</td>
                 </tr>
             </ng-template>
         </p-table>
