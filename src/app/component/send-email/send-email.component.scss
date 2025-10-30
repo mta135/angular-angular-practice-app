@@ -8,3 +8,17 @@
     padding: 4px 8px !important;
     font-size: 13px;
 }
+
+
+:host ::ng-deep .p-button.custom-blue {
+    background-color: #072F5F !important;
+    border: none !important;
+    color: #fff !important;
+    height: 35px !important;
+
+
+}
+
+:host ::ng-deep .p-button.custom-blue:hover {
+    background-color: #0d5399 !important;
+}
