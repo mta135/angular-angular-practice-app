@@ -32,26 +32,30 @@
         <p-button label="Small" icon="pi pi-check" size="small" />
     </div> -->
 
-    <div class="card">
-        <p-table [value]="dataSource" showGridlines [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
-            [tableStyle]="{ 'min-width': '50rem' }">
-            <ng-template #header>
-                <tr>
-                    <th pResizableColumn>Position</th>
-                    <th pResizableColumn>Name</th>
-                    <th pResizableColumn>Weight</th>
-                    <th pResizableColumn>Symbol</th>
-                </tr>
-            </ng-template>
-            <ng-template #body let-product>
-                <tr>
-                    <td>{{ product.position }}</td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.weight }}</td>
-                    <td>{{ product.symbol }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+    <div>
+        <label class="block mb-1 text-sm font-medium text-gray-700">
+            Lista de E-amiluiri
+        </label>
+        <div class="card">
+            <p-table [value]="dataSource" showGridlines [scrollable]="true" scrollHeight="500px"
+                [resizableColumns]="true" [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template #header>
+                    <tr>
+                        <th pResizableColumn>Position</th>
+                        <th pResizableColumn>Name</th>
+                        <th pResizableColumn>Weight</th>
+                        <th pResizableColumn>Symbol</th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-product>
+                    <tr>
+                        <td>{{ product.position }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.weight }}</td>
+                        <td>{{ product.symbol }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
     </div>
-
 </div>
