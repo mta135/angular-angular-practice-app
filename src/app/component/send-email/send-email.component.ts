@@ -56,6 +56,8 @@ export class SendEmailComponent {
     if (file) {
       this.selectedFile = file;
       this.getEmailDataFromTemplate(file);
+
+      event.target.value = null;
     }
   }
 
