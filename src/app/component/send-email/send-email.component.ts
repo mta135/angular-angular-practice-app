@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { FileUploadService } from '../../services/file-upload.service';
 
 
 
@@ -39,6 +40,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class SendEmailComponent {
 
+  constructor(private fileUploadService: FileUploadService) { }
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
 
@@ -51,6 +54,7 @@ export class SendEmailComponent {
 
     if (file) {
       this.selectedFile = file;
+      this.uploadFile(file);
     }
   }
 
@@ -73,6 +77,20 @@ export class SendEmailComponent {
 
 
   }
+
+
+  private uploadFile(file: File): void {
+    this.fileUploadService.uploadFile(file).subscribe({
+
+      next: (response) => {
+        console.log('Fișier încărcat cu succes:', response);
+      },
+      error: (error) => {
+        console.error('Eroare la încărcarea fișierului:', error);
+      }
+    });
+  }
+
 }
 
 
