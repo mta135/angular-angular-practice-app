@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadService } from '../../services/file-upload.service';
+import { EmailMessageModel } from '../../models/email-message.model';
 
 
 
@@ -41,11 +42,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class SendEmailComponent {
 
   constructor(private fileUploadService: FileUploadService) { }
+  emailList: EmailMessageModel[] = [];
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
-
   selectedFile: File | null = null;
+  loading = false;
 
 
   onFileSelected(event: any): void {
@@ -54,43 +55,34 @@ export class SendEmailComponent {
 
     if (file) {
       this.selectedFile = file;
-      this.uploadFile(file);
+      this.getEmailDataFromTemplate(file);
     }
   }
 
 
-  onUpload(): void {
-    if (!this.selectedFile) {
-      return; // Nu face nimic dacă nu e selectat niciun fișier
-    }
+  private getEmailDataFromTemplate(file: File): void {
 
-    // 1. Creăm un obiect FormData
-    // Acesta este formatul standard pentru trimiterea de fișiere
-    const formData = new FormData();
+    this.loading = true;
+    this.fileUploadService.getEmailDataFromTemplate(file).subscribe({
 
-    // 2. Adăugăm fișierul la FormData
-    // Primul parametru ('file') este cheia pe care serverul o va căuta.
-    // Asigură-te că aceasta corespunde cu ceea ce așteaptă API-ul tău.
-    formData.append('file', this.selectedFile, this.selectedFile.name);
+      next: (emails) => {
 
-    // 3. Trimitem cererea POST către server
+        this.emailList = emails;
+        this.loading = false;
+        console.log(' Lista emailuri:', emails);
 
-
-  }
-
-
-  private uploadFile(file: File): void {
-    this.fileUploadService.uploadFile(file).subscribe({
-
-      next: (response) => {
-        console.log('Fișier încărcat cu succes:', response);
       },
-      error: (error) => {
-        console.error('Eroare la încărcarea fișierului:', error);
+      error: (err) => {
+
+        console.error('Eroare upload:', err);
+        this.loading = false;
       }
     });
-  }
 
+
+  }
 }
+
+
 
 
