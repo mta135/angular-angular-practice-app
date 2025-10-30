@@ -17,6 +17,8 @@ export interface EmailMessageModel {
 
     footer: string;
     bodyAsHtml: string;
+    error: string
+
 
     emailSetting: EmailSettingModel;
 }

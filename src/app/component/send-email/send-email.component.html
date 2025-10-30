@@ -38,22 +38,36 @@
             Lista de E-amiluiri
         </label>
         <div class="card">
-            <p-table [value]="dataSource" showGridlines [scrollable]="true" scrollHeight="500px"
+            <p-table [value]="emailList" showGridlines [scrollable]="true" scrollHeight="500px"
                 [resizableColumns]="true" [tableStyle]="{ 'min-width': '50rem' }">
                 <ng-template #header>
                     <tr>
-                        <th pResizableColumn>Position</th>
-                        <th pResizableColumn>Name</th>
-                        <th pResizableColumn>Weight</th>
-                        <th pResizableColumn>Symbol</th>
+                        <th style="width: 120px;">Nr.</th>
+                        <th pResizableColumn>De la</th>
+                        <th pResizableColumn>To</th>
+                        <th pResizableColumn>Subiect</th>
+                        <th pResizableColumn>Header</th>
+                        <th pResizableColumn>Corp</th>
+                        <th pResizableColumn>Footer</th>
+                        <th pResizableColumn>Attachment</th>
+                        <th pResizableColumn>Cc</th>
+                        <th pResizableColumn>Erori</th>
+                        <th pResizableColumn>Status</th>
                     </tr>
                 </ng-template>
-                <ng-template #body let-product>
+                <ng-template #body let-email let-i="rowIndex">
                     <tr>
-                        <td>{{ product.position }}</td>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.weight }}</td>
-                        <td>{{ product.symbol }}</td>
+                        <td style="width: 60px;">{{ i + 1 }}</td>
+                        <td>{{ email.mailFrom}}</td>
+                        <td>{{ email.toRecipients }}</td>
+                        <td>{{ email.subject }}</td>
+                        <td>{{ email.header }}</td>
+                        <td>{{ email.body }}</td>
+                        <td>{{ email.footer }}</td>
+                        <td>{{ email.attachmentPath }}</td>
+                        <td>{{ email.ccRecipients }}</td>
+                        <td>{{ email.error }}</td>
+                        <td>{{ email.status }}</td>
                     </tr>
                 </ng-template>
             </p-table>
