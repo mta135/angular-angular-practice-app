@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
-
-
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 
 
@@ -32,7 +30,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-send-email',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [ButtonModule, TableModule],
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss']
 })

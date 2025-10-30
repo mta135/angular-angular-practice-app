@@ -1,100 +1,10 @@
-/* Folosim :host ::ng-deep pentru a suprascrie 
-   stilurile de bază ale Angular Material */
-:host ::ng-deep {
-
-    /* === BORDURI ORIZONTALE (Linii) === */
-
-    .mat-mdc-header-row,
-    .mat-header-row {
-        background-color: white;
-
-        /* Linia de SUS a tabelului */
-        border-top: 1px solid #ddd;
-
-        /* Linia de SUB header */
-        border-bottom: 1px solid #ddd;
-    }
-
-    .mat-mdc-row,
-    .mat-row {
-        /* Stilurile tale originale */
-        height: 15px !important;
-        background-color: white;
-        font-size: 12px;
-
-        /* Linia de SUB fiecare rând de date */
-        border-bottom: 1px solid #ddd;
-    }
-
-
-    /* === BORDURI VERTICALE (Coloane) === */
-
-    .mat-mdc-header-cell,
-    .mat-header-cell {
-        /* Linia din DREAPTA fiecărei celule de header */
-        border-right: 1px solid #ddd;
-    }
-
-    .mat-mdc-cell,
-    .mat-cell {
-        /* Stilurile tale originale */
-        padding-top: 4px !important;
-        padding-bottom: 4px !important;
-
-        /* Linia din DREAPTA fiecărei celule de date */
-        border-right: 1px solid #ddd;
-    }
-
-    /* Adaugă bordura din stânga doar pentru PRIMA COLOANĂ */
-    .mat-mdc-header-cell:first-of-type,
-    .mat-mdc-cell:first-of-type {
-        border-left: 1px solid #ddd;
-    }
+:host ::ng-deep .p-datatable-thead>tr>th {
+    height: 40px !important;
+    font-size: 15px;
+    padding: 4px 8px !important;
 }
 
-
-
-/* Pune acest cod în fișierul .css al componentei tale */
-:host ::ng-deep {
-
-    /* 1. Stilizarea mânerului de redimensionare (span-ul creat de directivă) */
-    .resize-handle {
-        position: absolute;
-        top: 0;
-        /* Îl poziționează jumătate înăuntru, jumătate în afară */
-        right: -2.5px;
-        bottom: 0;
-        /* Lățimea zonei pe care o poți "prinde" cu mouse-ul */
-        width: 5px;
-        cursor: col-resize;
-        /* Setează cursorul corect */
-        z-index: 10;
-        /* Să fie deasupra altor elemente */
-
-        /* Opțional: un indicator vizual la hover */
-        transition: background-color 0.2s ease;
-    }
-
-    // /* Indicatorul vizual la hover */
-    // .resize-handle:hover {
-    //     background-color: #007bff;
-    //     /* Sau culoarea ta de accent (ex. 'primary') */
-    // }
-
-    /* 2. Forțarea tabelului să respecte lățimile (FOARTE IMPORTANT) */
-    .resizable-table {
-        width: 100%;
-        /* Aceasta este regula CHEIE. Fără ea, tabelul ignoră lățimea <th> */
-        table-layout: fixed;
-        overflow: hidden;
-    }
-
-    /* 3. Asigurarea că mânerul nu e ascuns de header */
-    .mat-mdc-header-cell,
-    .mat-header-cell {
-        /* Directiva adaugă 'position: relative' automat, deci nu e nevoie aici */
-
-        /* Previne ascunderea mânerului. Unele teme Material au 'overflow: hidden' */
-        overflow: visible;
-    }
+:host ::ng-deep .p-datatable-tbody>tr>td {
+    padding: 4px 8px !important;
+    font-size: 13px;
 }
