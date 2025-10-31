@@ -64,6 +64,11 @@ export class SendEmailComponent {
 
   private getEmailDataFromTemplate(file: File): void {
 
+    if (this.emailList.length > 0) {
+      this.emailList = [];
+    }
+
+
     this.loading = true;
     this.fileUploadService.getEmailDataFromTemplate(file).subscribe({
 
