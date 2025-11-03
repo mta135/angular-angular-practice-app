@@ -26,19 +26,10 @@
 
 // row color classes
 
-::ng-deep tr.greenBkg {
-    //background-color: #e2ece8 !important;
-    color: #27815a !important;
+tr.greenBkg {
+    color: #0c5838 !important;
 }
 
-::ng-deep tr.redBkg {
-    color: #dc3545 !important;
-    /* Un roșu standard, lizibil */
-}
-
-::ng-deep tr.yellowBkg {
-    background-color: #fff3cd !important;
-    /* Fundal galben pal */
-    color: #664d03 !important;
-    /* Text galben închis */
+tr.redBkg {
+    color: #f0172d !important;
 }

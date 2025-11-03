@@ -75,7 +75,6 @@ export class SendEmailComponent {
     debugger
     if (status.toLowerCase() === 'succes') {
       return 'greenBkg';
-
     }
     else {
       return 'redBkg';
