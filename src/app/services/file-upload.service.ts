@@ -21,5 +21,11 @@ export class FileUploadService {
         return this.http.post<EmailMessageModel[]>(this.apiUrl, formData);
     }
 
+    private processEmailUrl = 'https://localhost:7147/api/ProcessEmail';
+
+    sendEmails(data: any): Observable<any> {
+        return this.http.post(this.processEmailUrl, data);
+    }
+
 
 }
