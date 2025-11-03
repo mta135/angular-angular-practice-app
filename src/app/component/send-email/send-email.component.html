@@ -56,7 +56,7 @@
                     </tr>
                 </ng-template>
                 <ng-template #body let-email let-i="rowIndex">
-                    <tr>
+                    <tr [ngClass]='myRowClass(email.status)'>
                         <td>{{ i + 1 }}</td>
                         <td>{{ email.mailFrom}}</td>
                         <td>{{ email.toRecipients }}</td>

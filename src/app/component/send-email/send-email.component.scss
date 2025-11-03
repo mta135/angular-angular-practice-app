@@ -22,3 +22,23 @@
 :host ::ng-deep .p-button.custom-blue:hover {
     background-color: #0d5399 !important;
 }
+
+
+// row color classes
+
+::ng-deep tr.greenBkg {
+    //background-color: #e2ece8 !important;
+    color: #27815a !important;
+}
+
+::ng-deep tr.redBkg {
+    color: #dc3545 !important;
+    /* Un roșu standard, lizibil */
+}
+
+::ng-deep tr.yellowBkg {
+    background-color: #fff3cd !important;
+    /* Fundal galben pal */
+    color: #664d03 !important;
+    /* Text galben închis */
+}
