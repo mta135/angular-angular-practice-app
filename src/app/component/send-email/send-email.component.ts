@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TRANSLATIONS } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadService } from '../../services/file-upload.service';
@@ -7,13 +7,6 @@ import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notification-service';
 import { HttpClient } from '@microsoft/signalr';
 import { firstValueFrom, Observable } from 'rxjs';
-
-
-
-
-
-
-
 
 @Component({
   selector: 'app-send-email',
@@ -25,8 +18,15 @@ import { firstValueFrom, Observable } from 'rxjs';
 })
 
 
-
 export class SendEmailComponent implements OnInit {
+
+  emailList: EmailMessageModel[] = [];
+
+  selectedFile: File | null = null;
+
+  hasErrors: boolean = true;
+
+  notifications$: Observable<string[]> | undefined;
 
   constructor(
 
@@ -34,18 +34,6 @@ export class SendEmailComponent implements OnInit {
     private fileUploadService: FileUploadService
 
   ) { }
-
-
-  notifications$: Observable<string[]> | undefined;
-  emailsToProcess = ['test1@example.com', 'test2@example.com',
-    'test3@example.com', 'test1@example.com', 'test2@example.com', 'test3@example.com', 'test1@example.com', 'test2@example.com', 'test3@example.com',
-    'test1@example.com', 'test2@example.com', 'test3@example.com'];
-
-  emailList: EmailMessageModel[] = [];
-
-  selectedFile: File | null = null;
-  loading = false;
-  isSending = false;
 
 
   //#region  events
@@ -79,31 +67,24 @@ export class SendEmailComponent implements OnInit {
       this.emailList = [];
     }
 
-
-    this.loading = true;
     this.fileUploadService.getEmailDataFromTemplate(file).subscribe({
-
       next: (emails) => {
-
         this.emailList = emails;
-        this.loading = false;
-        console.log(' Lista emailuri:', emails);
 
+        if (!this.emailList.some(x => Boolean(x.error?.trim()))) {
+          this.hasErrors = true;
+        }
+
+        console.log(' Lista emailuri:', emails);
       },
       error: (err) => {
-
         console.error('Eroare upload:', err);
-        this.loading = false;
       }
     });
-
   }
 
 
   async processEmails(): Promise<void> {
-
-    if (this.isSending) return;
-    this.isSending = true;
 
     try {
       const connectionId = await this.notificationService.initializeConnection();
@@ -113,9 +94,8 @@ export class SendEmailComponent implements OnInit {
       }
       console.log('Conexiune stabilită. ID:', connectionId);
 
-
       const payload = {
-        emails: this.emailsToProcess,
+        emails: this.emailList,
         connectionId: connectionId
       };
 
@@ -131,8 +111,6 @@ export class SendEmailComponent implements OnInit {
       alert('A apărut o eroare. Verificați consola.');
 
     } finally {
-
-      this.isSending = false;
 
     }
   }

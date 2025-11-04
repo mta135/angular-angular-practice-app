@@ -24,10 +24,7 @@
             </span>
         </div>
 
-        <!-- @if(loading){
 
-        <p class="mt-2 text-gray-600">Se procesează fișierul...</p>
-        } -->
 
     </div>
 
@@ -77,6 +74,6 @@
     <hr class="border-t border-gray-300 mt-3 mb-3">
 
     <div>
-        <p-button label="Trasnmite  emailuri" styleClass="custom-blue" (click)="processEmails()" />
+        <p-button label="Transmite" styleClass="custom-blue" (click)="processEmails()" [disabled]="hasErrors" />
     </div>
 </div>
