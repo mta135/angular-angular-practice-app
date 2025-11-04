@@ -37,7 +37,9 @@ export class SendEmailComponent implements OnInit {
 
 
   notifications$: Observable<string[]> | undefined;
-  emailsToProcess = ['test1@example.com', 'test2@example.com', 'test3@example.com'];
+  emailsToProcess = ['test1@example.com', 'test2@example.com',
+    'test3@example.com', 'test1@example.com', 'test2@example.com', 'test3@example.com', 'test1@example.com', 'test2@example.com', 'test3@example.com',
+    'test1@example.com', 'test2@example.com', 'test3@example.com'];
 
   emailList: EmailMessageModel[] = [];
 
@@ -136,16 +138,19 @@ export class SendEmailComponent implements OnInit {
   }
 
 
-
-
   public myRowClass(status: string) {
-    if (status.toLowerCase() === 'succes') {
-      return 'greenBkg';
-    }
-    else {
-      return 'redBkg';
+
+    if (status) {
+
+      if (status.toLowerCase() === 'succes') {
+        return 'greenBkg';
+      }
+      else {
+        return 'redBkg';
+      }
     }
 
+    return '';
   }
 
 }
