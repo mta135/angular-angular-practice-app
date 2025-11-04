@@ -140,20 +140,22 @@ export class SendEmailComponent implements OnInit {
 
   public myRowClass(error: string, status: string) {
 
+    let rowCollor: string = '';
+
     if (status) {
       if (status.toLowerCase() === 'succes') {
-        return 'greenBkg';
+        rowCollor = 'greenBkg';
       }
       else {
-        return 'redBkg';
+        rowCollor = 'redBkg';
       }
     }
 
     if (error) {
-      return 'redBkg';
+      rowCollor = 'redBkg';
     }
 
-    return '';
+    return rowCollor;
   }
 
 }
