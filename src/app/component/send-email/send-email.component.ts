@@ -138,16 +138,19 @@ export class SendEmailComponent implements OnInit {
   }
 
 
-  public myRowClass(status: string) {
+  public myRowClass(error: string, status: string) {
 
     if (status) {
-
       if (status.toLowerCase() === 'succes') {
         return 'greenBkg';
       }
       else {
         return 'redBkg';
       }
+    }
+
+    if (error) {
+      return 'redBkg';
     }
 
     return '';
