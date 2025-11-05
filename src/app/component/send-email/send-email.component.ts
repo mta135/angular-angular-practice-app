@@ -72,7 +72,7 @@ export class SendEmailComponent implements OnInit {
         this.emailList = emails;
 
         if (!this.emailList.some(x => Boolean(x.error?.trim()))) {
-          this.hasErrors = true;
+          this.hasErrors = false;
         }
 
         console.log(' Lista emailuri:', emails);
