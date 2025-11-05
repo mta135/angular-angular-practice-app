@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
+import { NotificationPayload } from '../models/notification-payload.model';
 
 @Injectable({
     providedIn: 'root'
@@ -42,24 +43,27 @@ export class NotificationService {
         }
     }
     private addNotificationListener(): void {
+        this.hubConnection.on('ReceiveNotification', (user: string, data: NotificationPayload) => {
+            debugger;
 
-        this.hubConnection.on('ReceiveNotification', (user: string, message: string) => {
-
-            console.log(`Mesaj primit: ${user} - ${message}`);
+            console.log(`Primit de la: ${user}`);
+            console.log(`Email: ${data.email} | Success: ${data.isSended} | Error: ${data.message}`);
 
             const currentNotifications = this.notificationsSubject.value;
 
-            this.notificationsSubject.next([...currentNotifications, `${user}: ${message}`]);
+            const text = data.isSended
+                ? `Trimis către ${data.email}`
+                : `Eroare către ${data.email}: ${data.message}`;
+
+            this.notificationsSubject.next([...currentNotifications, text]);
         });
 
         this.hubConnection.onreconnecting((error) => {
-
-            console.warn(`Conexiunea SignalR pierdută, se încearcă reconectarea...`, error);
+            console.warn(`Conexiunea pierdută, reconectare...`, error);
         });
 
         this.hubConnection.onreconnected((connectionId) => {
-
-            console.log(`Conexiunea SignalR restabilită. ID: ${connectionId}`);
+            console.log(`Reconectat. ID: ${connectionId}`);
         });
     }
 
