@@ -1,5 +1,10 @@
 export interface NotificationPayload {
-    email: string;     // 'e' mic
-    isSended: boolean; // 'i' mic
-    message: string;   // 'm' mic
+
+    rowCount: number;
+
+    email: string;
+
+    isSended: boolean;
+
+    message: string;
 }
