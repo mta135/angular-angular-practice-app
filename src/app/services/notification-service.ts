@@ -56,7 +56,8 @@ export class NotificationService {
             const newItem: NotificationPayload = {
                 email: data.email,
                 isSended: data.isSended,
-                message: data.message
+                message: data.message,
+                rowCount: data.rowCount
             };
 
             this.notificationsSubject.next([...current, newItem]);
