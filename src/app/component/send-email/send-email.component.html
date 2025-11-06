@@ -54,7 +54,7 @@
                 </ng-template>
                 <ng-template #body let-email let-i="rowIndex">
                     <tr [ngClass]='myRowClass(email.error, email.status)'>
-                        <td>{{ i + 1 }}</td>
+                        <td>{{ email.rowCount }}</td>
                         <td>{{ email.mailFrom}}</td>
                         <td>{{ email.toRecipients }}</td>
                         <td>{{ email.subject }}</td>
@@ -77,3 +77,11 @@
         <p-button label="Transmite" styleClass="custom-blue" (click)="processEmails()" [disabled]="hasErrors" />
     </div>
 </div>
+
+
+<ul>
+    <li *ngFor="let n of notifications">
+        {{ n.email }} - {{ n.isSended ? 'Trimis' : 'Eroare' }} - {{ n.message }}
+        <pre>{{ n | json }}</pre>
+    </li>
+</ul>

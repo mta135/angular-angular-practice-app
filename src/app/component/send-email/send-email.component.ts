@@ -6,7 +6,8 @@ import { EmailMessageModel } from '../../models/email-message.model';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notification-service';
 import { HttpClient } from '@microsoft/signalr';
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, Observable, Subscription } from 'rxjs';
+import { NotificationPayload } from '../../models/notification-payload.model';
 
 @Component({
   selector: 'app-send-email',
@@ -28,6 +29,10 @@ export class SendEmailComponent implements OnInit {
 
   notifications$: Observable<string[]> | undefined;
 
+  subscription?: Subscription;
+
+  notifications: NotificationPayload[] = [];
+
   constructor(
 
     private notificationService: NotificationService,
@@ -39,12 +44,18 @@ export class SendEmailComponent implements OnInit {
   //#region  events
 
   ngOnInit(): void {
-    this.notifications$ = this.notificationService.notifications$;
+
+    this.subscription = this.notificationService.notifications$.subscribe(items => {
+      this.notifications = items;
+
+      items.forEach(x => {
+        console.log('_Email:', x.email);
+        console.log('_Succes:', x.isSended);
+        console.log('_Mesaj:', x.message);
+      });
+    });
   }
 
-  // ngOnDestroy(): void {
-  //   this.notificationService.stopConnection();
-  // }
 
   //#endregion
 

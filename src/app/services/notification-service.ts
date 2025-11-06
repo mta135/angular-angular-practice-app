@@ -9,7 +9,9 @@ import { NotificationPayload } from '../models/notification-payload.model';
 })
 export class NotificationService {
     private hubConnection: signalR.HubConnection;
-    private notificationsSubject = new BehaviorSubject<string[]>([]);
+
+    private notificationsSubject = new BehaviorSubject<NotificationPayload[]>([]);
+
     public notifications$ = this.notificationsSubject.asObservable();
 
     constructor() {
@@ -49,13 +51,15 @@ export class NotificationService {
             console.log(`Primit de la: ${user}`);
             console.log(`Email: ${data.email} | Success: ${data.isSended} | Error: ${data.message}`);
 
-            const currentNotifications = this.notificationsSubject.value;
+            const current = this.notificationsSubject.value;
 
-            const text = data.isSended
-                ? `Trimis către ${data.email}`
-                : `Eroare către ${data.email}: ${data.message}`;
+            const newItem: NotificationPayload = {
+                email: data.email,
+                isSended: data.isSended,
+                message: data.message
+            };
 
-            this.notificationsSubject.next([...currentNotifications, text]);
+            this.notificationsSubject.next([...current, newItem]);
         });
 
         this.hubConnection.onreconnecting((error) => {
