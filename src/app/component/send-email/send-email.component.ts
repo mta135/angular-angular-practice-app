@@ -46,13 +46,23 @@ export class SendEmailComponent implements OnInit {
   ngOnInit(): void {
 
     this.subscription = this.notificationService.notifications$.subscribe(items => {
+      debugger;
       this.notifications = items;
 
-      items.forEach(x => {
-        console.log('_Email:', x.email);
-        console.log('_Succes:', x.isSended);
-        console.log('_Mesaj:', x.message);
-      });
+      for (let i = 0; i < items.length; i++) {
+
+        const row = this.emailList.find(x => x.rowCount === items[i].rowCount);
+        if (row) {
+          row.status = items[i].isSended ? 'Succes' : 'Eroare';
+
+        }
+
+
+
+        console.log('_Email:', items[i].email);
+        console.log('_Succes:', items[i].isSended);
+        console.log('_Mesaj:', items[i].message);
+      }
     });
   }
 
