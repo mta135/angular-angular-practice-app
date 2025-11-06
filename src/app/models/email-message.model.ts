@@ -1,4 +1,4 @@
-import { EmailSettingModel } from "./email-setting.model";
+
 
 export interface EmailMessageModel {
 
@@ -27,4 +27,12 @@ export interface EmailMessageModel {
     error: string
 
     emailSetting: EmailSettingModel;
+}
+
+
+export interface EmailSettingModel {
+    smtpServer: string;
+    port: number;
+    userName: string;
+    password: string;
 }
