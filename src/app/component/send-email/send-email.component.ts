@@ -18,7 +18,6 @@ import { NotificationPayload } from '../../models/notification-payload.model';
   styleUrls: ['./send-email.component.scss']
 })
 
-
 export class SendEmailComponent implements OnInit {
 
   emailList: EmailMessageModel[] = [];
@@ -40,7 +39,6 @@ export class SendEmailComponent implements OnInit {
 
   ) { }
 
-
   //#region  events
 
   ngOnInit(): void {
@@ -49,26 +47,16 @@ export class SendEmailComponent implements OnInit {
       debugger;
       this.notifications = items;
 
-      for (let i = 0; i < items.length; i++) {
-
-        const row = this.emailList.find(x => x.rowCount === items[i].rowCount);
+      items.forEach(item => {
+        const row = this.emailList.find(x => x.rowCount === item.rowCount);
         if (row) {
-          row.status = items[i].isSended ? 'Succes' : 'Eroare';
-
+          row.status = item.isSended ? 'Succes' : 'Eroare';
         }
-
-
-
-        console.log('_Email:', items[i].email);
-        console.log('_Succes:', items[i].isSended);
-        console.log('_Mesaj:', items[i].message);
-      }
+      });
     });
   }
 
-
   //#endregion
-
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
@@ -80,7 +68,6 @@ export class SendEmailComponent implements OnInit {
       event.target.value = null;
     }
   }
-
 
   private getEmailDataFromTemplate(file: File): void {
 
@@ -103,7 +90,6 @@ export class SendEmailComponent implements OnInit {
       }
     });
   }
-
 
   async processEmails(): Promise<void> {
 
@@ -135,7 +121,6 @@ export class SendEmailComponent implements OnInit {
 
     }
   }
-
 
   public myRowClass(error: string, status: string) {
 
