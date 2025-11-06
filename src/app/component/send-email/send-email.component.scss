@@ -33,3 +33,7 @@ tr.greenBkg {
 tr.redBkg {
     color: #f0172d !important;
 }
+
+:host ::ng-deep .myBar .p-progressbar-value {
+    background: #072F5F !important;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, TRANSLATIONS } from '@angular/core';
+import { Component, NgZone, OnInit, TRANSLATIONS } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadService } from '../../services/file-upload.service';
@@ -8,11 +8,12 @@ import { NotificationService } from '../../services/notification-service';
 import { HttpClient } from '@microsoft/signalr';
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NotificationPayload } from '../../models/notification-payload.model';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-send-email',
   standalone: true,
-  imports: [ButtonModule, TableModule, CommonModule],
+  imports: [ButtonModule, TableModule, CommonModule, ProgressBarModule],
   providers: [NotificationService],
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss']
@@ -32,16 +33,23 @@ export class SendEmailComponent implements OnInit {
 
   notifications: NotificationPayload[] = [];
 
+  value: number = 0;
+
+  progress: number = 0;
+
   constructor(
 
     private notificationService: NotificationService,
-    private fileUploadService: FileUploadService
+    private fileUploadService: FileUploadService,
+    private ngZone: NgZone
 
   ) { }
 
   //#region  events
 
   ngOnInit(): void {
+
+    this.simulateProgress();
 
     this.subscription = this.notificationService.notifications$.subscribe(items => {
       debugger;
@@ -95,7 +103,7 @@ export class SendEmailComponent implements OnInit {
 
     try {
       const connectionId = await this.notificationService.initializeConnection();
-
+      this.simulateProgress()
       if (!connectionId) {
         throw new Error("Nu s-a putut obține ID-ul de conexiune SignalR.");
       }
@@ -140,6 +148,18 @@ export class SendEmailComponent implements OnInit {
     }
 
     return rowCollor;
+  }
+
+
+  simulateProgress() {
+    this.progress = 0;
+    const interval = setInterval(() => {
+      this.progress += 10;
+
+      if (this.progress >= 100) {
+        clearInterval(interval);
+      }
+    }, 500);
   }
 
 }

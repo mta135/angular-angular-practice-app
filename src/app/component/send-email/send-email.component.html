@@ -73,15 +73,21 @@
 
     <hr class="border-t border-gray-300 mt-3 mb-3">
 
-    <div>
-        <p-button label="Transmite" styleClass="custom-blue" (click)="processEmails()" [disabled]="hasErrors" />
+
+
+    <div class="flex items-center gap-2 w-full">
+        <div>
+            <p-button label="Transmite" styleClass="custom-blue" (click)="processEmails()" [disabled]="hasErrors" />
+        </div>
+
+        <div>
+            <p-button label="Anuleaza" styleClass="custom-blue" (click)="processEmails()" [disabled]="hasErrors" />
+        </div>
+
+        <div class="flex justify-end items-center w-full">
+            <p-progressBar [value]="50" [showValue]="true" class="myBar w-[100%]" [style]="{'height':'20px'}">>
+            </p-progressBar>
+        </div>
     </div>
+
 </div>
-
-
-<ul>
-    <li *ngFor="let n of notifications">
-        {{ n.email }} - {{ n.isSended ? 'Trimis' : 'Eroare' }} - {{ n.message }}
-        <pre>{{ n | json }}</pre>
-    </li>
-</ul>
