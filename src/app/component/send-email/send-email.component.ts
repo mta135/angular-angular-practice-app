@@ -56,18 +56,18 @@ export class SendEmailComponent implements OnInit {
       debugger;
       this.notifications = items;
 
+      this.receivedStatuses = 0;
+
       items.forEach(item => {
         const row = this.emailList.find(x => x.rowCount === item.rowCount);
         if (row) {
 
           row.status = item.isSended ? 'Succes' : 'Eroare';
-
           this.receivedStatuses++;
-
-          this.updateProgress();
-
         }
       });
+
+      this.updateProgress();
     });
   }
 
