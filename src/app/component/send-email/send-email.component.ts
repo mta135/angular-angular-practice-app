@@ -37,19 +37,20 @@ export class SendEmailComponent implements OnInit {
 
   progress: number = 0;
 
+  totalEmails = 0;
+  receivedStatuses = 0;
+  progressValue = 0;
+
   constructor(
 
     private notificationService: NotificationService,
     private fileUploadService: FileUploadService,
-    private ngZone: NgZone
 
   ) { }
 
   //#region  events
 
   ngOnInit(): void {
-
-    this.simulateProgress();
 
     this.subscription = this.notificationService.notifications$.subscribe(items => {
       debugger;
@@ -58,7 +59,13 @@ export class SendEmailComponent implements OnInit {
       items.forEach(item => {
         const row = this.emailList.find(x => x.rowCount === item.rowCount);
         if (row) {
+
           row.status = item.isSended ? 'Succes' : 'Eroare';
+
+          this.receivedStatuses++;
+
+          this.updateProgress();
+
         }
       });
     });
@@ -103,10 +110,17 @@ export class SendEmailComponent implements OnInit {
 
     try {
       const connectionId = await this.notificationService.initializeConnection();
-      this.simulateProgress()
+
       if (!connectionId) {
         throw new Error("Nu s-a putut obține ID-ul de conexiune SignalR.");
       }
+
+
+      this.totalEmails = this.emailList.length;
+      this.receivedStatuses = 0;
+      this.progressValue = 0;
+
+
       console.log('Conexiune stabilită. ID:', connectionId);
 
       const payload = {
@@ -151,15 +165,11 @@ export class SendEmailComponent implements OnInit {
   }
 
 
-  simulateProgress() {
-    this.progress = 0;
-    const interval = setInterval(() => {
-      this.progress += 10;
-
-      if (this.progress >= 100) {
-        clearInterval(interval);
-      }
-    }, 500);
+  updateProgress() {
+    debugger
+    if (this.totalEmails === 0)
+      return;
+    this.progressValue = Math.round((this.receivedStatuses / this.totalEmails) * 100);
   }
 
 }
