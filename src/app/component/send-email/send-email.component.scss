@@ -1,6 +1,7 @@
 :host ::ng-deep .p-datatable-thead>tr>th {
     height: 40px !important;
     font-size: 15px;
+
     padding: 4px 8px !important;
 }
 
@@ -24,6 +25,7 @@
 }
 
 
+
 // row color classes
 
 tr.greenBkg {
@@ -36,4 +38,33 @@ tr.redBkg {
 
 :host ::ng-deep .myBar .p-progressbar-value {
     background: #072F5F !important;
+}
+
+
+.panel-container {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 0;
+    margin: 20px 0;
+    // box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    /* colțuri rotunjite și la tabel */
+}
+
+.panel-header {
+    background: #003b73;
+    color: white;
+    padding: 7px 12px;
+    font-size: 15px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #00284d;
+}
+
+.panel-body {
+    padding: 15px;
+    background: #fafafa;
 }

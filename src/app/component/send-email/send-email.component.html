@@ -30,11 +30,15 @@
 
     <hr class="border-t border-gray-300 mt-3 mb-3">
 
-    <div>
-        <label class="block mb-1 text-sm font-medium text-gray-700">
-            Lista de E-amiluiri
-        </label>
-        <div class="card">
+
+    <div class="panel-container">
+
+        <div class="panel-header">
+            <i class="pi pi-envelope"></i>
+            <span>Lista emailurilor încărcate</span>
+        </div>
+
+        <div class="panel-body">
             <p-table [value]="emailList" showGridlines [scrollable]="true" scrollHeight="500px"
                 [resizableColumns]="true" [tableStyle]="{ 'min-width': '50rem' }">
                 <ng-template #header>
@@ -69,11 +73,10 @@
                 </ng-template>
             </p-table>
         </div>
+
     </div>
 
     <hr class="border-t border-gray-300 mt-3 mb-3">
-
-
 
     <div class="flex items-center gap-2 w-full">
         <div>
