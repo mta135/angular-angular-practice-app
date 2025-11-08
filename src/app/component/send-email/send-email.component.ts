@@ -140,7 +140,7 @@ export class SendEmailComponent implements OnInit {
       alert('A apărut o eroare. Verificați consola.');
 
     } finally {
-
+      this.notificationService.stopConnection();
     }
   }
 
