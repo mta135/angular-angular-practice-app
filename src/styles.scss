@@ -42,9 +42,28 @@ body {
 .status-valid {
     color: green;
     font-weight: bold;
+
 }
 
 .status-error {
     color: red;
     font-weight: bold;
+}
+
+body .p-dialog.dialog-fundal-inchis {
+    background-color: #f0f0f0;
+}
+
+body .p-dialog.dialog-fundal-inchis .p-dialog-header {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+body .p-dialog.dialog-fundal-inchis .p-dialog-content {
+    background-color: #fafafa;
+}
+
+body .p-dialog.dialog-fundal-inchis .p-dialog-title {
+
+    font-size: 15px;
 }

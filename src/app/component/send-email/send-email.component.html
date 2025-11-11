@@ -97,10 +97,9 @@
 
 
     <div class="card flex justify-center">
-        <p-dialog header="Statusul Fișierului" [(visible)]="visible" [modal]="false" [style]="{ width: '25rem' }">
-            <div [appFileStatus]="myFileStatus"></div>
-            <hr>
-            <p>Aici poți adăuga și alt conținut în dialog.</p>
+        <p-dialog header="Statusul Fișierului" [(visible)]="visible" [modal]="false" [style]="{ width: '25rem' }"
+            styleClass="dialog-fundal-inchis">
+            <div class="mt-3" [appFileStatus]="myFileStatus"></div>
         </p-dialog>
     </div>
 
