@@ -10,6 +10,7 @@ import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NotificationPayload } from '../../models/notification-payload.model';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressBarModel } from '../../common/progress-bar-model';
+import { EmailProcessRequest } from '../../models/email-process-request-model';
 
 @Component({
   selector: 'app-send-email',
@@ -111,14 +112,10 @@ export class SendEmailComponent implements OnInit {
 
       console.log('Conexiune stabilită. ID:', connectionId);
 
-      const payload = {
-        emails: this.emailList,
-        connectionId: connectionId
-      };
+      let requestObject = new EmailProcessRequest(this.emailList, connectionId);
+      console.log('Se trimite cererea HTTP la /api/ProcessEmail...', requestObject);
 
-      console.log('Se trimite cererea HTTP la /api/ProcessEmail...', payload);
-
-      await firstValueFrom(this.fileUploadService.sendEmails(payload));
+      await firstValueFrom(this.fileUploadService.sendEmails(requestObject));
 
       console.log('Cererea HTTP a fost trimisă. Se așteaptă notificări...');
 
