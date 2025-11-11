@@ -49,6 +49,8 @@ export class SendEmailComponent implements OnInit {
     this.subscription = this.notificationService.notifications$.subscribe(items => {
       debugger;
       this.notifications = items;
+
+      this.receivedStatuses = 0;
       this.progressbar.resetReceivedStatuses();
 
       items.forEach(item => {
@@ -56,9 +58,12 @@ export class SendEmailComponent implements OnInit {
         if (row) {
 
           row.status = item.isSended ? 'Succes' : 'Eroare';
+          this.receivedStatuses++;
           this.progressbar.increment();
         }
       });
+
+      this.updateProgress();
     });
   }
 
@@ -126,7 +131,7 @@ export class SendEmailComponent implements OnInit {
       alert('A apărut o eroare. Verificați consola.');
 
     } finally {
-
+      this.notificationService.stopConnection();
     }
   }
 
