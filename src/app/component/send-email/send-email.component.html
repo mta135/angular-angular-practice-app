@@ -98,7 +98,7 @@
 
     <div class="card flex justify-center">
         <p-dialog header="Statusul Fișierului" [(visible)]="visible" [modal]="false" [style]="{ width: '25rem' }"
-            styleClass="dialog-fundal-inchis">
+            styleClass="dialog-fundal-inchis" [position]="'top'">
             <div class="mt-3" [appFileStatus]="myFileStatus"></div>
         </p-dialog>
     </div>
