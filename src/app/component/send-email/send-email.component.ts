@@ -11,12 +11,13 @@ import { NotificationPayload } from '../../models/notification-payload.model';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressBarModel } from '../../common/progress-bar-model';
 import { EmailProcessRequest } from '../../models/email-process-request-model';
+import { Dialog } from 'primeng/dialog';
 
 @Component({
   selector: 'app-send-email',
   standalone: true,
-  imports: [ButtonModule, TableModule, CommonModule, ProgressBarModule],
-  providers: [NotificationService],
+  imports: [ButtonModule, TableModule, CommonModule, ProgressBarModule, Dialog],
+  providers: [NotificationService, Dialog],
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss']
 })
@@ -34,6 +35,8 @@ export class SendEmailComponent implements OnInit {
   subscription?: Subscription;
 
   notifications: NotificationPayload[] = [];
+
+  visible: boolean = false;
 
   public progressbar = new ProgressBarModel();
   constructor(
@@ -149,6 +152,11 @@ export class SendEmailComponent implements OnInit {
     }
 
     return rowCollor;
+  }
+
+
+  showDialog() {
+    this.visible = true;
   }
 
 }

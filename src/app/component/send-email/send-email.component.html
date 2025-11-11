@@ -94,4 +94,16 @@
         </div>
     </div>
 
+
+
+
+
+    <div class="card flex justify-center">
+        <p-button (click)="showDialog()" label="Show" />
+        <p-dialog header="statut" [modal]="false" [(visible)]="visible" [style]="{ width: '25rem' }">
+        </p-dialog>
+
+    </div>
+
+
 </div>
