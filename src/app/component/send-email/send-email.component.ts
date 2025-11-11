@@ -9,6 +9,7 @@ import { HttpClient } from '@microsoft/signalr';
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NotificationPayload } from '../../models/notification-payload.model';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ProgressBarModel } from '../../common/progress-bar-model';
 
 @Component({
   selector: 'app-send-email',
@@ -33,14 +34,7 @@ export class SendEmailComponent implements OnInit {
 
   notifications: NotificationPayload[] = [];
 
-  value: number = 0;
-
-  progress: number = 0;
-
-  totalEmails = 0;
-  receivedStatuses = 0;
-  progressValue = 0;
-
+  public progressbar = new ProgressBarModel();
   constructor(
 
     private notificationService: NotificationService,
@@ -55,17 +49,14 @@ export class SendEmailComponent implements OnInit {
     this.subscription = this.notificationService.notifications$.subscribe(items => {
       debugger;
       this.notifications = items;
+      this.progressbar.resetReceivedStatuses();
 
       items.forEach(item => {
         const row = this.emailList.find(x => x.rowCount === item.rowCount);
         if (row) {
 
           row.status = item.isSended ? 'Succes' : 'Eroare';
-
-          this.receivedStatuses++;
-
-          this.updateProgress();
-
+          this.progressbar.increment();
         }
       });
     });
@@ -98,6 +89,7 @@ export class SendEmailComponent implements OnInit {
           this.hasErrors = false;
         }
 
+        this.progressbar.TotalEmails = this.emailList.length;
         console.log(' Lista emailuri:', emails);
       },
       error: (err) => {
@@ -114,12 +106,6 @@ export class SendEmailComponent implements OnInit {
       if (!connectionId) {
         throw new Error("Nu s-a putut obține ID-ul de conexiune SignalR.");
       }
-
-
-      this.totalEmails = this.emailList.length;
-      this.receivedStatuses = 0;
-      this.progressValue = 0;
-
 
       console.log('Conexiune stabilită. ID:', connectionId);
 
@@ -162,14 +148,6 @@ export class SendEmailComponent implements OnInit {
     }
 
     return rowCollor;
-  }
-
-
-  updateProgress() {
-    debugger
-    if (this.totalEmails === 0)
-      return;
-    this.progressValue = Math.round((this.receivedStatuses / this.totalEmails) * 100);
   }
 
 }
