@@ -84,6 +84,8 @@ export class SendEmailComponent implements OnInit {
       this.emailList = [];
     }
 
+    this.progressbar.reset();
+
     this.fileUploadService.getEmailDataFromTemplate(file).subscribe({
       next: (emails) => {
         this.emailList = emails;
