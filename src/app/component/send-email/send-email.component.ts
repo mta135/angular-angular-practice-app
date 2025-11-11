@@ -12,11 +12,12 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressBarModel } from '../../common/progress-bar-model';
 import { EmailProcessRequest } from '../../models/email-process-request-model';
 import { Dialog } from 'primeng/dialog';
+import { FileStatusDirective, ValidationStatus } from '../../directive/file-status.directive';
 
 @Component({
   selector: 'app-send-email',
   standalone: true,
-  imports: [ButtonModule, TableModule, CommonModule, ProgressBarModule, Dialog],
+  imports: [ButtonModule, TableModule, CommonModule, ProgressBarModule, Dialog, FileStatusDirective],
   providers: [NotificationService, Dialog],
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss']
@@ -37,6 +38,8 @@ export class SendEmailComponent implements OnInit {
   notifications: NotificationPayload[] = [];
 
   visible: boolean = false;
+
+  myFileStatus: ValidationStatus | null = null;
 
   public progressbar = new ProgressBarModel();
   constructor(
@@ -97,6 +100,12 @@ export class SendEmailComponent implements OnInit {
           this.hasErrors = false;
         }
 
+        this.myFileStatus = {
+          isValid: true,
+          successText: !this.hasErrors ? 'Fișierul a fost încărcat cu succes și este valid.' : undefined
+        };
+
+        this.visible = true;
         this.progressbar.TotalEmails = this.emailList.length;
         console.log(' Lista emailuri:', emails);
       },
@@ -152,11 +161,6 @@ export class SendEmailComponent implements OnInit {
     }
 
     return rowCollor;
-  }
-
-
-  showDialog() {
-    this.visible = true;
   }
 
 }
