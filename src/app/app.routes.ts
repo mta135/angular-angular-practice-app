@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { SendEmailComponent } from './component/send-email/send-email.component';
+import { CurrencyComponent } from './component/currency/currency.component';
 
 export const routes: Routes = [
 
-    { path: '', redirectTo: '/sendemail', pathMatch: 'full' },
-    { path: 'sendemail', component: SendEmailComponent },
+    { path: '', redirectTo: '/currency', pathMatch: 'full' },
+    { path: 'currency', component: CurrencyComponent },
 ];
