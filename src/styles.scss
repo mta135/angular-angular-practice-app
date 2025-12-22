@@ -16,26 +16,11 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-// .resize-handle {
-//     position: absolute;
-//     top: 0;
-//     right: -2.5px;
-//     /* Îl poziționează jumătate înăuntru, jumătate în afară */
-//     bottom: 0;
-//     width: 5px;
-//     cursor: col-resize;
-//     /* Cursorul specific pentru redimensionare */
-//     z-index: 10;
 
-//     /* Opțional: un indicator vizual subtil */
-//     /* background-color: rgba(0, 0, 0, 0.1); */
-// }
+.test-border {
+    border: 5px solid red !important;
+}
 
-// /* Opțional: adaugă un efect la hover */
-// .resize-handle:hover {
-//     // background-color: #007bff;
-//     /* Sau culoarea ta de accent */
-// }
 
 
 
