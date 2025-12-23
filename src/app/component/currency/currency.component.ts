@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
+import { CurrencyService } from '../../services/currency-service';
+import { ApiResponseModel } from '../../models/api-response-model';
 
 
 interface City {
@@ -20,6 +22,15 @@ interface City {
 
 
 export class CurrencyComponent implements OnInit {
+
+
+  constructor() {
+
+    this.GetCurrencyData();
+  }
+
+  private currencyService = inject(CurrencyService);
+  currencyData?: ApiResponseModel;
 
 
 
@@ -40,8 +51,12 @@ export class CurrencyComponent implements OnInit {
   }
 
 
-  close(dd: any) {
-    setTimeout(() => dd.hide());
-  }
+  GetCurrencyData() {
+    debugger
+    this.currencyService.GetCurrencyResponse().subscribe((response) => {
+      this.currencyData = response;
+      console.log(this.currencyData);
+    });
 
+  }
 }
