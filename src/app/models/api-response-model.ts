@@ -1,4 +1,4 @@
-import { ExchangeRatesModel } from "./exchange-rates-model";
+
 
 export interface ApiResponseModel {
 
@@ -11,4 +11,10 @@ export interface ApiResponseModel {
     time_next_update_utc: string;
 
     rates: ExchangeRatesModel[];
+}
+
+export interface ExchangeRatesModel {
+    Code: string;
+
+    Value: number;
 }
