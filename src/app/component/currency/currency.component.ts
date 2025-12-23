@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
 
 
 interface City {
@@ -12,7 +12,7 @@ interface City {
 
 @Component({
   selector: 'app-currency',
-  imports: [CardModule, DropdownModule, FormsModule, InputTextModule],
+  imports: [CardModule, FormsModule, InputTextModule, SelectModule],
   templateUrl: './currency.component.html',
   styleUrl: './currency.component.scss'
 })
