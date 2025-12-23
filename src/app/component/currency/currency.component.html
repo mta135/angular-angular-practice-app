@@ -5,16 +5,14 @@
         <div class="mt-7">
             <div class="flex flex-row gap-5 w-full">
                 <div class="flex-1">
-
-                    <p-dropdown #dd [options]="cities" [(ngModel)]="selectedCity" placeholder="Selectează oraș"
-                        [editable]="true" [filter]="true" optionLabel="name" styleClass="w-full" [showClear]="true"
-                        (click)="dd.show()" (onSelect)="close(dd)" />
+                    <p-dropdown [(ngModel)]="selectedCity" [options]="cities" [filter]="true" optionLabel="name"
+                        placeholder="Select a City" [showClear]="true" styleClass="w-full" />
                 </div>
 
                 <div class="flex-1">
 
-                    <p-dropdown #dd2 [options]="cities" [(ngModel)]="selectedCity" placeholder="Selectează oraș"
-                        [editable]="true" [filter]="true" optionLabel="name" styleClass="w-full" (click)="dd2.show()" />
+                    <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Selectează oraș"
+                        [filter]="true" [showClear]="true" optionLabel="name" styleClass="w-full" />
                 </div>
             </div>
         </div>
