@@ -2,7 +2,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { EmailMessageModel } from '../models/email-message.model';
 import { ApiResponseModel as CurrencyFullDataApiResponseModel } from '../models/api-response-model';
 import { ExchangeRatesModel } from '../models/exchange-rates-model';
 

@@ -21,11 +21,9 @@ interface City {
 
 
 
-export class CurrencyComponent implements OnInit {
-
+export class CurrencyComponent {
 
   constructor() {
-
     this.GetFullData();
   }
 
@@ -38,22 +36,10 @@ export class CurrencyComponent implements OnInit {
 
   selectedCity: City | undefined;
 
-  ngOnInit() {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
-    ];
-  }
-
 
   GetFullData() {
     this.currencyService.GetFullData().subscribe((response) => {
       this.currencyData = response;
-      console.log(this.currencyData);
     });
-
   }
 }
