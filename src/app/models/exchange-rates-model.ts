@@ -1,6 +1,6 @@
 
 export interface ExchangeRatesModel {
-    CurrencyCode: string;
-    CurrencyValue: string;
+    Code: string;
 
+    Value: number;
 }

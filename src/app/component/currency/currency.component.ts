@@ -26,13 +26,11 @@ export class CurrencyComponent implements OnInit {
 
   constructor() {
 
-    this.GetCurrencyData();
+    this.GetFullData();
   }
 
   private currencyService = inject(CurrencyService);
   currencyData?: ApiResponseModel;
-
-
 
   value: string | undefined;
 
@@ -51,9 +49,8 @@ export class CurrencyComponent implements OnInit {
   }
 
 
-  GetCurrencyData() {
-    debugger
-    this.currencyService.GetCurrencyResponse().subscribe((response) => {
+  GetFullData() {
+    this.currencyService.GetFullData().subscribe((response) => {
       this.currencyData = response;
       console.log(this.currencyData);
     });
