@@ -4,22 +4,23 @@
 
         <div class="mt-7">
             <div class="flex flex-row gap-5 w-full">
+
                 <div class="flex-1">
-                    <p-select [options]="currencyData?.rates" [(ngModel)]="selectedCity" [checkmark]="true"
-                        optionLabel="Code" [filter]="true" filterBy="Code" [showClear]="true"
+                    <p-select [options]="currencyData?.rates" [(ngModel)]="selection.LeftSelectedRate"
+                        [checkmark]="true" optionLabel="Code" [filter]="true" filterBy="Code" [showClear]="true"
                         placeholder="Select a City" class="w-full" />
                 </div>
 
                 <div class="flex-1">
-
-                    <p-select [options]="currencyData?.rates" [(ngModel)]="selectedCity" [checkmark]="true"
-                        optionLabel="Code" [filter]="true" filterBy="Code" [showClear]="true"
+                    <p-select [options]="currencyData?.rates" [(ngModel)]="selection.RightSelectedRate"
+                        [checkmark]="true" optionLabel="Code" [filter]="true" filterBy="Code" [showClear]="true"
                         placeholder="Select a City" class="w-full" />
                 </div>
+
             </div>
         </div>
 
-        <div class="mt-16">
+        <div class="mt-5">
             <div class="flex flex-row gap-5 w-full">
 
                 <div class="flex-1">

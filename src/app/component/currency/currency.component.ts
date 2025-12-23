@@ -5,6 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { CurrencyService } from '../../services/currency-service';
 import { ApiResponseModel } from '../../models/api-response-model';
+import { ExchangeSelection } from '../../models/exchange-selection-model';
 
 
 interface City {
@@ -28,18 +29,29 @@ export class CurrencyComponent {
   }
 
   private currencyService = inject(CurrencyService);
+
   currencyData?: ApiResponseModel;
-
+  selection: ExchangeSelection = { LeftSelectedRate: null, RightSelectedRate: null, };
   value: string | undefined;
-
-  cities: City[] | undefined;
-
-  selectedCity: City | undefined;
 
 
   GetFullData() {
     this.currencyService.GetFullData().subscribe((response) => {
+
       this.currencyData = response;
+      this.SetDefaultCurrencyRates();
+
     });
   }
+
+
+  SetDefaultCurrencyRates(): void {
+
+    if (this.currencyData) {
+
+      this.selection.LeftSelectedRate = this.currencyData.rates.find(rate => rate.Code === 'MDL') || null;
+      this.selection.RightSelectedRate = this.currencyData.rates.find(rate => rate.Code === 'EUR') || null;
+    }
+  }
+
 }
