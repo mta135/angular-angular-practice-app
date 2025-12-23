@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { ApiResponseModel as CurrencyFullDataApiResponseModel, ExchangeRatesModel } from '../models/api-response-model';
+import { ApiResponseModel as ApiResponseModel, ExchangeRatesModel } from '../models/api-response-model';
 
 
 @Injectable({
@@ -15,8 +15,8 @@ export class CurrencyService {
 
     constructor(private http: HttpClient) { }
 
-    GetFullData(): Observable<CurrencyFullDataApiResponseModel> {
-        return this.http.get<CurrencyFullDataApiResponseModel>(this.baseUrl).pipe(
+    GetFullData(): Observable<ApiResponseModel> {
+        return this.http.get<ApiResponseModel>(this.baseUrl).pipe(
 
             map(raw => {
 
@@ -31,7 +31,7 @@ export class CurrencyService {
                     formattedRates.push(rateObject);
                 }
 
-                let apiResponse: CurrencyFullDataApiResponseModel = {
+                let apiResponse: ApiResponseModel = {
 
                     result: raw.result,
                     base_code: raw.base_code,

@@ -20,8 +20,6 @@ interface City {
   styleUrl: './currency.component.scss'
 })
 
-
-
 export class CurrencyComponent {
 
   constructor() {
