@@ -7,6 +7,7 @@ import { CurrencyService } from '../../services/currency-service';
 import { ApiResponseModel } from '../../models/api-response-model';
 import { ExchangeSelection } from '../../models/exchange-selection-model';
 import { DatePipe } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 
 interface City {
@@ -21,26 +22,48 @@ interface City {
   styleUrl: './currency.component.scss'
 })
 
-export class CurrencyComponent {
+export class CurrencyComponent implements OnInit {
 
-  constructor() {
-    this.GetFullData();
-  }
+  currencyData?: ApiResponseModel;
+
+  selection: ExchangeSelection;
 
   private currencyService = inject(CurrencyService);
 
-  currencyData?: ApiResponseModel;
-  selection: ExchangeSelection = { LeftSelectedRate: null, RightSelectedRate: null, };
   value: string | undefined;
 
 
-  GetFullData() {
-    this.currencyService.GetFullData().subscribe((response) => {
+  constructor() {
+
+    this.selection = {
+      LeftSelectedRate: null,
+      RightSelectedRate: null,
+    };
+
+  }
+  async ngOnInit(): Promise<void> {
+    await this.GetFullData();
+  }
+
+
+  async GetFullData() {
+    try {
+
+      const response = await firstValueFrom(this.currencyService.GetFullData());
 
       this.currencyData = response;
       this.SetDefaultCurrencyRates();
 
-    });
+      console.log('Datele au fost încărcate asincron');
+
+    } catch (error) {
+      console.error('Eroare la încărcare:', error);
+    }
+  }
+
+
+  LeftOnChange(): void {
+
   }
 
 
