@@ -52,8 +52,10 @@ export class CurrencyService {
         return this.http.get<any>(this.descUrl).pipe(
             map(raw => {
                 debugger;
-                for (const item of raw.currencies) {
+
+                for (let item of raw) {
                     var values = Object.values(item);
+                    console.log(values);
                 }
             })
         );
