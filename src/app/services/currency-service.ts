@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ApiResponseModel as ApiResponseModel, ExchangeRatesModel } from '../models/api-response-model';
 
 
@@ -12,6 +12,7 @@ import { ApiResponseModel as ApiResponseModel, ExchangeRatesModel } from '../mod
 export class CurrencyService {
 
     private baseUrl = 'https://open.er-api.com/v6/latest';
+    private descUrl = 'https://restcountries.com/v3.1/all?fields=currencies';
 
     constructor(private http: HttpClient) { }
 
@@ -43,5 +44,19 @@ export class CurrencyService {
                 return apiResponse;
             })
         );
+    }
+
+
+    GetCurrencyDetails(): Observable<any> {
+
+        return this.http.get<any>(this.descUrl).pipe(
+            map(raw => {
+                debugger;
+                for (const item of raw.currencies) {
+                    var values = Object.values(item);
+                }
+            })
+        );
+
     }
 }

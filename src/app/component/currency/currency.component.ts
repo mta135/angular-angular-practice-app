@@ -44,7 +44,10 @@ export class CurrencyComponent implements OnInit {
 
   }
   async ngOnInit(): Promise<void> {
+
     await this.GetFullData();
+    await this.GetFullDataDescrition();
+
   }
 
 
@@ -61,6 +64,15 @@ export class CurrencyComponent implements OnInit {
     } catch (error) {
       console.error('Eroare la încărcare:', error);
     }
+  }
+
+
+  async GetFullDataDescrition(): Promise<void> {
+    debugger
+
+    const response = await firstValueFrom(this.currencyService.GetCurrencyDetails());
+
+
   }
 
 
