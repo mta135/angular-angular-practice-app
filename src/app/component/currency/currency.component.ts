@@ -38,6 +38,8 @@ export class CurrencyComponent implements OnInit {
     this.selection = {
       LeftSelectedRate: null,
       RightSelectedRate: null,
+      LeftDescription: '',
+      RightDescription: ''
     };
 
   }
@@ -63,6 +65,11 @@ export class CurrencyComponent implements OnInit {
 
 
   LeftOnChange(): void {
+
+  }
+
+  SetDescription(): void {
+    let descripon: string = "Hello, world!";
 
   }
 
