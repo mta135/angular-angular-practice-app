@@ -6,6 +6,7 @@ import { SelectModule } from 'primeng/select';
 import { CurrencyService } from '../../services/currency-service';
 import { ApiResponseModel } from '../../models/api-response-model';
 import { ExchangeSelection } from '../../models/exchange-selection-model';
+import { DatePipe } from '@angular/common';
 
 
 interface City {
@@ -15,7 +16,7 @@ interface City {
 
 @Component({
   selector: 'app-currency',
-  imports: [CardModule, FormsModule, InputTextModule, SelectModule],
+  imports: [CardModule, FormsModule, InputTextModule, SelectModule, DatePipe],
   templateUrl: './currency.component.html',
   styleUrl: './currency.component.scss'
 })
