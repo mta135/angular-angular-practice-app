@@ -8,4 +8,8 @@ export interface ExchangeSelection {
     RightSelectedRate: ExchangeRatesModel | null;
 
     RightDescription: string;
+
+    InputLeftValue: string;
+
+    InputRightValue: string;
 }

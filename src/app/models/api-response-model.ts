@@ -1,3 +1,4 @@
+import { CurrencyDescription } from "./currency-description-model";
 
 
 export interface ApiResponseModel {
@@ -11,6 +12,8 @@ export interface ApiResponseModel {
     time_next_update_utc: string;
 
     rates: ExchangeRatesModel[];
+
+    currencyDescriptions: CurrencyDescription[];
 }
 
 export interface ExchangeRatesModel {

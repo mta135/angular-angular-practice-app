@@ -7,14 +7,8 @@ import { CurrencyService } from '../../services/currency-service';
 import { ApiResponseModel } from '../../models/api-response-model';
 import { ExchangeSelection } from '../../models/exchange-selection-model';
 import { DatePipe } from '@angular/common';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { CurrencyDescription } from '../../models/currency-description-model';
-
-
-interface City {
-  name: string;
-  code: string;
-}
 
 @Component({
   selector: 'app-currency',
@@ -29,19 +23,12 @@ export class CurrencyComponent implements OnInit {
 
   public currencyData?: ApiResponseModel;
 
-  public currencyDescriptions: CurrencyDescription[] = [];
+  public selection: ExchangeSelection = this.CreateEmptySelection();
 
-  public selection: ExchangeSelection;
+  constructor() { }
 
-  public value: string | undefined;
-
-
-  constructor() {
-    this.selection = { LeftSelectedRate: null, RightSelectedRate: null, LeftDescription: '', RightDescription: '' };
-  }
   async ngOnInit(): Promise<void> {
     await this.loadData();
-
   }
 
   LeftOnChange(): void {
@@ -49,7 +36,10 @@ export class CurrencyComponent implements OnInit {
   }
 
   SetDescription(): void {
-    let descripon: string = "Hello, world!";
+    ///let descripon: string = "Hello, world!";
+
+    // this.selection.LeftDescription = "adadadad" //= this.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Name || '';
+    // this.selection.RightDescription = this.currencyDescriptions.find(desc => desc.Code === this.selection.RightSelectedRate?.Code)?.Name || '';
   }
 
   async loadData(): Promise<void> {
@@ -59,7 +49,7 @@ export class CurrencyComponent implements OnInit {
       var data = await lastValueFrom(this.currencyService.GetCompleteData());
 
       this.currencyData = data.exchangeData;
-      this.currencyDescriptions = data.descriptions;
+      this.currencyData!.currencyDescriptions = data.descriptions;
 
       this.SetDefaultCurrencyRates();
 
@@ -78,6 +68,21 @@ export class CurrencyComponent implements OnInit {
       this.selection.LeftSelectedRate = this.currencyData.rates.find(rate => rate.Code === 'MDL') || null;
       this.selection.RightSelectedRate = this.currencyData.rates.find(rate => rate.Code === 'EUR') || null;
     }
+  }
+
+  private CreateEmptySelection(): ExchangeSelection {
+
+    return {
+
+      LeftSelectedRate: null,
+      LeftDescription: '',
+
+      RightSelectedRate: null,
+      RightDescription: '',
+
+      InputLeftValue: '',
+      InputRightValue: ''
+    };
   }
 
 }

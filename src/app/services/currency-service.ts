@@ -35,12 +35,14 @@ export class CurrencyService {
                 }
 
                 let apiResponse: ApiResponseModel = {
-
                     result: raw.result,
+
                     base_code: raw.base_code,
                     time_last_update_utc: raw.time_last_update_utc,
                     time_next_update_utc: raw.time_next_update_utc,
-                    rates: formattedRates
+                    rates: formattedRates,
+
+                    currencyDescriptions: []
                 }
 
                 return apiResponse;
