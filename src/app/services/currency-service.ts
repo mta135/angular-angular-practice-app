@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, tap } from 'rxjs';
 import { ApiResponseModel as ApiResponseModel, ExchangeRatesModel } from '../models/api-response-model';
+import { CurrencyDescription, DescriptionDetails } from '../models/currency-description-model';
 
 
 @Injectable({
@@ -47,18 +48,40 @@ export class CurrencyService {
     }
 
 
-    GetCurrencyDetails(): Observable<any> {
+    GetCurrencyDescription(): Observable<CurrencyDescription[]> {
 
         return this.http.get<any>(this.descUrl).pipe(
+
             map(raw => {
                 debugger;
+                let currencyDescriptions: CurrencyDescription[] = [];
 
                 for (let item of raw) {
-                    var values = Object.values(item);
-                    console.log(values);
+
+                    let description = new CurrencyDescription();
+                    let descriptionDetail = new DescriptionDetails();
+
+                    let currencyDataArray = Object.values(item.currencies);
+                    let keys = Object.keys(item.currencies);
+
+                    descriptionDetail.Name = keys[0];
+
+                    for (let currencyData of currencyDataArray) {
+                        let data = currencyData as any;
+
+                        let name: string = data.name;
+                        let symbol: string = data.symbol;
+
+                        descriptionDetail.Details.set('name', name);
+                        descriptionDetail.Details.set('symbol', symbol);
+                    }
+
+                    description.CurrencyDescriptionDetails = descriptionDetail;
+                    currencyDescriptions.push(description);
                 }
+
+                return currencyDescriptions;
             })
         );
-
     }
 }
