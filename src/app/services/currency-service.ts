@@ -51,30 +51,35 @@ export class CurrencyService {
     GetCurrencyDescription(): Observable<CurrencyDescription[]> {
         return this.http.get<any[]>(this.descUrl).pipe(
             map(raw => {
-                let currencyDescriptions: CurrencyDescription[] = [];
 
+                let currencyDescriptions: CurrencyDescription[] = [];
                 debugger
 
-                for (let item of raw) {
-                    if (!item.currencies) continue;
+                for (let i = 0; i < raw.length; i++) {
 
-                    for (const [code, data] of Object.entries(item.currencies)) {
+                    let item = raw[i];
+                    if (item.currencies) {
+                        let keys = Object.keys(item.currencies);
 
-                        let description = new CurrencyDescription();
-                        let descriptionDetail = new DescriptionDetails();
-                        let d = data as any;
+                        for (let j = 0; j < keys.length; j++) {
 
-                        descriptionDetail.Name = code;
+                            let code = keys[j];
+                            let data = item.currencies[code];
 
-                        descriptionDetail.Details.set('name', d.name);
-                        descriptionDetail.Details.set('symbol', d.symbol);
+                            let description = new CurrencyDescription();
+                            let descriptionDetail = new DescriptionDetails();
 
-                        description.CurrencyDescriptionDetails = descriptionDetail;
+                            descriptionDetail.Name = code;
 
-                        currencyDescriptions.push(description);
+                            descriptionDetail.Details.set('name', data.name);
+                            descriptionDetail.Details.set('symbol', data.symbol);
+
+                            description.CurrencyDescriptionDetails = descriptionDetail;
+
+                            currencyDescriptions.push(description);
+                        }
                     }
                 }
-
                 return currencyDescriptions;
             })
         );
