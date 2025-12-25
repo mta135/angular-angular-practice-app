@@ -28,48 +28,76 @@ export class CurrencyComponent implements OnInit {
   constructor() { }
 
   async ngOnInit(): Promise<void> {
-    await this.loadData();
+    await this.LoadData();
   }
 
   LeftOnChange(): void {
 
   }
 
-  SetDescription(): void {
+  SetCurrencyDescription(): string {
 
     let description: string = "";
 
     if (!this.IsEmpty(this.selection.InputLeftValue)) {
 
       var value = this.currencyData?.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Name || '';
-
       description += this.selection.InputLeftValue + " ";
 
     }
     else {
-      description += this.currencyData?.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Name || '';
+
+      let name: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.LeftSelectedRate?.Code)?.Name || "";
+      let code: string = this.currencyData?.currencyDescriptions.find(x => x.Code == this.selection.LeftSelectedRate?.Code)?.Code || "";
+
+      let result = this.Calculate();
+      description += "1 " + code + " (" + name + ") = " + result;
     }
 
+    return description;
+  }
 
 
+  private Calculate(): string {
 
+    let result: string = "";
+    let temResult: number | undefined;
 
+    if (!this.IsEmpty(this.selection.InputLeftValue)) {
 
+    }
+
+    else {
+
+      var leftRate = this.currencyData?.rates.find(r => r.Code === this.selection.LeftSelectedRate?.Code)?.Value ?? 0;
+      var rightRate = this.currencyData?.rates.find(r => r.Code === this.selection.RightSelectedRate?.Code)?.Value ?? 0;
+
+      temResult = rightRate / leftRate;
+      result = temResult.toFixed(4);
+    }
+
+    return result;
 
   }
 
-  async loadData(): Promise<void> {
+  private SetDescriptions(): void {
+
+    this.selection.LeftDescription = this.SetCurrencyDescription();
+  }
+
+  async LoadData(): Promise<void> {
 
     try {
-
 
       var data = await lastValueFrom(this.currencyService.GetCompleteData());
 
       this.currencyData = data.exchangeData;
+      console.log(this.currencyData);
+
       this.currencyData!.currencyDescriptions = data.descriptions;
 
       this.SetDefaultCurrencyRates();
-      this.SetDescription();
+      this.SetDescriptions();
 
       console.log('Date încărcate asincron cu succes!');
     }
