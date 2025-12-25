@@ -8,11 +8,15 @@ export class CurrencyDescription {
 }
 
 export class DescriptionDetails {
-    public Name: string
-    public Details: Map<string, string>;
-    constructor() {
+    public Code: string
 
+    public Name: string
+
+    public Symbol: string
+
+    constructor() {
+        this.Code = '';
         this.Name = '';
-        this.Details = new Map<string, string>();
+        this.Symbol = '';
     }
 }

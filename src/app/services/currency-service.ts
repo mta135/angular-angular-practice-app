@@ -69,10 +69,9 @@ export class CurrencyService {
                             let description = new CurrencyDescription();
                             let descriptionDetail = new DescriptionDetails();
 
-                            descriptionDetail.Name = code;
-
-                            descriptionDetail.Details.set('name', data.name);
-                            descriptionDetail.Details.set('symbol', data.symbol);
+                            descriptionDetail.Code = code;
+                            descriptionDetail.Name = data.name;
+                            descriptionDetail.Symbol = data.symbol;
 
                             description.CurrencyDescriptionDetails = descriptionDetail;
 
