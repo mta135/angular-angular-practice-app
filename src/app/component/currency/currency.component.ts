@@ -36,15 +36,32 @@ export class CurrencyComponent implements OnInit {
   }
 
   SetDescription(): void {
-    ///let descripon: string = "Hello, world!";
 
-    // this.selection.LeftDescription = "adadadad" //= this.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Name || '';
-    // this.selection.RightDescription = this.currencyDescriptions.find(desc => desc.Code === this.selection.RightSelectedRate?.Code)?.Name || '';
+    let description: string = "";
+
+    if (!this.IsEmpty(this.selection.InputLeftValue)) {
+
+      var value = this.currencyData?.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Name || '';
+
+      description += this.selection.InputLeftValue + " ";
+
+    }
+    else {
+      description += this.currencyData?.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Name || '';
+    }
+
+
+
+
+
+
+
   }
 
   async loadData(): Promise<void> {
 
     try {
+
 
       var data = await lastValueFrom(this.currencyService.GetCompleteData());
 
@@ -52,6 +69,7 @@ export class CurrencyComponent implements OnInit {
       this.currencyData!.currencyDescriptions = data.descriptions;
 
       this.SetDefaultCurrencyRates();
+      this.SetDescription();
 
       console.log('Date încărcate asincron cu succes!');
     }
@@ -82,7 +100,15 @@ export class CurrencyComponent implements OnInit {
 
       InputLeftValue: '',
       InputRightValue: ''
+
+
     };
   }
+
+
+  private IsEmpty(str: string): boolean {
+    return str.length === 0;
+  }
+
 
 }
