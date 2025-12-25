@@ -1,9 +1,9 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { forkJoin, map, Observable, tap } from 'rxjs';
 import { ApiResponseModel as ApiResponseModel, ExchangeRatesModel } from '../models/api-response-model';
-import { CurrencyDescription } from '../models/currency-description-model';
+import { CurrencyDescription, FullCurrencyData } from '../models/currency-description-model';
 
 
 @Injectable({
@@ -13,6 +13,7 @@ import { CurrencyDescription } from '../models/currency-description-model';
 export class CurrencyService {
 
     private baseUrl = 'https://open.er-api.com/v6/latest';
+
     private descUrl = 'https://restcountries.com/v3.1/all?fields=currencies';
 
     constructor(private http: HttpClient) { }
@@ -47,13 +48,11 @@ export class CurrencyService {
         );
     }
 
-
     GetCurrencyDescription(): Observable<CurrencyDescription[]> {
         return this.http.get<any[]>(this.descUrl).pipe(
             map(raw => {
 
                 let currencyDescriptions: CurrencyDescription[] = [];
-                debugger
 
                 for (let i = 0; i < raw.length; i++) {
 
@@ -80,4 +79,13 @@ export class CurrencyService {
             })
         );
     }
+
+    GetCompleteData(): Observable<FullCurrencyData> {
+
+        return forkJoin({
+            exchangeData: this.GetFullData(),
+            descriptions: this.GetCurrencyDescription()
+        });
+    }
+
 }

@@ -1,3 +1,5 @@
+import { ApiResponseModel } from "./api-response-model";
+
 export class CurrencyDescription {
 
     public Code: string
@@ -13,3 +15,7 @@ export class CurrencyDescription {
     }
 }
 
+export interface FullCurrencyData {
+    exchangeData: ApiResponseModel;
+    descriptions: CurrencyDescription[];
+}

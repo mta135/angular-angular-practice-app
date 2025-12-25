@@ -7,7 +7,8 @@ import { CurrencyService } from '../../services/currency-service';
 import { ApiResponseModel } from '../../models/api-response-model';
 import { ExchangeSelection } from '../../models/exchange-selection-model';
 import { DatePipe } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { CurrencyDescription } from '../../models/currency-description-model';
 
 
 interface City {
@@ -24,55 +25,24 @@ interface City {
 
 export class CurrencyComponent implements OnInit {
 
-  currencyData?: ApiResponseModel;
-
-  selection: ExchangeSelection;
-
   private currencyService = inject(CurrencyService);
 
-  value: string | undefined;
+  public currencyData?: ApiResponseModel;
+
+  public currencyDescriptions: CurrencyDescription[] = [];
+
+  public selection: ExchangeSelection;
+
+  public value: string | undefined;
 
 
   constructor() {
-
-    this.selection = {
-      LeftSelectedRate: null,
-      RightSelectedRate: null,
-      LeftDescription: '',
-      RightDescription: ''
-    };
-
+    this.selection = { LeftSelectedRate: null, RightSelectedRate: null, LeftDescription: '', RightDescription: '' };
   }
   async ngOnInit(): Promise<void> {
-
-    await this.GetFullData();
-    await this.GetFullDataDescrition();
+    await this.loadData();
 
   }
-
-
-  async GetFullData() {
-    try {
-
-      const response = await firstValueFrom(this.currencyService.GetFullData());
-
-      this.currencyData = response;
-      this.SetDefaultCurrencyRates();
-
-      console.log('Datele au fost încărcate asincron');
-
-    } catch (error) {
-      console.error('Eroare la încărcare:', error);
-    }
-  }
-
-
-  async GetFullDataDescrition(): Promise<void> {
-
-    const response = await firstValueFrom(this.currencyService.GetCurrencyDescription());
-    console.log('Descrierile au fost încărcate asincron', response);
-  }
-
 
   LeftOnChange(): void {
 
@@ -80,9 +50,26 @@ export class CurrencyComponent implements OnInit {
 
   SetDescription(): void {
     let descripon: string = "Hello, world!";
-
   }
 
+  async loadData(): Promise<void> {
+
+    try {
+
+      var data = await lastValueFrom(this.currencyService.GetCompleteData());
+
+      this.currencyData = data.exchangeData;
+      this.currencyDescriptions = data.descriptions;
+
+      this.SetDefaultCurrencyRates();
+
+      console.log('Date încărcate asincron cu succes!');
+    }
+    catch (error) {
+
+      console.error('Eroare la încărcarea datelor:', error);
+    }
+  }
 
   SetDefaultCurrencyRates(): void {
 
