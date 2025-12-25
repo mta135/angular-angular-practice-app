@@ -48,10 +48,15 @@ export class CurrencyComponent implements OnInit {
     else {
 
       let name: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.LeftSelectedRate?.Code)?.Name || "";
-      let code: string = this.currencyData?.currencyDescriptions.find(x => x.Code == this.selection.LeftSelectedRate?.Code)?.Code || "";
+      let LeftCode: string = this.currencyData?.currencyDescriptions.find(x => x.Code == this.selection.LeftSelectedRate?.Code)?.Code || "";
+
+      let RightCode: string = this.currencyData?.currencyDescriptions.find(x => x.Code == this.selection.RightSelectedRate?.Code)?.Code || "";
+
+      var _value = this.selection.RightSelectedRate;
+
 
       let result = this.Calculate();
-      description += "1 " + code + " (" + name + ") = " + result;
+      description += "1 " + LeftCode + " (" + name + ") = " + result + " " + RightCode;
     }
 
     return description;
@@ -73,7 +78,7 @@ export class CurrencyComponent implements OnInit {
       var rightRate = this.currencyData?.rates.find(r => r.Code === this.selection.RightSelectedRate?.Code)?.Value ?? 0;
 
       temResult = rightRate / leftRate;
-      result = temResult.toFixed(4);
+      result = temResult.toFixed(6);
     }
 
     return result;
