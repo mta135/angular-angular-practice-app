@@ -49,35 +49,30 @@ export class CurrencyService {
 
 
     GetCurrencyDescription(): Observable<CurrencyDescription[]> {
-
-        return this.http.get<any>(this.descUrl).pipe(
-
+        return this.http.get<any[]>(this.descUrl).pipe(
             map(raw => {
-                debugger;
                 let currencyDescriptions: CurrencyDescription[] = [];
 
+                debugger
+
                 for (let item of raw) {
+                    if (!item.currencies) continue;
 
-                    let description = new CurrencyDescription();
-                    let descriptionDetail = new DescriptionDetails();
+                    for (const [code, data] of Object.entries(item.currencies)) {
 
-                    let currencyDataArray = Object.values(item.currencies);
-                    let keys = Object.keys(item.currencies);
+                        let description = new CurrencyDescription();
+                        let descriptionDetail = new DescriptionDetails();
+                        let d = data as any;
 
-                    descriptionDetail.Name = keys[0];
+                        descriptionDetail.Name = code;
 
-                    for (let currencyData of currencyDataArray) {
-                        let data = currencyData as any;
+                        descriptionDetail.Details.set('name', d.name);
+                        descriptionDetail.Details.set('symbol', d.symbol);
 
-                        let name: string = data.name;
-                        let symbol: string = data.symbol;
+                        description.CurrencyDescriptionDetails = descriptionDetail;
 
-                        descriptionDetail.Details.set('name', name);
-                        descriptionDetail.Details.set('symbol', symbol);
+                        currencyDescriptions.push(description);
                     }
-
-                    description.CurrencyDescriptionDetails = descriptionDetail;
-                    currencyDescriptions.push(description);
                 }
 
                 return currencyDescriptions;
