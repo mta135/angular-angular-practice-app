@@ -1,13 +1,5 @@
 export class CurrencyDescription {
 
-    public CurrencyDescriptionDetails: DescriptionDetails;
-
-    constructor() {
-        this.CurrencyDescriptionDetails = new DescriptionDetails();
-    }
-}
-
-export class DescriptionDetails {
     public Code: string
 
     public Name: string
@@ -20,3 +12,4 @@ export class DescriptionDetails {
         this.Symbol = '';
     }
 }
+

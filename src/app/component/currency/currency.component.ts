@@ -68,6 +68,7 @@ export class CurrencyComponent implements OnInit {
 
 
   async GetFullDataDescrition(): Promise<void> {
+
     const response = await firstValueFrom(this.currencyService.GetCurrencyDescription());
     console.log('Descrierile au fost încărcate asincron', response);
   }

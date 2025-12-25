@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, tap } from 'rxjs';
 import { ApiResponseModel as ApiResponseModel, ExchangeRatesModel } from '../models/api-response-model';
-import { CurrencyDescription, DescriptionDetails } from '../models/currency-description-model';
+import { CurrencyDescription } from '../models/currency-description-model';
 
 
 @Injectable({
@@ -67,13 +67,10 @@ export class CurrencyService {
                             let data = item.currencies[code];
 
                             let description = new CurrencyDescription();
-                            let descriptionDetail = new DescriptionDetails();
 
-                            descriptionDetail.Code = code;
-                            descriptionDetail.Name = data.name;
-                            descriptionDetail.Symbol = data.symbol;
-
-                            description.CurrencyDescriptionDetails = descriptionDetail;
+                            description.Code = code;
+                            description.Name = data.name;
+                            description.Symbol = data.symbol;
 
                             currencyDescriptions.push(description);
                         }
