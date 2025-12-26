@@ -35,48 +35,87 @@ export class CurrencyComponent implements OnInit {
 
   }
 
-  SetCurrencyDescription(): string {
+  SetCurrencyDescription(side: string): string {
 
     let description: string = "";
 
-    if (!this.IsEmpty(this.selection.InputLeftValue)) {
+    if (side == "left") {
 
-      var value = this.currencyData?.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Description || '';
-      description += this.selection.InputLeftValue + " ";
+      if (!this.IsEmpty(this.selection.InputLeftValue)) {
+
+        var value = this.currencyData?.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Description || '';
+        description += this.selection.InputLeftValue + " ";
+
+      }
+      else {
+
+        let currencyDescription: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.LeftSelectedRate?.Code)?.Description || "";
+        let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
+
+        let RightCode: string = this.selection.RightSelectedRate?.Code || "";
+
+        let result = this.Calculate("left");
+        description += "1 " + LeftCode + " (" + currencyDescription + ") = " + result + " " + RightCode;
+      }
 
     }
-    else {
 
-      let currencyDescription: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.LeftSelectedRate?.Code)?.Description || "";
-      let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
 
-      let RightCode: string = this.selection.RightSelectedRate?.Code || "";
+    if (side == "right") {
 
-      let result = this.Calculate();
-      description += "1 " + LeftCode + " (" + currencyDescription + ") = " + result + " " + RightCode;
+      if (!this.IsEmpty(this.selection.InputRightValue)) {
+
+      }
+      else {
+
+        let currencyDescription: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.RightSelectedRate?.Code)?.Description || "";
+        let RightCode: string = this.selection.RightSelectedRate?.Code || "";
+
+        let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
+
+        let result = this.Calculate("right");
+
+        description += "1 " + RightCode + " (" + currencyDescription + ") = " + result + " " + LeftCode;
+
+      }
+
     }
 
     return description;
   }
 
 
-  private Calculate(): string {
+  private Calculate(side: string): string {
 
     let result: string = "";
     let temResult: number | undefined;
 
-    if (!this.IsEmpty(this.selection.InputLeftValue)) {
+
+    if (side == "left") {
+
+      if (!this.IsEmpty(this.selection.InputLeftValue)) {
+
+      }
+
+      else {
+
+        var leftRate = this.currencyData?.rates.find(r => r.Code === this.selection.LeftSelectedRate?.Code)?.Value ?? 0;
+        var rightRate = this.currencyData?.rates.find(r => r.Code === this.selection.RightSelectedRate?.Code)?.Value ?? 0;
+
+        temResult = rightRate / leftRate;
+        result = temResult.toFixed(6);
+      }
+    }
+
+
+
+    if (side == "right") {
 
     }
 
-    else {
 
-      var leftRate = this.currencyData?.rates.find(r => r.Code === this.selection.LeftSelectedRate?.Code)?.Value ?? 0;
-      var rightRate = this.currencyData?.rates.find(r => r.Code === this.selection.RightSelectedRate?.Code)?.Value ?? 0;
 
-      temResult = rightRate / leftRate;
-      result = temResult.toFixed(6);
-    }
+
 
     return result;
 
@@ -84,8 +123,11 @@ export class CurrencyComponent implements OnInit {
 
   private SetDescriptions(): void {
 
-    this.selection.LeftDescription = this.SetCurrencyDescription();
+    this.selection.LeftDescription = this.SetCurrencyDescription("left");
+    this.selection.RightDescription = this.SetCurrencyDescription("right");
   }
+
+
 
   async LoadData(): Promise<void> {
 
