@@ -70,7 +70,7 @@ export class CurrencyService {
                             let description = new CurrencyDescription();
 
                             description.Code = code;
-                            description.Name = data.name;
+                            description.Description = data.name;
                             description.Symbol = data.symbol;
 
                             currencyDescriptions.push(description);

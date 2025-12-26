@@ -41,22 +41,19 @@ export class CurrencyComponent implements OnInit {
 
     if (!this.IsEmpty(this.selection.InputLeftValue)) {
 
-      var value = this.currencyData?.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Name || '';
+      var value = this.currencyData?.currencyDescriptions.find(desc => desc.Code === this.selection.LeftSelectedRate?.Code)?.Description || '';
       description += this.selection.InputLeftValue + " ";
 
     }
     else {
 
-      let name: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.LeftSelectedRate?.Code)?.Name || "";
-      let LeftCode: string = this.currencyData?.currencyDescriptions.find(x => x.Code == this.selection.LeftSelectedRate?.Code)?.Code || "";
+      let currencyDescription: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.LeftSelectedRate?.Code)?.Description || "";
+      let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
 
-      let RightCode: string = this.currencyData?.currencyDescriptions.find(x => x.Code == this.selection.RightSelectedRate?.Code)?.Code || "";
-
-      var _value = this.selection.RightSelectedRate;
-
+      let RightCode: string = this.selection.RightSelectedRate?.Code || "";
 
       let result = this.Calculate();
-      description += "1 " + LeftCode + " (" + name + ") = " + result + " " + RightCode;
+      description += "1 " + LeftCode + " (" + currencyDescription + ") = " + result + " " + RightCode;
     }
 
     return description;
