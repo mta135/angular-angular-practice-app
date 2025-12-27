@@ -8,7 +8,6 @@ import { ApiResponseModel } from '../../models/api-response-model';
 import { ExchangeSelection } from '../../models/exchange-selection-model';
 import { DatePipe } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
-import { CurrencyDescription } from '../../models/currency-description-model';
 
 @Component({
   selector: 'app-currency',
@@ -56,6 +55,7 @@ export class CurrencyComponent implements OnInit {
 
         let result = this.Calculate("left");
         description += "1 " + LeftCode + " (" + currencyDescription + ") = " + result + " " + RightCode;
+
       }
 
     }
@@ -88,8 +88,7 @@ export class CurrencyComponent implements OnInit {
   private Calculate(side: string): string {
 
     let result: string = "";
-    let temResult: number | undefined;
-
+    let tempResult: number | undefined;
 
     if (side == "left") {
 
@@ -102,23 +101,26 @@ export class CurrencyComponent implements OnInit {
         var leftRate = this.currencyData?.rates.find(r => r.Code === this.selection.LeftSelectedRate?.Code)?.Value ?? 0;
         var rightRate = this.currencyData?.rates.find(r => r.Code === this.selection.RightSelectedRate?.Code)?.Value ?? 0;
 
-        temResult = rightRate / leftRate;
-        result = temResult.toFixed(6);
+        tempResult = rightRate / leftRate;
+        result = tempResult.toFixed(6);
       }
     }
 
-
-
     if (side == "right") {
 
+      if (!this.IsEmpty(this.selection.InputLeftValue)) {
+
+      }
+      else {
+
+        var rightRate = this.currencyData?.rates.find(r => r.Code === this.selection.RightSelectedRate?.Code)?.Value ?? 0;
+        var leftRate = this.currencyData?.rates.find(r => r.Code === this.selection.LeftSelectedRate?.Code)?.Value ?? 0;
+
+        tempResult = leftRate / rightRate;
+        result = tempResult.toFixed(6);
+      }
     }
-
-
-
-
-
     return result;
-
   }
 
   private SetDescriptions(): void {
@@ -172,7 +174,6 @@ export class CurrencyComponent implements OnInit {
 
       InputLeftValue: '',
       InputRightValue: ''
-
 
     };
   }
