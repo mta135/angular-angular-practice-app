@@ -8,6 +8,7 @@ import { ApiResponseModel } from '../../models/api-response-model';
 import { ExchangeSelection } from '../../models/exchange-selection-model';
 import { DatePipe } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
+import { CurrencyDirection } from '../../enums/calculation-type-enum';
 
 @Component({
   selector: 'app-currency',
@@ -30,15 +31,21 @@ export class CurrencyComponent implements OnInit {
     await this.LoadData();
   }
 
-  LeftOnChange(): void {
+  public LeftOnChange(): void {
 
+    this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
   }
 
-  SetCurrencyDescription(side: string): string {
+  public RightOnChange(): void {
+
+    this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
+  }
+
+  CalculateConversionRate(side: string): string {
 
     let description: string = "";
 
-    if (side == "left") {
+    if (side == CurrencyDirection.Left) {
 
       if (!this.IsEmpty(this.selection.InputLeftValue)) {
 
@@ -53,7 +60,7 @@ export class CurrencyComponent implements OnInit {
 
         let RightCode: string = this.selection.RightSelectedRate?.Code || "";
 
-        let result = this.Calculate("left");
+        let result = this.CalculateRate(CurrencyDirection.Left);
         description += "1 " + LeftCode + " (" + currencyDescription + ") = " + result + " " + RightCode;
 
       }
@@ -61,7 +68,7 @@ export class CurrencyComponent implements OnInit {
     }
 
 
-    if (side == "right") {
+    if (side == CurrencyDirection.Right) {
 
       if (!this.IsEmpty(this.selection.InputRightValue)) {
 
@@ -73,24 +80,23 @@ export class CurrencyComponent implements OnInit {
 
         let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
 
-        let result = this.Calculate("right");
+        let result = this.CalculateRate(CurrencyDirection.Right);
 
         description += "1 " + RightCode + " (" + currencyDescription + ") = " + result + " " + LeftCode;
 
       }
-
     }
 
     return description;
   }
 
 
-  private Calculate(side: string): string {
+  private CalculateRate(side: string): string {
 
     let result: string = "";
     let tempResult: number | undefined;
 
-    if (side == "left") {
+    if (side == CurrencyDirection.Left) {
 
       if (!this.IsEmpty(this.selection.InputLeftValue)) {
 
@@ -106,7 +112,7 @@ export class CurrencyComponent implements OnInit {
       }
     }
 
-    if (side == "right") {
+    if (side == CurrencyDirection.Right) {
 
       if (!this.IsEmpty(this.selection.InputLeftValue)) {
 
@@ -125,8 +131,8 @@ export class CurrencyComponent implements OnInit {
 
   private SetDescriptions(): void {
 
-    this.selection.LeftDescription = this.SetCurrencyDescription("left");
-    this.selection.RightDescription = this.SetCurrencyDescription("right");
+    this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
+    this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
   }
 
 
@@ -167,10 +173,10 @@ export class CurrencyComponent implements OnInit {
     return {
 
       LeftSelectedRate: null,
-      LeftDescription: '',
+      LeftExchangeRate: '',
 
       RightSelectedRate: null,
-      RightDescription: '',
+      RightExchangeRate: '',
 
       InputLeftValue: '',
       InputRightValue: ''

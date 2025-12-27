@@ -15,7 +15,8 @@
                 <div class="flex-1">
                     <p-select [options]="currencyData?.rates" [(ngModel)]="selection.RightSelectedRate"
                         [checkmark]="true" optionLabel="Code" [filter]="true" filterBy="Code" [virtualScroll]="true"
-                        [virtualScrollItemSize]="38" placeholder="Select a City" class="w-full" />
+                        [virtualScrollItemSize]="38" placeholder="Select a City" class="w-full"
+                        (onChange)="RightOnChange()" />
                 </div>
 
             </div>
@@ -40,11 +41,11 @@
         </div>
 
         <p class="mt-[50px] text-black text-base">
-            {{selection.LeftDescription}}
+            {{selection.LeftExchangeRate}}
         </p>
 
         <p class="mt-[5px] text-black text-base">
-            {{selection.RightDescription}}
+            {{selection.RightExchangeRate}}
         </p>
 
         <p class="absolute bottom-4 right-4 text-black text-base">
