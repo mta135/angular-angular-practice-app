@@ -34,6 +34,7 @@ export class CurrencyComponent implements OnInit {
   public LeftOnChange(): void {
 
     this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
+    this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
   }
 
   public RightOnChange(): void {
