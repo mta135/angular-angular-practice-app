@@ -38,12 +38,21 @@ export class CurrencyComponent implements OnInit {
 
   public LeftSelectedOnChange(): void {
 
+    let lastLeftSelectedCode = this.session.GetItem(CurrencyDirection.Left);
+
     this.session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
 
     this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
 
-    this.ChangeCalculationDirection(CurrencyDirection.Left);
+
+    if (this.selection.LeftSelectedRate?.Code == this.selection.LeftSelectedRate?.Code) {
+
+
+
+    }
+
+
 
   }
 
