@@ -49,6 +49,10 @@ export class CurrencyComponent implements OnInit {
 
   }
 
+  public InputRightValueOnChange(): void {
+
+  }
+
   CalculateConversionRate(side: string): string {
 
     let description: string = "";
