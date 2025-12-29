@@ -9,10 +9,11 @@ import { ExchangeSelection } from '../../models/exchange-selection-model';
 import { DatePipe } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
 import { CurrencyDirection } from '../../enums/calculation-type-enum';
+import { NumbersOnlyDirective } from '../../directive/input-only-numbers-directive';
 
 @Component({
   selector: 'app-currency',
-  imports: [CardModule, FormsModule, InputTextModule, SelectModule, DatePipe],
+  imports: [CardModule, FormsModule, InputTextModule, SelectModule, DatePipe, NumbersOnlyDirective],
   templateUrl: './currency.component.html',
   styleUrl: './currency.component.scss'
 })
