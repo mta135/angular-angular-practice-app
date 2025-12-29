@@ -32,13 +32,13 @@ export class CurrencyComponent implements OnInit {
     await this.LoadData();
   }
 
-  public LeftOnChange(): void {
+  public LeftSelectedOnChange(): void {
 
     this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
   }
 
-  public RightOnChange(): void {
+  public RightSelectedOnChange(): void {
 
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
   }
@@ -172,6 +172,7 @@ export class CurrencyComponent implements OnInit {
         let rightInputValue: number = Number(this.selection.InputRightValue);
 
         break;
+
     }
 
     return result.toFixed(4);
