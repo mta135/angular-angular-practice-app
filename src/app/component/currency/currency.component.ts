@@ -43,7 +43,7 @@ export class CurrencyComponent implements OnInit {
     this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
 
-    this.ChangeCalculationDirection();
+    this.ChangeCalculationDirection(CurrencyDirection.Left);
 
   }
 
@@ -60,7 +60,7 @@ export class CurrencyComponent implements OnInit {
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
 
 
-    this.ChangeCalculationDirection();
+    this.ChangeCalculationDirection(CurrencyDirection.Right);
   }
 
   public InputRightValueOnChange(): void {
@@ -160,7 +160,7 @@ export class CurrencyComponent implements OnInit {
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
   }
 
-  CalculatRate(direction: string): string {
+  private CalculatRate(direction: string): string {
 
     let leftRate: number = this.selection.LeftSelectedRate?.Value ?? 0;
     let rightRate: number = this.selection.RightSelectedRate?.Value ?? 0;
@@ -213,7 +213,7 @@ export class CurrencyComponent implements OnInit {
     }
   }
 
-  SetDefaultCurrencyRates(left: string, right: string): void {
+  private SetDefaultCurrencyRates(left: string, right: string): void {
 
     if (this.currencyData) {
 
@@ -243,7 +243,7 @@ export class CurrencyComponent implements OnInit {
   }
 
 
-  private ChangeCalculationDirection(): void {
+  private ChangeCalculationDirection(direction: string): void {
 
     let leftSelecteRateCode: string = this.selection.LeftSelectedRate?.Code ?? "";
     let RightSelectedRateCode: string = this.selection.RightSelectedRate?.Code ?? "";
