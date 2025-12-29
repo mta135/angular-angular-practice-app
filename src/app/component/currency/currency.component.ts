@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -144,33 +144,33 @@ export class CurrencyComponent implements OnInit {
   }
 
 
-  CalculatRate(direction: string): number {
+  CalculatRate(direction: string): string {
 
-    let leftRate: number | undefined = this.selection.LeftSelectedRate?.Value;
-    let rightRate: number | undefined = this.selection.RightSelectedRate?.Value;
+    let leftRate: number = this.selection.LeftSelectedRate?.Value ?? 0;
+    let rightRate: number = this.selection.RightSelectedRate?.Value ?? 0;
+
+    const input = direction === CurrencyDirection.Left ? this.selection.InputLeftValue : this.selection.InputRightValue;
+
+    if (this.IsEmpty(input) || input.trim() === "") return ''
 
     let result: number = 0;
-
-    if (leftRate === undefined || rightRate === undefined || leftRate === 0 || rightRate === 0) return 0;
+    let intputValue = Number(input);
 
     switch (direction) {
+
       case CurrencyDirection.Left:
 
-        let leftInputValue: number = Number(this.selection.InputLeftValue);
-        result = leftInputValue * (rightRate / leftRate);
+        result = intputValue * (rightRate / leftRate);
         break;
 
-
       case CurrencyDirection.Right:
-
+        // TODO must implement
         let rightInputValue: number = Number(this.selection.InputRightValue);
 
         break;
     }
 
-
-
-    return Number(result.toFixed(4));
+    return result.toFixed(4);
 
   }
 

@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-    selector: 'input[numbersOnly]', // Use as <input numbersOnly>
+    selector: 'input[numbersOnly]',
     standalone: true // Angular 19 standard
 })
 export class NumbersOnlyDirective {
