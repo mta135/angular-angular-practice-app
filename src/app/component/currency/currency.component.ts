@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { CurrencyService } from '../../services/currency-service';
-import { ApiResponseModel } from '../../models/api-response-model';
+import { ApiResponseModel, ExchangeRatesModel } from '../../models/api-response-model';
 import { ExchangeSelection } from '../../models/exchange-selection-model';
 import { DatePipe } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
@@ -40,6 +40,12 @@ export class CurrencyComponent implements OnInit {
   public RightOnChange(): void {
 
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
+  }
+
+  public InputLeftValueOnChange(): void {
+
+    this.selection.InputRightValue = this.CalculatRate(CurrencyDirection.Left).toString()
+
   }
 
   CalculateConversionRate(side: string): string {
@@ -134,6 +140,36 @@ export class CurrencyComponent implements OnInit {
 
     this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
+  }
+
+
+  CalculatRate(direction: string): number {
+
+    var currencyRate = 0;
+
+    if (direction == CurrencyDirection.Left) {
+
+      let leftInput: number = Number(this.selection.InputLeftValue)
+
+      let leftRate: ExchangeRatesModel | null = this.selection.LeftSelectedRate;
+      let rightRate: ExchangeRatesModel | null = this.selection.RightSelectedRate;
+
+      if (leftRate?.Value && rightRate?.Value) {
+
+        let temResult = rightRate.Value / leftRate.Value;
+        currencyRate = leftInput * temResult
+
+      }
+    }
+
+
+    else if (direction == CurrencyDirection.Right) {
+
+    }
+
+
+    return Number(currencyRate.toFixed(4));
+
   }
 
 
