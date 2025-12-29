@@ -2,10 +2,6 @@
 export class Session {
 
     public static SetItem(key: string, value: string): void {
-
-        if (this.GetItem(key) !== "" || this.GetItem(key) !== null)
-            this.Clear();
-
         sessionStorage.setItem(key, value);
     }
 
