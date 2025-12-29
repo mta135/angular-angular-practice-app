@@ -145,30 +145,31 @@ export class CurrencyComponent implements OnInit {
 
   CalculatRate(direction: string): number {
 
-    var currencyRate = 0;
+    let leftRate: number | undefined = this.selection.LeftSelectedRate?.Value;
+    let rightRate: number | undefined = this.selection.RightSelectedRate?.Value;
 
-    if (direction == CurrencyDirection.Left) {
+    let result: number = 0;
 
-      let leftInput: number = Number(this.selection.InputLeftValue)
+    if (leftRate === undefined || rightRate === undefined || leftRate === 0 || rightRate === 0) return 0;
 
-      let leftRate: ExchangeRatesModel | null = this.selection.LeftSelectedRate;
-      let rightRate: ExchangeRatesModel | null = this.selection.RightSelectedRate;
+    switch (direction) {
+      case CurrencyDirection.Left:
 
-      if (leftRate?.Value && rightRate?.Value) {
+        let leftInputValue: number = Number(this.selection.InputLeftValue);
+        result = leftInputValue * (rightRate / leftRate);
+        break;
 
-        let temResult = rightRate.Value / leftRate.Value;
-        currencyRate = leftInput * temResult
 
-      }
+      case CurrencyDirection.Right:
+
+        let rightInputValue: number = Number(this.selection.InputRightValue);
+
+        break;
     }
 
 
-    else if (direction == CurrencyDirection.Right) {
 
-    }
-
-
-    return Number(currencyRate.toFixed(4));
+    return Number(result.toFixed(4));
 
   }
 
