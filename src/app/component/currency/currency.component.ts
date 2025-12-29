@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
 import { CurrencyDirection } from '../../enums/calculation-type-enum';
 import { NumbersOnlyDirective } from '../../directive/input-only-numbers-directive';
+import { Session } from '../../utils/session-storage';
 
 @Component({
   selector: 'app-currency',
@@ -30,6 +31,8 @@ export class CurrencyComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.LoadData();
+
+
   }
 
   public LeftSelectedOnChange(): void {
@@ -38,16 +41,20 @@ export class CurrencyComponent implements OnInit {
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
   }
 
+
+  public InputLeftValueOnChange(): void {
+
+    Session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
+    this.selection.InputRightValue = this.CalculatRate(CurrencyDirection.Left).toString()
+
+  }
+
   public RightSelectedOnChange(): void {
 
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
   }
 
-  public InputLeftValueOnChange(): void {
 
-    this.selection.InputRightValue = this.CalculatRate(CurrencyDirection.Left).toString()
-
-  }
 
   public InputRightValueOnChange(): void {
 
@@ -170,9 +177,7 @@ export class CurrencyComponent implements OnInit {
       case CurrencyDirection.Right:
         // TODO must implement
         let rightInputValue: number = Number(this.selection.InputRightValue);
-
         break;
-
     }
 
     return result.toFixed(4);
@@ -195,10 +200,12 @@ export class CurrencyComponent implements OnInit {
       this.SetDefaultCurrencyRates();
       this.SetDescriptions();
 
+      Session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
+      Session.SetItem(CurrencyDirection.Right, this.selection.RightSelectedRate?.Code ?? "");
+
       console.log('Date încărcate asincron cu succes!');
     }
     catch (error) {
-
       console.error('Eroare la încărcarea datelor:', error);
     }
   }
