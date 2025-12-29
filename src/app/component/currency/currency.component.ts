@@ -23,6 +23,8 @@ export class CurrencyComponent implements OnInit {
 
   private currencyService = inject(CurrencyService);
 
+  private session = inject(Session);
+
   public currencyData?: ApiResponseModel;
 
   public selection: ExchangeSelection = this.CreateEmptySelection();
@@ -32,29 +34,34 @@ export class CurrencyComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.LoadData();
 
-
   }
 
   public LeftSelectedOnChange(): void {
 
+    this.session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
+
     this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
+
+    this.ChangeCalculationDirection();
+
   }
 
 
   public InputLeftValueOnChange(): void {
 
-    Session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
-    this.selection.InputRightValue = this.CalculatRate(CurrencyDirection.Left).toString()
+    this.selection.InputRightValue = this.CalculatRate(CurrencyDirection.Left).toString();
 
   }
 
   public RightSelectedOnChange(): void {
 
+    this.session.SetItem(CurrencyDirection.Left, this.selection.RightSelectedRate?.Code ?? "");
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
+
+
+    this.ChangeCalculationDirection();
   }
-
-
 
   public InputRightValueOnChange(): void {
 
@@ -109,7 +116,6 @@ export class CurrencyComponent implements OnInit {
     return description;
   }
 
-
   private CalculateRate(side: string): string {
 
     let result: string = "";
@@ -154,7 +160,6 @@ export class CurrencyComponent implements OnInit {
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
   }
 
-
   CalculatRate(direction: string): string {
 
     let leftRate: number = this.selection.LeftSelectedRate?.Value ?? 0;
@@ -184,8 +189,6 @@ export class CurrencyComponent implements OnInit {
 
   }
 
-
-
   async LoadData(): Promise<void> {
 
     try {
@@ -197,11 +200,11 @@ export class CurrencyComponent implements OnInit {
 
       this.currencyData!.currencyDescriptions = data.descriptions;
 
-      this.SetDefaultCurrencyRates();
+      this.SetDefaultCurrencyRates("MDL", "EUR");
       this.SetDescriptions();
 
-      Session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
-      Session.SetItem(CurrencyDirection.Right, this.selection.RightSelectedRate?.Code ?? "");
+      this.session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
+      this.session.SetItem(CurrencyDirection.Right, this.selection.RightSelectedRate?.Code ?? "");
 
       console.log('Date încărcate asincron cu succes!');
     }
@@ -210,12 +213,12 @@ export class CurrencyComponent implements OnInit {
     }
   }
 
-  SetDefaultCurrencyRates(): void {
+  SetDefaultCurrencyRates(left: string, right: string): void {
 
     if (this.currencyData) {
 
-      this.selection.LeftSelectedRate = this.currencyData.rates.find(rate => rate.Code === 'MDL') || null;
-      this.selection.RightSelectedRate = this.currencyData.rates.find(rate => rate.Code === 'EUR') || null;
+      this.selection.LeftSelectedRate = this.currencyData.rates.find(rate => rate.Code === left) || null;
+      this.selection.RightSelectedRate = this.currencyData.rates.find(rate => rate.Code === right) || null;
     }
   }
 
@@ -235,10 +238,25 @@ export class CurrencyComponent implements OnInit {
     };
   }
 
-
   private IsEmpty(str: string): boolean {
     return str.length === 0;
   }
 
+
+  private ChangeCalculationDirection(): void {
+
+    let leftSelecteRateCode: string = this.selection.LeftSelectedRate?.Code ?? "";
+    let RightSelectedRateCode: string = this.selection.RightSelectedRate?.Code ?? "";
+
+    if (leftSelecteRateCode === RightSelectedRateCode) {
+
+      let LeftCode: string = this.session.GetItem(leftSelecteRateCode) ?? "";
+      let rightCode: string = this.session.GetItem(RightSelectedRateCode) ?? "";
+
+      this.SetDefaultCurrencyRates(LeftCode, rightCode);
+
+    }
+
+  }
 
 }

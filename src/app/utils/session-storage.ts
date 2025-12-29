@@ -1,20 +1,31 @@
 
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
+@Injectable({
+    providedIn: 'root'
+})
+
 export class Session {
 
-    public static SetItem(key: string, value: string): void {
-        sessionStorage.setItem(key, value);
+    private platformId = inject(PLATFORM_ID);
+
+    public SetItem(key: string, value: string): void {
+
+        if (isPlatformBrowser(this.platformId)) {
+            sessionStorage.setItem(key, value);
+        }
     }
 
-    public static GetItem(key: string): string | null {
-        return sessionStorage.getItem(key);
+    public GetItem(key: string): string | null {
+
+        if (isPlatformBrowser(this.platformId)) {
+            return sessionStorage.getItem(key);
+        }
+        return null;
     }
 
     public static Clear(): void {
         sessionStorage.clear();
     }
-
-    public static Remove(key: string): void {
-        sessionStorage.removeItem(key);
-    }
-
 }
