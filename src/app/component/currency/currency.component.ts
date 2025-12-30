@@ -39,14 +39,16 @@ export class CurrencyComponent implements OnInit {
   public LeftSelectedOnChange(): void {
 
     let lastCode = this.session.GetItem(CurrencyDirection.Left) ?? "";
-
     this.session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
+
 
     this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
 
-    if (this.selection.LeftSelectedRate?.Code == this.selection.LeftSelectedRate?.Code) {
+    if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
       this.SetDefaultCurrencyRates(this.selection.LeftSelectedRate?.Code ?? "", lastCode);
+
+      this.session.SetItem(CurrencyDirection.Right, lastCode);
     }
 
   }
@@ -60,10 +62,17 @@ export class CurrencyComponent implements OnInit {
 
   public RightSelectedOnChange(): void {
 
+    let lastCode = this.session.GetItem(CurrencyDirection.Right) ?? "";
     this.session.SetItem(CurrencyDirection.Right, this.selection.RightSelectedRate?.Code ?? "");
+
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
 
+    if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
+      this.SetDefaultCurrencyRates(lastCode, this.selection.LeftSelectedRate?.Code ?? "");
+      this.session.SetItem(CurrencyDirection.Left, lastCode);
+
+    }
 
   }
 
