@@ -41,7 +41,7 @@ export class CurrencyComponent implements OnInit {
     let previousLeftCode = this.session.GetItem(ExchangeSide.Left) ?? "";
     this.session.SetItem(ExchangeSide.Left, this.selection.LeftSelectedRate?.Code ?? "");
 
-    this.UpdateAllDescription(ExchangeSide.Left, ExchangeSide.Right);
+    this.RefreshRateLabels(ExchangeSide.Left, ExchangeSide.Right);
 
     if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
@@ -64,7 +64,7 @@ export class CurrencyComponent implements OnInit {
     let lastCode = this.session.GetItem(ExchangeSide.Right) ?? "";
     this.session.SetItem(ExchangeSide.Right, this.selection.RightSelectedRate?.Code ?? "");
 
-    this.selection.RightExchangeRate = this.CalculateConversionRate(ExchangeSide.Right);
+    this.selection.RightExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Right);
 
     if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
@@ -79,7 +79,7 @@ export class CurrencyComponent implements OnInit {
 
   }
 
-  CalculateConversionRate(side: string): string {
+  FormatExchangeRateLabel(side: string): string {
 
     let description: string = "";
 
@@ -168,8 +168,8 @@ export class CurrencyComponent implements OnInit {
 
   private SetDescriptions(): void {
 
-    this.selection.LeftExchangeRate = this.CalculateConversionRate(ExchangeSide.Left);
-    this.selection.RightExchangeRate = this.CalculateConversionRate(ExchangeSide.Right);
+    this.selection.LeftExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Left);
+    this.selection.RightExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Right);
   }
 
   private CalculatRate(direction: string): string {
@@ -255,10 +255,10 @@ export class CurrencyComponent implements OnInit {
   }
 
 
-  private UpdateAllDescription(leftExchangeSide: string, rightExchangeSide: string): void {
+  private RefreshRateLabels(leftExchangeSide: string, rightExchangeSide: string): void {
 
-    this.selection.LeftExchangeRate = this.CalculateConversionRate(leftExchangeSide);
-    this.selection.RightExchangeRate = this.CalculateConversionRate(rightExchangeSide);
+    this.selection.LeftExchangeRate = this.FormatExchangeRateLabel(leftExchangeSide);
+    this.selection.RightExchangeRate = this.FormatExchangeRateLabel(rightExchangeSide);
   }
 
 }
