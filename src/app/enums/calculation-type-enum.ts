@@ -1,4 +1,4 @@
-export enum CurrencyDirection {
+export enum ExchangeSide {
 
     Left = "LEFT",
     Right = "RIGHT",
