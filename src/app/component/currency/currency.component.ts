@@ -38,18 +38,15 @@ export class CurrencyComponent implements OnInit {
 
   public LeftSelectedOnChange(): void {
 
-    let lastCode = this.session.GetItem(ExchangeSide.Left) ?? "";
+    let previousLeftCode = this.session.GetItem(ExchangeSide.Left) ?? "";
     this.session.SetItem(ExchangeSide.Left, this.selection.LeftSelectedRate?.Code ?? "");
-
-    // this.selection.LeftExchangeRate = this.CalculateConversionRate(ExchangeSide.Left);
-    // this.selection.RightExchangeRate = this.CalculateConversionRate(ExchangeSide.Right);
 
     this.UpdateAllDescription(ExchangeSide.Left, ExchangeSide.Right);
 
     if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
-      this.SetDefaultCurrencyRates(this.selection.LeftSelectedRate?.Code ?? "", lastCode);
-      this.session.SetItem(ExchangeSide.Right, lastCode);
+      this.UpdateSelectedRates(this.selection.LeftSelectedRate?.Code ?? "", previousLeftCode);
+      this.session.SetItem(ExchangeSide.Right, previousLeftCode);
 
     }
 
@@ -71,7 +68,7 @@ export class CurrencyComponent implements OnInit {
 
     if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
-      this.SetDefaultCurrencyRates(lastCode, this.selection.LeftSelectedRate?.Code ?? "");
+      this.UpdateSelectedRates(lastCode, this.selection.LeftSelectedRate?.Code ?? "");
       this.session.SetItem(ExchangeSide.Left, lastCode);
 
     }
@@ -215,7 +212,7 @@ export class CurrencyComponent implements OnInit {
 
       this.currencyData!.currencyDescriptions = data.descriptions;
 
-      this.SetDefaultCurrencyRates("MDL", "EUR");
+      this.UpdateSelectedRates("MDL", "EUR");
       this.SetDescriptions();
 
       this.session.SetItem(ExchangeSide.Left, this.selection.LeftSelectedRate?.Code ?? "");
@@ -228,13 +225,13 @@ export class CurrencyComponent implements OnInit {
     }
   }
 
-  private SetDefaultCurrencyRates(left: string, right: string): void {
+  private UpdateSelectedRates(left: string, right: string): void {
 
-    if (this.currencyData) {
+    if (!this.currencyData) return;
 
-      this.selection.LeftSelectedRate = this.currencyData.rates.find(rate => rate.Code === left) || null;
-      this.selection.RightSelectedRate = this.currencyData.rates.find(rate => rate.Code === right) || null;
-    }
+    this.selection.LeftSelectedRate = this.currencyData.rates.find(rate => rate.Code === left) || null;
+    this.selection.RightSelectedRate = this.currencyData.rates.find(rate => rate.Code === right) || null;
+
   }
 
   private CreateEmptySelection(): ExchangeSelection {
