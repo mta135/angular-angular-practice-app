@@ -38,21 +38,16 @@ export class CurrencyComponent implements OnInit {
 
   public LeftSelectedOnChange(): void {
 
-    let lastLeftSelectedCode = this.session.GetItem(CurrencyDirection.Left);
+    let lastCode = this.session.GetItem(CurrencyDirection.Left) ?? "";
 
     this.session.SetItem(CurrencyDirection.Left, this.selection.LeftSelectedRate?.Code ?? "");
 
     this.selection.LeftExchangeRate = this.CalculateConversionRate(CurrencyDirection.Left);
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
 
-
     if (this.selection.LeftSelectedRate?.Code == this.selection.LeftSelectedRate?.Code) {
-
-
-
+      this.SetDefaultCurrencyRates(this.selection.LeftSelectedRate?.Code ?? "", lastCode);
     }
-
-
 
   }
 
@@ -65,11 +60,11 @@ export class CurrencyComponent implements OnInit {
 
   public RightSelectedOnChange(): void {
 
-    this.session.SetItem(CurrencyDirection.Left, this.selection.RightSelectedRate?.Code ?? "");
+    this.session.SetItem(CurrencyDirection.Right, this.selection.RightSelectedRate?.Code ?? "");
     this.selection.RightExchangeRate = this.CalculateConversionRate(CurrencyDirection.Right);
 
 
-    this.ChangeCalculationDirection(CurrencyDirection.Right);
+
   }
 
   public InputRightValueOnChange(): void {
@@ -252,20 +247,20 @@ export class CurrencyComponent implements OnInit {
   }
 
 
-  private ChangeCalculationDirection(direction: string): void {
+  // private ChangeCalculationDirection(lastSelect: string): void {
 
-    let leftSelecteRateCode: string = this.selection.LeftSelectedRate?.Code ?? "";
-    let RightSelectedRateCode: string = this.selection.RightSelectedRate?.Code ?? "";
+  //   let leftSelecteRateCode: string = this.selection.LeftSelectedRate?.Code ?? "";
+  //   let RightSelectedRateCode: string = this.selection.RightSelectedRate?.Code ?? "";
 
-    if (leftSelecteRateCode === RightSelectedRateCode) {
+  //   if (leftSelecteRateCode === RightSelectedRateCode) {
 
-      let LeftCode: string = this.session.GetItem(leftSelecteRateCode) ?? "";
-      let rightCode: string = this.session.GetItem(RightSelectedRateCode) ?? "";
+  //     let LeftCode: string = this.session.GetItem(leftSelecteRateCode) ?? "";
+  //     let rightCode: string = this.session.GetItem(RightSelectedRateCode) ?? "";
 
-      this.SetDefaultCurrencyRates(LeftCode, rightCode);
+  //     this.SetDefaultCurrencyRates(LeftCode, rightCode);
 
-    }
-
-  }
+  //   }
 
 }
+
+
