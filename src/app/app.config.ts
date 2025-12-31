@@ -8,6 +8,33 @@ import { providePrimeNG } from 'primeng/config'; // Add this
 import Aura from '@primeng/themes/aura'; // Add this (or your preferred theme)
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { definePreset } from '@primeuix/themes';
+
+
+const MyPreset = definePreset(Aura, {
+  semantic: {
+    colorScheme: {
+      light: {
+        formField: {
+          focusBorderColor: '#c5229c' // Culoarea bordurii la focus
+        },
+        focusRing: {
+          color: '#c5229c', // Culoarea inelului (aura)
+          shadow: '0 0 0 0.2rem rgba(197, 34, 156, 0.2)' // Umbra la focus
+        }
+      },
+      dark: {
+        formField: {
+          focusBorderColor: '#c5229c'
+        },
+        focusRing: {
+          color: '#c5229c',
+          shadow: '0 0 0 0.2rem rgba(197, 34, 156, 0.2)'
+        }
+      }
+    }
+  }
+});
 
 
 export const appConfig: ApplicationConfig = {
@@ -25,7 +52,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(), // Add this
     providePrimeNG({ // Add this
       theme: {
-        preset: Aura, // Add this (or your preferred theme)
+        preset: MyPreset // Folosim presetul modificat
       },
     }),
 
