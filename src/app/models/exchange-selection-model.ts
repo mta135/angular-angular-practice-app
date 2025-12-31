@@ -3,11 +3,11 @@ import { ExchangeRatesModel } from "./api-response-model";
 export interface ExchangeSelection {
     LeftSelectedRate: ExchangeRatesModel | null;
 
-    LeftExchangeRate: string;
+    LeftExchangeRateLabel: string;
 
     RightSelectedRate: ExchangeRatesModel | null;
 
-    RightExchangeRate: string;
+    RightExchangeRateLabel: string;
 
     InputLeftValue: string;
 

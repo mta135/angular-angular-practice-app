@@ -66,7 +66,7 @@ export class CurrencyComponent implements OnInit {
     let lastCode = this.session.GetItem(ExchangeSide.Right) ?? "";
     this.session.SetItem(ExchangeSide.Right, this.selection.RightSelectedRate?.Code ?? "");
 
-    this.selection.RightExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Right);
+    this.selection.RightExchangeRateLabel = this.FormatExchangeRateLabel(ExchangeSide.Right);
 
     if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
@@ -235,10 +235,10 @@ export class CurrencyComponent implements OnInit {
     return {
 
       LeftSelectedRate: null,
-      LeftExchangeRate: '',
+      LeftExchangeRateLabel: '',
 
       RightSelectedRate: null,
-      RightExchangeRate: '',
+      RightExchangeRateLabel: '',
 
       InputLeftValue: '',
       InputRightValue: ''
@@ -253,8 +253,8 @@ export class CurrencyComponent implements OnInit {
 
   private RefreshOrUpdateRateLabels(leftExchangeSide: string, rightExchangeSide: string): void {
 
-    this.selection.LeftExchangeRate = this.FormatExchangeRateLabel(leftExchangeSide);
-    this.selection.RightExchangeRate = this.FormatExchangeRateLabel(rightExchangeSide);
+    this.selection.LeftExchangeRateLabel = this.FormatExchangeRateLabel(leftExchangeSide);
+    this.selection.RightExchangeRateLabel = this.FormatExchangeRateLabel(rightExchangeSide);
   }
 
 
