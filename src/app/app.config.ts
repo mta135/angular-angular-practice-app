@@ -16,19 +16,19 @@ const MyPreset = definePreset(Aura, {
     colorScheme: {
       light: {
         formField: {
-          focusBorderColor: '#c5229c' // Culoarea bordurii la focus
+          focusBorderColor: '#8a2be2' // Culoarea bordurii la focus
         },
         focusRing: {
-          color: '#c5229c', // Culoarea inelului (aura)
-          shadow: '0 0 0 0.2rem rgba(197, 34, 156, 0.2)' // Umbra la focus
+          color: '#8a2be2', // Culoarea inelului (aura)
+          // shadow: '0 0 0 0.2rem rgba(197, 34, 156, 0.2)' // Umbra la focus
         }
       },
       dark: {
         formField: {
-          focusBorderColor: '#c5229c'
+          focusBorderColor: '#8a2be2'
         },
         focusRing: {
-          color: '#c5229c',
+          color: '#8a2be2',
           shadow: '0 0 0 0.2rem rgba(197, 34, 156, 0.2)'
         }
       }
