@@ -41,7 +41,7 @@ export class CurrencyComponent implements OnInit {
     let previousLeftCode = this.session.GetItem(ExchangeSide.Left) ?? "";
     this.session.SetItem(ExchangeSide.Left, this.selection.LeftSelectedRate?.Code ?? "");
 
-    this.RefreshRateLabels(ExchangeSide.Left, ExchangeSide.Right);
+    this.RefreshOrUpdateRateLabels(ExchangeSide.Left, ExchangeSide.Right);
 
     if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
@@ -49,6 +49,8 @@ export class CurrencyComponent implements OnInit {
       this.session.SetItem(ExchangeSide.Right, previousLeftCode);
 
     }
+
+
 
   }
 
@@ -166,12 +168,6 @@ export class CurrencyComponent implements OnInit {
     return result;
   }
 
-  private SetDescriptions(): void {
-
-    this.selection.LeftExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Left);
-    this.selection.RightExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Right);
-  }
-
   private CalculatRate(direction: string): string {
 
     let leftRate: number = this.selection.LeftSelectedRate?.Value ?? 0;
@@ -213,7 +209,7 @@ export class CurrencyComponent implements OnInit {
       this.currencyData!.currencyDescriptions = data.descriptions;
 
       this.UpdateSelectedRates("MDL", "EUR");
-      this.SetDescriptions();
+      this.RefreshOrUpdateRateLabels(ExchangeSide.Left, ExchangeSide.Right);
 
       this.session.SetItem(ExchangeSide.Left, this.selection.LeftSelectedRate?.Code ?? "");
       this.session.SetItem(ExchangeSide.Right, this.selection.RightSelectedRate?.Code ?? "");
@@ -255,11 +251,18 @@ export class CurrencyComponent implements OnInit {
   }
 
 
-  private RefreshRateLabels(leftExchangeSide: string, rightExchangeSide: string): void {
+  private RefreshOrUpdateRateLabels(leftExchangeSide: string, rightExchangeSide: string): void {
 
     this.selection.LeftExchangeRate = this.FormatExchangeRateLabel(leftExchangeSide);
     this.selection.RightExchangeRate = this.FormatExchangeRateLabel(rightExchangeSide);
   }
+
+
+  // private SetDescriptions(): void {
+
+  //   this.selection.LeftExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Left);
+  //   this.selection.RightExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Right);
+  // }
 
 }
 
