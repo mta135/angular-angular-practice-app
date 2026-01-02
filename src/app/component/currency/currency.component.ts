@@ -100,7 +100,7 @@ export class CurrencyComponent implements OnInit {
 
         let RightCode: string = this.selection.RightSelectedRate?.Code || "";
 
-        let result = this.CalculateRate(ExchangeSide.Left);
+        let result = this.CalculateExchangeRateLabel(ExchangeSide.Left);
         description += "1 " + LeftCode + " (" + currencyDescription + ") = " + result + " " + RightCode;
 
       }
@@ -120,7 +120,7 @@ export class CurrencyComponent implements OnInit {
 
         let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
 
-        let result = this.CalculateRate(ExchangeSide.Right);
+        let result = this.CalculateExchangeRateLabel(ExchangeSide.Right);
 
         description += "1 " + RightCode + " (" + currencyDescription + ") = " + result + " " + LeftCode;
 
@@ -130,7 +130,7 @@ export class CurrencyComponent implements OnInit {
     return description;
   }
 
-  private CalculateRate(side: string): string {
+  private CalculateExchangeRateLabel(side: string): string {
 
     let result: string = "";
     let tempResult: number | undefined;
