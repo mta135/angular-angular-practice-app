@@ -116,41 +116,33 @@ export class CurrencyComponent implements OnInit {
 
   }
 
+  private GetCurrenyData(exchangeSide: string): number {
+
+    let selection = exchangeSide === ExchangeSide.Left ? this.selection.LeftSelectedRate : this.selection.RightSelectedRate;
+    return this.currencyData?.rates.find(r => r.Code === selection?.Code)?.Value ?? 0;
+
+  }
+
   private CalculateExchangeRateLabel(side: string): string {
 
     let result: string = "";
-    let tempResult: number | undefined;
+    let tempResult: number = 0;
 
-    if (side == ExchangeSide.Left) {
+    let leftRate = this.GetCurrenyData(ExchangeSide.Left);
+    let rightRate = this.GetCurrenyData(ExchangeSide.Right);
 
-      if (!this.IsEmpty(this.selection.InputLeftValue)) {
+    switch (side) {
 
-      }
-
-      else {
-
-        var leftRate = this.currencyData?.rates.find(r => r.Code === this.selection.LeftSelectedRate?.Code)?.Value ?? 0;
-        var rightRate = this.currencyData?.rates.find(r => r.Code === this.selection.RightSelectedRate?.Code)?.Value ?? 0;
-
+      case ExchangeSide.Left:
         tempResult = rightRate / leftRate;
-        result = tempResult.toFixed(6);
-      }
-    }
+        break;
 
-    if (side == ExchangeSide.Right) {
-
-      if (!this.IsEmpty(this.selection.InputLeftValue)) {
-
-      }
-      else {
-
-        var rightRate = this.currencyData?.rates.find(r => r.Code === this.selection.RightSelectedRate?.Code)?.Value ?? 0;
-        var leftRate = this.currencyData?.rates.find(r => r.Code === this.selection.LeftSelectedRate?.Code)?.Value ?? 0;
-
+      case ExchangeSide.Right:
         tempResult = leftRate / rightRate;
-        result = tempResult.toFixed(6);
-      }
+        break;
     }
+
+    result = tempResult.toFixed(6);
     return result;
   }
 
