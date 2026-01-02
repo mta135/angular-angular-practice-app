@@ -60,7 +60,7 @@ export class CurrencyComponent implements OnInit {
     this.selection.InputLeftValue = this.CalculateConvertedAmount(ExchangeSide.Right).toString();
   }
 
-  public RightInputTextBoxEvent(): void {
+  public RightSelectedOnChange(): void {
 
     let lastCode = this.session.GetItem(ExchangeSide.Right) ?? "";
     this.session.SetItem(ExchangeSide.Right, this.selection.RightSelectedRate?.Code ?? "");
