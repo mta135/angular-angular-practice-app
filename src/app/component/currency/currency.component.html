@@ -35,13 +35,13 @@
                 <div class="flex-1">
                     <input type="text" numbersOnly [(ngModel)]="selection.InputLeftValue"
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-0 focus:!border-[#8a2be2] shadow-none outline-none h-[47px]"
-                        (input)="InputLeftValueOnChange()" />
+                        (input)="LeftInputTextBoxEvent()" />
                 </div>
 
                 <div class="flex-1">
                     <input type="text" [(ngModel)]="selection.InputRightValue"
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-0 focus:!border-[#8a2be2] shadow-none outline-none h-[47px]"
-                        (input)="InputRightValueOnChange()" />
+                        (input)="RightInputTextBoxEvent()" />
                 </div>
 
             </div>
