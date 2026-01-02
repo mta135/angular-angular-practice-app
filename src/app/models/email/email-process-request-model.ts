@@ -1,4 +1,4 @@
-import { EmailMessageModel } from "./email-message.model";
+import { EmailMessageModel } from "../email-message.model";
 
 export class EmailProcessRequest {
 

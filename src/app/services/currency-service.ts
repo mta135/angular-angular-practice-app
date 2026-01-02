@@ -2,9 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, tap } from 'rxjs';
-import { ApiResponseModel as ApiResponseModel, ExchangeRatesModel } from '../models/api-response-model';
-import { CurrencyDescription, FullCurrencyData } from '../models/currency-description-model';
-
+import { ApiResponseModel, ExchangeRatesModel } from '../models/currency/api-response-model';
+import { CurrencyDescription, FullCurrencyData } from '../models/currency/currency-description-model';
 
 @Injectable({
     providedIn: 'root'

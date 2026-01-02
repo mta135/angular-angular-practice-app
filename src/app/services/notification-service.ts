@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
-import { NotificationPayload } from '../models/notification-payload.model';
+import { NotificationPayload } from '../models/email/notification-payload.model';
 
 @Injectable({
     providedIn: 'root'

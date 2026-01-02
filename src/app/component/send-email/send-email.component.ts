@@ -2,15 +2,15 @@ import { Component, NgZone, OnInit, TRANSLATIONS } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadService } from '../../services/file-upload.service';
-import { EmailMessageModel } from '../../models/email-message.model';
+import { EmailMessageModel } from '../../models/email/email-message.model';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notification-service';
 import { HttpClient } from '@microsoft/signalr';
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
-import { NotificationPayload } from '../../models/notification-payload.model';
+import { NotificationPayload } from '../../models/email/notification-payload.model';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressBarModel } from '../../common/progress-bar-model';
-import { EmailProcessRequest } from '../../models/email-process-request-model';
+import { EmailProcessRequest } from '../../models/email/email-process-request-model';
 import { Dialog } from 'primeng/dialog';
 import { FileStatusDirective, ValidationStatus } from '../../directive/file-status.directive';
 

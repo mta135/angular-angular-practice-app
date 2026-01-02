@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { CurrencyService } from '../../services/currency-service';
-import { ApiResponseModel, ExchangeRatesModel } from '../../models/api-response-model';
-import { ExchangeSelection } from '../../models/exchange-selection-model';
+
 import { DatePipe } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
-import { ExchangeSide } from '../../enums/calculation-type-enum';
+import { ExchangeSide } from '../../enums/currency/calculation-type-enum';
 import { NumbersOnlyDirective } from '../../directive/input-only-numbers-directive';
 import { Session } from '../../utils/session-storage';
+import { ApiResponseModel } from '../../models/currency/api-response-model';
+import { ExchangeSelection } from '../../models/currency/exchange-selection-model';
 
 @Component({
   selector: 'app-currency',
