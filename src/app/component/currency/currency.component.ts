@@ -85,32 +85,35 @@ export class CurrencyComponent implements OnInit {
 
     let description: string = "";
 
-    if (side == ExchangeSide.Left) {
+    let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
+    let RightCode: string = this.selection.RightSelectedRate?.Code || "";
 
-      let currencyDescription: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.LeftSelectedRate?.Code)?.Description || "";
-      let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
+    let currencyDescription = this.GetCurrencyDescription(side);
+    let result = this.CalculateExchangeRateLabel(side);
 
-      let RightCode: string = this.selection.RightSelectedRate?.Code || "";
+    switch (side) {
 
-      let result = this.CalculateExchangeRateLabel(ExchangeSide.Left);
-      description += "1 " + LeftCode + " (" + currencyDescription + ") = " + result + " " + RightCode;
+      case ExchangeSide.Left:
+        description += "1 " + LeftCode + " (" + currencyDescription + ") = " + result + " " + RightCode;
 
-    }
+        break;
 
-    if (side == ExchangeSide.Right) {
+      case ExchangeSide.Right:
+        description += "1 " + RightCode + " (" + currencyDescription + ") = " + result + " " + LeftCode;
 
-      let currencyDescription: string = this.currencyData?.currencyDescriptions.find(x => x.Code === this.selection.RightSelectedRate?.Code)?.Description || "";
-      let RightCode: string = this.selection.RightSelectedRate?.Code || "";
-
-      let LeftCode: string = this.selection.LeftSelectedRate?.Code || "";
-
-      let result = this.CalculateExchangeRateLabel(ExchangeSide.Right);
-
-      description += "1 " + RightCode + " (" + currencyDescription + ") = " + result + " " + LeftCode;
-
+        break
     }
 
     return description;
+  }
+
+
+  private GetCurrencyDescription(exchangeSide: string): string | null {
+
+    const selectRate = exchangeSide === ExchangeSide.Left ? this.selection.LeftSelectedRate : this.selection.RightSelectedRate;
+
+    return this.currencyData?.currencyDescriptions.find(x => x.Code === selectRate?.Code)?.Description || "";
+
   }
 
   private CalculateExchangeRateLabel(side: string): string {
@@ -239,13 +242,6 @@ export class CurrencyComponent implements OnInit {
     this.selection.LeftExchangeRateLabel = this.FormatExchangeRateLabel(leftExchangeSide);
     this.selection.RightExchangeRateLabel = this.FormatExchangeRateLabel(rightExchangeSide);
   }
-
-
-  // private SetDescriptions(): void {
-
-  //   this.selection.LeftExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Left);
-  //   this.selection.RightExchangeRate = this.FormatExchangeRateLabel(ExchangeSide.Right);
-  // }
 
 }
 
