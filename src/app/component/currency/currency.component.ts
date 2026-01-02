@@ -41,14 +41,15 @@ export class CurrencyComponent implements OnInit {
     let previousLeftCode = this.session.GetItem(ExchangeSide.Left) ?? "";
     this.session.SetItem(ExchangeSide.Left, this.selection.LeftSelectedRate?.Code ?? "");
 
-    this.RefreshOrUpdateRateLabels(ExchangeSide.Left, ExchangeSide.Right);
-
     if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
       this.UpdateSelectedRates(this.selection.LeftSelectedRate?.Code ?? "", previousLeftCode);
       this.session.SetItem(ExchangeSide.Right, previousLeftCode);
 
     }
+
+    this.RefreshOrUpdateRateLabels(ExchangeSide.Left, ExchangeSide.Right);
+    this.LeftInputTextBoxEvent();
 
   }
 
@@ -65,14 +66,15 @@ export class CurrencyComponent implements OnInit {
     let lastCode = this.session.GetItem(ExchangeSide.Right) ?? "";
     this.session.SetItem(ExchangeSide.Right, this.selection.RightSelectedRate?.Code ?? "");
 
-    this.RefreshOrUpdateRateLabels(ExchangeSide.Left, ExchangeSide.Right);
-
     if (this.selection.LeftSelectedRate?.Code == this.selection.RightSelectedRate?.Code) {
 
       this.UpdateSelectedRates(lastCode, this.selection.LeftSelectedRate?.Code ?? "");
       this.session.SetItem(ExchangeSide.Left, lastCode);
 
     }
+
+    this.RefreshOrUpdateRateLabels(ExchangeSide.Left, ExchangeSide.Right);
+    this.InputRightValueOnChange();
 
   }
 
