@@ -8,16 +8,16 @@
 
                 <div class="flex-1">
                     <p-select [options]="currencyData?.rates" [(ngModel)]="selection.LeftSelectedRate"
-                        [checkmark]="true" optionLabel="Code" [filter]="true" filterBy="Code" [virtualScroll]="true"
-                        [virtualScrollItemSize]="38" placeholder="Select a City" class="w-full"
+                        [checkmark]="true" optionLabel="Code" [filter]="true" filterBy="Code" [resetFilterOnHide]="true"
+                        [virtualScroll]="true" [virtualScrollItemSize]="38" placeholder="Select a City" class="w-full"
                         (onChange)="LeftSelectedOnChange()" />
                 </div>
 
                 <div class="flex-1">
                     <p-select [options]="currencyData?.rates" [(ngModel)]="selection.RightSelectedRate"
                         [checkmark]="true" optionLabel="Code" [filter]="true" filterBy="Code" [virtualScroll]="true"
-                        [virtualScrollItemSize]="38" placeholder="Select a City" class="w-full"
-                        (onChange)="RightSelectedOnChange()" />
+                        [resetFilterOnHide]="true" [virtualScrollItemSize]="38" placeholder="Select a City"
+                        class="w-full" (onChange)="RightSelectedOnChange()" />
                 </div>
 
             </div>
