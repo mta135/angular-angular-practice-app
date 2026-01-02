@@ -7,7 +7,7 @@ import { CurrencyService } from '../../services/currency-service';
 
 import { DatePipe } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
-import { ExchangeSide } from '../../enums/currency/calculation-type-enum';
+import { ExchangeSide } from '../../enums/currency/exchenge-side-enum';
 import { NumbersOnlyDirective } from '../../directive/input-only-numbers-directive';
 import { Session } from '../../utils/session-storage';
 import { ApiResponseModel } from '../../models/currency/api-response-model';
