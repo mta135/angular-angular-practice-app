@@ -50,15 +50,14 @@ export class CurrencyComponent implements OnInit {
 
     }
 
-
-
   }
 
-
   public InputLeftValueOnChange(): void {
+    this.selection.InputRightValue = this.CalculateConvertedAmount(ExchangeSide.Left).toString();
+  }
 
-    this.selection.InputRightValue = this.CalculatRate(ExchangeSide.Left).toString();
-
+  public InputRightValueOnChange(): void {
+    this.selection.InputLeftValue = this.CalculateConvertedAmount(ExchangeSide.Right).toString();
   }
 
   public RightSelectedOnChange(): void {
@@ -74,10 +73,6 @@ export class CurrencyComponent implements OnInit {
       this.session.SetItem(ExchangeSide.Left, lastCode);
 
     }
-
-  }
-
-  public InputRightValueOnChange(): void {
 
   }
 
@@ -106,7 +101,6 @@ export class CurrencyComponent implements OnInit {
 
     return description;
   }
-
 
   private GetCurrencyDescription(exchangeSide: string): string | null {
 
@@ -146,7 +140,7 @@ export class CurrencyComponent implements OnInit {
     return result;
   }
 
-  private CalculatRate(direction: string): string {
+  private CalculateConvertedAmount(direction: string): string {
 
     let leftRate: number = this.selection.LeftSelectedRate?.Value ?? 0;
     let rightRate: number = this.selection.RightSelectedRate?.Value ?? 0;
@@ -166,12 +160,12 @@ export class CurrencyComponent implements OnInit {
         break;
 
       case ExchangeSide.Right:
-        // TODO must implement
-        let rightInputValue: number = Number(this.selection.InputRightValue);
+
+        result = intputValue * (leftRate / rightRate);
         break;
     }
 
-    return result.toFixed(4);
+    return result.toFixed(5);
 
   }
 
