@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SelectModule } from 'primeng/select';
-import { CurrencyDataService as CurrencyDataService } from '../../services/currency-data-service';
+import { CurrencyDataService as CurrencyDataService } from '../../services/exchage-data-service';
 import { lastValueFrom } from 'rxjs';
 
 @Component({

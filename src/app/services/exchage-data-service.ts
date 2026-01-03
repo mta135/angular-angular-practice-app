@@ -2,9 +2,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { ExchangeCurrencyData, Provider, Rates } from '../models/currency-converter/currency-converter-data';
+import { ExchangeCurrencyData, Provider, Rates } from '../models/currency-converter/exchange-currency-data';
 import { it } from 'node:test';
-import { CurrencyServiceDataMapper } from '../common/mapper/currency-converter-mapper/currency-service-data-mapper';
+import { CurrencyServiceDataMapper } from '../common/mapper/currency-converter-mapper/exchange-service-data-mapper';
 
 @Injectable({
     providedIn: 'root'

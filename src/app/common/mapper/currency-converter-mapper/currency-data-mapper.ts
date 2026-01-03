@@ -1,4 +1,4 @@
-import { ExchangeCurrencyData } from "../../../models/currency-converter/currency-converter-data";
+import { ExchangeCurrencyData } from "../../../models/currency-converter/exchange-currency-data";
 
 export class CurrencyServiceDataMapper {
 
