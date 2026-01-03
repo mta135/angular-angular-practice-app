@@ -9,7 +9,7 @@ import { it } from 'node:test';
     providedIn: 'root'
 })
 
-export class CurrencyProviderDataService {
+export class CurrencyDataService {
 
     private url: string = "https://www.curs.md/ru/json_convertor_provider";
 

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SelectModule } from 'primeng/select';
-import { CurrencyProviderDataService as CurrencyProviderDataService } from '../../services/currency-converter-data-service';
+import { CurrencyDataService as CurrencyDataService } from '../../services/currency-data-service';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { lastValueFrom } from 'rxjs';
 })
 export class CurrencyConverterComponent implements OnInit {
 
-  private currencyService = inject(CurrencyProviderDataService);
+  private currencyService = inject(CurrencyDataService);
 
 
   async ngOnInit(): Promise<void> {
