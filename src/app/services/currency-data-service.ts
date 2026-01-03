@@ -31,6 +31,7 @@ export class CurrencyDataService {
 
                     let provider = new Provider();
                     provider.Name = providerKey;
+                    provider.FullName = CurrencyMapper.SetProviderFullName(provider.Name);
 
                     provider.Date = new Date(providerRawObj.date);
                     provider.Expire = providerRawObj.expired;

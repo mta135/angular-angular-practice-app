@@ -24,13 +24,9 @@ export class CurrencyConverterComponent implements OnInit {
 
     try {
 
-      debugger;
       this.currencyService.GetCurrencyProvidersData().subscribe((response) => {
         console.log(response);
       });
-
-
-
 
       console.log('Date încărcate asincron cu succes!');
     }

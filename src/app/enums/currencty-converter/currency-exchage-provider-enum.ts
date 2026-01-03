@@ -16,5 +16,7 @@ export enum ExchangeProvider {
 
     FincomBank = "fincombank",
 
-    ComertBank = "comertbank"
+    ComertBank = "comertbank",
+
+    grafitisf1 = "grafitisf1",
 }

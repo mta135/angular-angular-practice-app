@@ -66,7 +66,8 @@ export class CurrencyMapper {
         [ExchangeProvider.EximBank]: "EXIMBANK",
         [ExchangeProvider.MobiasBanca]: "OTP Bank",
         [ExchangeProvider.FincomBank]: "FinComBank",
-        [ExchangeProvider.ComertBank]: "BC COMERTBANK"
+        [ExchangeProvider.ComertBank]: "BC COMERTBANK",
+        [ExchangeProvider.grafitisf1]: "Grafitis SRL Filiala 1"
 
     }
 
@@ -75,6 +76,6 @@ export class CurrencyMapper {
     }
 
     public static SetProviderFullName(name: string): string {
-        return this.ProiderName[name];
+        return this.ProiderName[name] ?? name;
     }
 }
