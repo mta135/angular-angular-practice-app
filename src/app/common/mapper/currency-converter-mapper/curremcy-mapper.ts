@@ -3,7 +3,7 @@ import { ExchangeProvider } from "../../../enums/currencty-converter/currency-ex
 
 export class CurrencyMapper {
 
-    private static readonly CurrencyName: Record<string, string> = {
+    private static readonly CodeFullName: Record<string, string> = {
 
         [CurrencyCode.MDL]: "MDL - Leu moldovenesc",
         [CurrencyCode.EUR]: "EUR - Euro",
@@ -70,8 +70,8 @@ export class CurrencyMapper {
 
     }
 
-    public static SetCurrencyFullName(code: string | CurrencyCode): string {
-        return this.CurrencyName[code] || code;
+    public static SetCodeFullName(code: string): string {
+        return this.CodeFullName[code];
     }
 
     public static SetProviderFullName(name: string): string {

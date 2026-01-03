@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Data, Provider, Rates } from '../models/currency-converter/currency-converter-data';
 import { it } from 'node:test';
+import { CurrencyMapper } from '../common/mapper/currency-converter-mapper/curremcy-mapper';
 
 @Injectable({
     providedIn: 'root'
@@ -46,6 +47,8 @@ export class CurrencyDataService {
                             rate.Code = currencyCode;
                             rate.Buy = parseFloat(rateValues.buy);
                             rate.Sell = parseFloat(rateValues.sell);
+
+                            rate.Name = CurrencyMapper.SetCodeFullName(rate.Code);
 
                             provider.Rate.push(rate);
                         }
