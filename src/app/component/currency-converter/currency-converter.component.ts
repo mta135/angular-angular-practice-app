@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SelectModule } from 'primeng/select';
-import { CurrencyConverterDataService as CurrencyProviderDataService } from '../../services/currency-converter-data-service';
+import { CurrencyProviderDataService as CurrencyProviderDataService } from '../../services/currency-converter-data-service';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -14,8 +14,8 @@ export class CurrencyConverterComponent implements OnInit {
   private currencyService = inject(CurrencyProviderDataService);
 
 
-  ngOnInit(): void {
-
+  async ngOnInit(): Promise<void> {
+    this.GetCurrencyProviderData();
   }
 
 
@@ -25,7 +25,11 @@ export class CurrencyConverterComponent implements OnInit {
     try {
 
       debugger;
-      var data = await lastValueFrom(this.currencyService.GetCurrencyProvidersData());
+      this.currencyService.GetCurrencyProvidersData().subscribe((response) => {
+        console.log(response);
+      });
+
+
 
 
       console.log('Date încărcate asincron cu succes!');

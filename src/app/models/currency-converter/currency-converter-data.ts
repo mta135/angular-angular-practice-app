@@ -44,11 +44,11 @@ export class CurrencyRates {
 
     public Sell: number;
 
-    public Bay: number;
+    public Buy: number;
 
     constructor() {
         this.Name = "";
-        this.Bay = 0;
+        this.Buy = 0;
 
         this.Sell = 0;
         this.FullName = "";
