@@ -1,56 +1,56 @@
 
 
-export class CurrencyData {
+export class Data {
 
-    public CurrencyProviders: CurrencyProvider[];
+    public Provider: Provider[];
 
     constructor() {
-        this.CurrencyProviders = [];
+        this.Provider = [];
     }
 }
 
 
-export class CurrencyProvider {
+export class Provider {
 
     public Id: number;
 
-    public ProviderName: string;
+    public Name: string;
 
-    public ProviderFullName: string;
+    public FullName: string;
 
     public Date: Date;
 
     public Expire: boolean;
 
-    public CurrencyRates: CurrencyRates[];
+    public Rate: Rates[];
 
     constructor() {
 
         this.Id = 0;
-        this.ProviderName = "";
-        this.ProviderFullName = "";
+        this.Name = "";
+        this.FullName = "";
 
         this.Date = new Date();
         this.Expire = false;
-        this.CurrencyRates = [];
+        this.Rate = [];
     }
 }
 
-export class CurrencyRates {
+export class Rates {
+
+    public Code: string;
 
     public Name: string;
-
-    public FullName: string;
 
     public Sell: number;
 
     public Buy: number;
 
     constructor() {
-        this.Name = "";
+        this.Code = "";
         this.Buy = 0;
 
         this.Sell = 0;
-        this.FullName = "";
+        this.Name = "";
     }
 }
