@@ -9,7 +9,7 @@ import { HttpClient } from '@microsoft/signalr';
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NotificationPayload } from '../../models/email/notification-payload.model';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { ProgressBarModel } from '../../common/progress-bar-model';
+import { ProgressBarModel } from '../../common/shared/progress-bar-model';
 import { EmailProcessRequest } from '../../models/email/email-process-request-model';
 import { Dialog } from 'primeng/dialog';
 import { FileStatusDirective, ValidationStatus } from '../../directive/file-status.directive';
