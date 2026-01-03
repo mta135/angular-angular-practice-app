@@ -24,6 +24,7 @@ export class CurrencyDataService {
 
                 let currencyData: Data = new Data();
 
+                let i = 0;
                 for (let providerKey in raw) {
 
                     let providerRawObj = raw[providerKey];
@@ -33,6 +34,7 @@ export class CurrencyDataService {
 
                     provider.Date = new Date(providerRawObj.date);
                     provider.Expire = providerRawObj.expired;
+                    provider.Id = i++;
 
                     let ratesObj = providerRawObj.rates;
 
