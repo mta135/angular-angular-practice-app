@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { CurrencyData, CurrencyProvider, CurrencyRates } from '../models/currency-converter/currency-converter-data';
+import { it } from 'node:test';
 
 @Injectable({
     providedIn: 'root'
@@ -20,43 +21,42 @@ export class CurrencyProviderDataService {
 
             map(raw => {
 
-                let rawData = raw;
                 let currencyData: CurrencyData = new CurrencyData();
 
-                debugger;
-                for (let i = 0; i < rawData.length; i++) {
-                    let item = rawData[i];
+                for (let providerKey in raw) {
+
+                    let providerRawObj = raw[providerKey];
 
                     let provider = new CurrencyProvider();
+                    provider.ProviderName = providerKey;
 
-                    provider.ProviderName = item.activprim;
-                    provider.Date = new Date(item.date);
-                    provider.Expire = item.expired;
+                    provider.Date = new Date(providerRawObj.date);
+                    provider.Expire = providerRawObj.expired;
 
-                    if (item.rates) {
+                    let ratesObj = providerRawObj.rates;
 
-                        for (const key in item.rates) {
+                    if (ratesObj) {
 
-                            if (item.rates.hasOwnProperty(key)) {
-                                const value = item.rates[key];
+                        for (let currencyCode in ratesObj) {
 
-                                let rate = new CurrencyRates();
-                                rate.Name = key;
+                            let rateValues = ratesObj[currencyCode];
 
-                                rate.Buy = parseFloat(value.buy);
-                                rate.Sell = parseFloat(value.sell);
+                            let rate = new CurrencyRates();
 
-                                provider.CurrencyRates.push(rate);
-                            }
+                            rate.Name = currencyCode;
+                            rate.Buy = parseFloat(rateValues.buy);
+                            rate.Sell = parseFloat(rateValues.sell);
+
+                            provider.CurrencyRates.push(rate);
                         }
-
-                        currencyData.CurrencyProviders.push(provider);
                     }
-                }
 
+                    currencyData.CurrencyProviders.push(provider);
+                }
                 return currencyData;
             })
         );
+
     }
 
 }
