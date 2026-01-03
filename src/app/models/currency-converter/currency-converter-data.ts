@@ -1,6 +1,6 @@
 
 
-export class Data {
+export class ExchangeCurrencyData {
 
     public Provider: Provider[];
 

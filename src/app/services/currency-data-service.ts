@@ -2,9 +2,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Data, Provider, Rates } from '../models/currency-converter/currency-converter-data';
+import { ExchangeCurrencyData, Provider, Rates } from '../models/currency-converter/currency-converter-data';
 import { it } from 'node:test';
-import { CurrencyMapper } from '../common/mapper/currency-converter-mapper/curremcy-mapper';
+import { CurrencyServiceDataMapper } from '../common/mapper/currency-converter-mapper/currency-service-data-mapper';
 
 @Injectable({
     providedIn: 'root'
@@ -16,13 +16,13 @@ export class CurrencyDataService {
 
     constructor(private http: HttpClient) { }
 
-    public GetCurrencyProvidersData(): Observable<Data> {
+    public GetCurrencyProvidersData(): Observable<ExchangeCurrencyData> {
 
         return this.http.get<any[]>(this.url).pipe(
 
             map(raw => {
 
-                let currencyData: Data = new Data();
+                let currencyData: ExchangeCurrencyData = new ExchangeCurrencyData();
 
                 let i = 0;
                 for (let providerKey in raw) {
@@ -31,7 +31,7 @@ export class CurrencyDataService {
 
                     let provider = new Provider();
                     provider.Name = providerKey;
-                    provider.FullName = CurrencyMapper.SetProviderFullName(provider.Name);
+                    provider.FullName = CurrencyServiceDataMapper.SetProviderFullName(provider.Name);
 
                     provider.Date = new Date(providerRawObj.date);
                     provider.Expire = providerRawObj.expired;
@@ -51,7 +51,7 @@ export class CurrencyDataService {
                             rate.Buy = parseFloat(rateValues.buy);
                             rate.Sell = parseFloat(rateValues.sell);
 
-                            rate.Name = CurrencyMapper.SetCodeFullName(rate.Code);
+                            rate.Name = CurrencyServiceDataMapper.SetCodeFullName(rate.Code);
 
                             provider.Rate.push(rate);
                         }
