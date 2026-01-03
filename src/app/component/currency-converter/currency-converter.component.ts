@@ -1,8 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SelectModule } from 'primeng/select';
 import { CurrencyDataService as CurrencyDataService } from '../../services/exchage-data-service';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
-import { ExhcengeServiceDataMapper } from '../../common/mapper/currency-converter-mapper/exchange-service-data-mapper';
+import { firstValueFrom } from 'rxjs';
 import { CurrencyServiceDataMapper } from '../../common/mapper/currency-converter-mapper/currency-data-mapper';
 import { CurrencyProvider } from '../../models/currency-converter/provider-mode';
 
