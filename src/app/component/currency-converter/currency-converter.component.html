@@ -23,15 +23,15 @@
             <div class="flex flex-row gap-5 w-full">
 
                 <div class="flex-1">
-                    <p-select [options]="" [checkmark]="true" optionLabel="Code" [filter]="true" filterBy="Code"
-                        [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full"
-                        size="large" (onChange)="LeftSelectedOnChange()" />
+                    <p-select [options]="currencyRates" [checkmark]="true" optionLabel="Name" [filter]="true"
+                        filterBy="Code" [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38"
+                        class="w-full" size="large" (onChange)="LeftSelectedOnChange()" />
                 </div>
 
                 <div class="flex-1">
-                    <p-select [options]="" [checkmark]="true" optionLabel="Code" [filter]="true" filterBy="Code"
-                        [virtualScroll]="true" [resetFilterOnHide]="true" [virtualScrollItemSize]="38" class="w-full"
-                        size="large" (onChange)="RightSelectedOnChange()" />
+                    <p-select [options]="currencyRates" [checkmark]="true" optionLabel="Name" [filter]="true"
+                        filterBy="Code" [virtualScroll]="true" [resetFilterOnHide]="true" [virtualScrollItemSize]="38"
+                        class="w-full" size="large" (onChange)="RightSelectedOnChange()" />
                 </div>
 
             </div>

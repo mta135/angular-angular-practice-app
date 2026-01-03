@@ -1,5 +1,5 @@
 import { ExchangeCurrencyData, Provider } from "../../../models/currency-converter/exchange-currency-data";
-import { CurrencyProvider } from "../../../models/currency-converter/provider-mode";
+import { CurrencyProvider, CurrencyRates } from "../../../models/currency-converter/provider-mode";
 
 export class CurrencyServiceDataMapper {
 
@@ -24,4 +24,30 @@ export class CurrencyServiceDataMapper {
 
         return currencyProviders;
     }
+
+    public GetCurrencyRates(code: string): CurrencyRates[] {
+
+        let provider = this.currencyData.Provider.find(x => x.Code == code);
+        let rates = provider?.Rate || [];
+        let currencyRate: CurrencyRates[] = [];
+
+        for (let data of rates) {
+            let rate = new CurrencyRates();
+
+            rate.Code = data.Code;
+            rate.Name = data.Name;
+
+            currencyRate.push(rate);
+        }
+
+        return currencyRate;
+    }
+
+    public GetInitialData(defaultBank: string) {
+        return {
+            allProviders: this.GetProviders(),
+            defaultRates: this.GetCurrencyRates(defaultBank)
+        };
+    }
+
 }

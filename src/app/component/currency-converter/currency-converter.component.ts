@@ -3,7 +3,8 @@ import { SelectModule } from 'primeng/select';
 import { CurrencyDataService as CurrencyDataService } from '../../services/exchage-data-service';
 import { firstValueFrom } from 'rxjs';
 import { CurrencyServiceDataMapper } from '../../common/mapper/currency-converter-mapper/currency-data-mapper';
-import { CurrencyProvider } from '../../models/currency-converter/provider-mode';
+import { CurrencyProvider, CurrencyRates } from '../../models/currency-converter/provider-mode';
+import { ExchangeProvider } from '../../enums/currencty-converter/currency-exchage-provider-enum';
 
 @Component({
   selector: 'app-currency-converter',
@@ -15,7 +16,9 @@ export class CurrencyConverterComponent implements OnInit {
 
   private currencyService = inject(CurrencyDataService);
 
+  private mapper?: CurrencyServiceDataMapper;
   public providers: CurrencyProvider[] = [];
+  public currencyRates: CurrencyRates[] = [];
 
 
   async ngOnInit(): Promise<void> {
@@ -32,9 +35,10 @@ export class CurrencyConverterComponent implements OnInit {
       if (response) {
         console.log(response);
 
-        let currencyServiceDateMapper: CurrencyServiceDataMapper = new CurrencyServiceDataMapper(response);
-        this.providers = currencyServiceDateMapper.GetProviders();
+        this.mapper = new CurrencyServiceDataMapper(response);
 
+        this.providers = this.mapper?.GetProviders();
+        this.currencyRates = this.mapper?.GetCurrencyRates(ExchangeProvider.Bnm)
 
         console.log('Datele au fost încărcate și mapate cu succes.');
       }
