@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { ExchangeCurrencyData, Provider, Rates } from '../models/currency-converter/exchange-currency-data';
 import { it } from 'node:test';
-import { CurrencyServiceDataMapper } from '../common/mapper/currency-converter-mapper/exchange-service-data-mapper';
+import { ExhcengeServiceDataMapper } from '../common/mapper/currency-converter-mapper/exchange-service-data-mapper';
 
 @Injectable({
     providedIn: 'root'
@@ -30,8 +30,8 @@ export class CurrencyDataService {
                     let providerRawObj = raw[providerKey];
 
                     let provider = new Provider();
-                    provider.Name = providerKey;
-                    provider.FullName = CurrencyServiceDataMapper.SetProviderFullName(provider.Name);
+                    provider.Code = providerKey;
+                    provider.Name = ExhcengeServiceDataMapper.SetProviderFullName(provider.Code);
 
                     provider.Date = new Date(providerRawObj.date);
                     provider.Expire = providerRawObj.expired;
@@ -51,7 +51,7 @@ export class CurrencyDataService {
                             rate.Buy = parseFloat(rateValues.buy);
                             rate.Sell = parseFloat(rateValues.sell);
 
-                            rate.Name = CurrencyServiceDataMapper.SetCodeFullName(rate.Code);
+                            rate.Name = ExhcengeServiceDataMapper.SetCodeFullName(rate.Code);
 
                             provider.Rate.push(rate);
                         }

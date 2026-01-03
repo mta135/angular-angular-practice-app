@@ -14,9 +14,9 @@ export class Provider {
 
     public Id: number;
 
-    public Name: string;
+    public Code: string;
 
-    public FullName: string;
+    public Name: string;
 
     public Date: Date;
 
@@ -27,8 +27,8 @@ export class Provider {
     constructor() {
 
         this.Id = 0;
+        this.Code = "";
         this.Name = "";
-        this.FullName = "";
 
         this.Date = new Date();
         this.Expire = false;

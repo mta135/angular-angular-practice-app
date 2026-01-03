@@ -12,9 +12,9 @@
         <div class="mt-4">
             <label for="provider-select" class="font-medium text-900">Provider</label>
             <div class="flex-1">
-                <p-select [options]="" id="provider-select" [checkmark]="true" optionLabel="Code" [filter]="true"
-                    filterBy="Code" [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38"
-                    class="w-full" size="large" (onChange)="LeftSelectedOnChange()" />
+                <p-select [options]="providers" id="provider-select" [checkmark]="true" [filter]="true"
+                    optionLabel="Name" filterBy="Name" [resetFilterOnHide]="true" [virtualScroll]="true"
+                    [virtualScrollItemSize]="38" class="w-full" size="large" (onChange)="ProviderSelectedChange()" />
             </div>
         </div>
 

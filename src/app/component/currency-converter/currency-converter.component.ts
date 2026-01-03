@@ -1,7 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SelectModule } from 'primeng/select';
 import { CurrencyDataService as CurrencyDataService } from '../../services/exchage-data-service';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { ExhcengeServiceDataMapper } from '../../common/mapper/currency-converter-mapper/exchange-service-data-mapper';
+import { CurrencyServiceDataMapper } from '../../common/mapper/currency-converter-mapper/currency-data-mapper';
+import { CurrencyProvider } from '../../models/currency-converter/provider-mode';
 
 @Component({
   selector: 'app-currency-converter',
@@ -13,6 +16,8 @@ export class CurrencyConverterComponent implements OnInit {
 
   private currencyService = inject(CurrencyDataService);
 
+  public providers: CurrencyProvider[] = [];
+
 
   async ngOnInit(): Promise<void> {
     this.GetCurrencyProviderData();
@@ -21,23 +26,35 @@ export class CurrencyConverterComponent implements OnInit {
 
 
   async GetCurrencyProviderData(): Promise<void> {
-
     try {
 
-      this.currencyService.GetCurrencyProvidersData().subscribe((response) => {
-        console.log(response);
-      });
+      let response = await firstValueFrom(this.currencyService.GetCurrencyProvidersData());
 
-      console.log('Date încărcate asincron cu succes!');
+      if (response) {
+        console.log(response);
+
+        let currencyServiceDateMapper: CurrencyServiceDataMapper = new CurrencyServiceDataMapper(response);
+        this.providers = currencyServiceDateMapper.GetProviders();
+
+
+        console.log('Datele au fost încărcate și mapate cu succes.');
+      }
+
+    } catch (error) {
+      console.error('A apărut o eroare la preluarea datelor valutare:', error);
     }
-    catch (error) {
-      console.error('Eroare la încărcarea datelor:', error);
-    }
+  }
+
+
+  public ProviderSelectedChange(): void {
+
   }
 
 
 
   public LeftSelectedOnChange(): void {
+
+
 
   }
 
