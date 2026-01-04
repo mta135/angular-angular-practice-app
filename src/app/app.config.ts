@@ -9,6 +9,7 @@ import Aura from '@primeng/themes/aura'; // Add this (or your preferred theme)
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { definePreset } from '@primeuix/themes';
+import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 
 const MyPreset = definePreset(Aura, {
@@ -44,6 +45,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
+    provideHotToastConfig(),
 
     provideHttpClient(withFetch()),
 
@@ -54,7 +56,7 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: MyPreset // Folosim presetul modificat
       },
-    }),
+    }), provideHotToastConfig(),
 
   ]
 };
