@@ -6,10 +6,12 @@ import { CurrencyServiceDataMapper } from '../../common/mapper/currency-converte
 import { CurrencyProvider, CurrencyRates } from '../../models/currency-converter/provider-mode';
 import { ExchangeProvider } from '../../enums/currencty-converter/currency-exchage-provider-enum';
 import { ExchangeDataViewMode } from '../../models/currency-converter/exchange-data-view-model';
+import { FormsModule } from '@angular/forms';
+import { debug } from 'console';
 
 @Component({
   selector: 'app-currency-converter',
-  imports: [SelectModule],
+  imports: [SelectModule, FormsModule],
   templateUrl: './currency-converter.component.html',
   styleUrl: './currency-converter.component.scss'
 })
@@ -26,8 +28,6 @@ export class CurrencyConverterComponent implements OnInit {
     this.GetCurrencyProviderData();
   }
 
-
-
   async GetCurrencyProviderData(): Promise<void> {
     try {
 
@@ -36,12 +36,19 @@ export class CurrencyConverterComponent implements OnInit {
       if (response) {
         console.log(response);
 
-        this.mapper = new CurrencyServiceDataMapper(response);
+        let mapper = new CurrencyServiceDataMapper(response);
+        this.mapper = mapper;
 
-        this.viewModel.Providers = this.mapper?.GetProviders();
-        this.viewModel.CurrencyRates = this.mapper?.GetCurrencyRates(ExchangeProvider.Bnm);
+        this.viewModel.Providers = mapper.GetProviders();
+
+        debugger;
+        this.viewModel.SelectedProvider = mapper.GetSelectedProvider(ExchangeProvider.Bnm);
+        this.viewModel.CurrencyRates = mapper.GetCurrencyRates(ExchangeProvider.Bnm);
 
         console.log('Datele au fost încărcate și mapate cu succes.');
+      }
+      else {
+        // error handler
       }
 
     } catch (error) {
@@ -50,7 +57,13 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
 
-  public ProviderSelectedChange(): void {
+  public SelectedProviderOnChange(): void {
+
+    debugger
+    const selected = this.viewModel.SelectedProvider;
+    if (!selected) return;
+
+    const bankCode = selected.code;
 
   }
 

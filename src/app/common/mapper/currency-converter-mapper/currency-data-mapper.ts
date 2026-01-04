@@ -50,4 +50,17 @@ export class CurrencyServiceDataMapper {
         };
     }
 
+
+    public GetSelectedProvider(code: string): CurrencyProvider {
+
+        const data = this.currencyData.Provider.find(x => x.Code === code);
+
+        let currencyProvider = new CurrencyProvider();
+
+        currencyProvider.Name = data?.Name ?? "";
+        currencyProvider.code = data?.Code ?? "";
+
+        return currencyProvider;
+    }
+
 }
