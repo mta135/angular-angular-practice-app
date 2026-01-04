@@ -41,7 +41,6 @@ export class CurrencyConverterComponent implements OnInit {
 
         this.viewModel.Providers = mapper.GetProviders();
 
-        debugger;
         this.viewModel.SelectedProvider = mapper.GetSelectedProvider(ExchangeProvider.Bnm);
         this.viewModel.CurrencyRates = mapper.GetCurrencyRates(ExchangeProvider.Bnm);
 
@@ -59,11 +58,7 @@ export class CurrencyConverterComponent implements OnInit {
 
   public SelectedProviderOnChange(): void {
 
-    debugger
-    const selected = this.viewModel.SelectedProvider;
-    if (!selected) return;
-
-    const bankCode = selected.code;
+    const bankCode = this.viewModel.SelectedProvider?.code;
 
   }
 
