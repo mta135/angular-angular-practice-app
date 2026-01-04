@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { CurrencyServiceDataMapper } from '../../common/mapper/currency-converter-mapper/currency-data-mapper';
 import { CurrencyProvider, CurrencyRates } from '../../models/currency-converter/provider-mode';
 import { ExchangeProvider } from '../../enums/currencty-converter/currency-exchage-provider-enum';
+import { ExchangeDataViewMode } from '../../models/currency-converter/exchange-data-view-model';
 
 @Component({
   selector: 'app-currency-converter',
@@ -17,8 +18,8 @@ export class CurrencyConverterComponent implements OnInit {
   private currencyService = inject(CurrencyDataService);
 
   private mapper?: CurrencyServiceDataMapper;
-  public providers: CurrencyProvider[] = [];
-  public currencyRates: CurrencyRates[] = [];
+
+  public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
 
   async ngOnInit(): Promise<void> {
@@ -37,8 +38,8 @@ export class CurrencyConverterComponent implements OnInit {
 
         this.mapper = new CurrencyServiceDataMapper(response);
 
-        this.providers = this.mapper?.GetProviders();
-        this.currencyRates = this.mapper?.GetCurrencyRates(ExchangeProvider.Bnm)
+        this.viewModel.Providers = this.mapper?.GetProviders();
+        this.viewModel.CurrencyRates = this.mapper?.GetCurrencyRates(ExchangeProvider.Bnm);
 
         console.log('Datele au fost încărcate și mapate cu succes.');
       }

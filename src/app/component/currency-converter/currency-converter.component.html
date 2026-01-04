@@ -12,7 +12,7 @@
         <div class="mt-4">
             <label for="provider-select" class="font-medium text-900">Provider</label>
             <div class="flex-1">
-                <p-select [options]="providers" id="provider-select" [checkmark]="true" [filter]="true"
+                <p-select [options]="viewModel.Providers" id="provider-select" [checkmark]="true" [filter]="true"
                     optionLabel="Name" filterBy="Name" [resetFilterOnHide]="true" [virtualScroll]="true"
                     [virtualScrollItemSize]="38" class="w-full" size="large" (onChange)="ProviderSelectedChange()" />
             </div>
@@ -23,15 +23,17 @@
             <div class="flex flex-row gap-5 w-full">
 
                 <div class="flex-1">
-                    <p-select [options]="currencyRates" [checkmark]="true" optionLabel="Name" optionValue="Code"
-                        [filter]="true" filterBy="Code" [resetFilterOnHide]="true" [virtualScroll]="true"
-                        [virtualScrollItemSize]="38" class="w-full" size="large" (onChange)="LeftSelectedOnChange()" />
+                    <p-select [options]="viewModel.CurrencyRates" [checkmark]="true" optionLabel="Name"
+                        optionValue="Code" [filter]="true" filterBy="Code" [resetFilterOnHide]="true"
+                        [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full" size="large"
+                        (onChange)="LeftSelectedOnChange()" />
                 </div>
 
                 <div class="flex-1">
-                    <p-select [options]="currencyRates" [checkmark]="true" optionLabel="Name" optionValue="Code"
-                        [filter]="true" filterBy="Code" [virtualScroll]="true" [resetFilterOnHide]="true"
-                        [virtualScrollItemSize]="38" class="w-full" size="large" (onChange)="RightSelectedOnChange()" />
+                    <p-select [options]="viewModel.CurrencyRates" [checkmark]="true" optionLabel="Name"
+                        optionValue="Code" [filter]="true" filterBy="Code" [virtualScroll]="true"
+                        [resetFilterOnHide]="true" [virtualScrollItemSize]="38" class="w-full" size="large"
+                        (onChange)="RightSelectedOnChange()" />
                 </div>
 
             </div>
