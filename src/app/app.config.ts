@@ -56,7 +56,7 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: MyPreset // Folosim presetul modificat
       },
-    }), provideHotToastConfig(),
+    }), provideHotToastConfig(), provideHotToastConfig(),
 
   ]
 };
