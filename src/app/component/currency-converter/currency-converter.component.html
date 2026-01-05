@@ -10,17 +10,43 @@
         <hr class="mt-1" />
 
         <div class="mt-4">
-            <label for="provider-select" class="font-medium text-900">Provider</label>
-            <div class="flex-1">
-                <p-select [options]="viewModel.Providers" [(ngModel)]="viewModel.SelectedProvider"
-                    [disabled]="isDisabled" id="provider-select" [checkmark]="true" [filter]="true" optionLabel="Name"
-                    filterBy="Name" [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38"
-                    class="w-full" size="large" (onChange)="SelectedProviderOnChange()" />
+            <div class="flex flex-row gap-5 w-full">
+                <div class="flex-1">
+                    <label for="provider-select" class="font-medium text-900">Provider</label>
+                    <p-select [options]="viewModel.Providers" [(ngModel)]="viewModel.SelectedProvider"
+                        [disabled]="isDisabled" id="provider-select" [checkmark]="true" [filter]="true"
+                        optionLabel="Name" filterBy="Name" [resetFilterOnHide]="true" [virtualScroll]="true"
+                        [virtualScrollItemSize]="38" class="w-full" size="large"
+                        (onChange)="SelectedProviderOnChange()" />
+                </div>
+
+                <div class="flex-1">
+                    <label for="provider-select" class="font-medium text-900">Curs valutar Banca Națională (BNM)</label>
+
+                    <div class="card p-3 border border-gray-200 rounded-md bg-white w-full shadow-sm">
+
+                        <div class="flex flex-row justify-between items-center h-full">
+
+                            <div class="flex flex-col gap-2">
+
+                                <p> EURO </p>
+                                <p>USA</p>
+                                <p>RO</p>
+                                <p>UAH</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+
+
         </div>
 
 
-        <div class="mt-5">
+        <div class=" mt-5">
             <div class="flex flex-row gap-5 w-full">
 
                 <div class="flex-1">
