@@ -20,44 +20,7 @@ import { UserNotificationService } from '../../services/user-notification-servic
 })
 export class CurrencyConverterComponent implements OnInit {
 
-
-  /**
-   *
-   */
-  constructor(private toast: HotToastService) {
-
-
-  }
-
-
-  // showToast() {
-  //   // this.toast.show('Hello World!');
-  //   // this.toast.loading('Lazyyy...');
-  //   // this.toast.success('Yeah!!');
-  //   // this.toast.warning('Boo!');
-  //   // this.toast.error('Oh no!');
-  //   // this.toast.info('Something...');
-
-  //   this.toast.success('Look at my styles, and I also need more time!', {
-  //     position: 'top-right', // Aici setezi poziția
-  //     duration: 5000,
-  //     style: {
-  //       marginTop: '32px', // Adaugă spațiu deasupra acestui toast specific
-  //       border: '1px solid #713200',
-  //       padding: '24px',        // Mărește spațiul interior
-  //       color: '#713200',
-  //       fontSize: '20px',       // Mărește textul
-  //       minWidth: '400px',      // Setează o lățime minimă
-  //       maxWidth: '600px',      // Permite extinderea
-  //     },
-  //     iconTheme: {
-  //       primary: '#713200',
-  //       secondary: '#FFFAEE',
-  //     },
-  //   });
-
-  // }
-
+  constructor() { }
 
   private currencyService = inject(CurrencyDataService);
 
@@ -67,6 +30,7 @@ export class CurrencyConverterComponent implements OnInit {
 
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
+  public isDisabled: boolean = false;
 
   async ngOnInit(): Promise<void> {
     this.GetCurrencyProviderData();
@@ -91,7 +55,9 @@ export class CurrencyConverterComponent implements OnInit {
         console.log('Datele au fost încărcate și mapate cu succes.');
       }
       else {
-        // error handler
+
+        this.userNotification.ShowToast();
+        this.isDisabled = true;
       }
 
     } catch (error) {
@@ -103,7 +69,6 @@ export class CurrencyConverterComponent implements OnInit {
   public SelectedProviderOnChange(): void {
 
     const bankCode = this.viewModel.SelectedProvider?.code;
-    this.userNotification.ShowToast();
 
   }
 

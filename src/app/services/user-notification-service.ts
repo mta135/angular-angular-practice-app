@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { HotToastService } from "@ngxpert/hot-toast";
 
 @Injectable({ providedIn: 'root' })
 
 export class UserNotificationService {
 
-    constructor(private toast: HotToastService) { }
+    constructor(private toast: HotToastService, @Inject(PLATFORM_ID) private platformId: object) { }
 
     public ShowToast(): void {
         // this.toast.show('Hello World!');
@@ -14,6 +15,10 @@ export class UserNotificationService {
         // this.toast.warning('Boo!');
         // this.toast.error('Oh no!');
         // this.toast.info('Something...');
+
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
 
         this.toast.success('Look at my styles, and I also need more time!', {
             position: 'top-right', // Aici setezi poziția

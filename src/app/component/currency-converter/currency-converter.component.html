@@ -12,10 +12,10 @@
         <div class="mt-4">
             <label for="provider-select" class="font-medium text-900">Provider</label>
             <div class="flex-1">
-                <p-select [options]="viewModel.Providers" [(ngModel)]="viewModel.SelectedProvider" id="provider-select"
-                    [checkmark]="true" [filter]="true" optionLabel="Name" filterBy="Name" [resetFilterOnHide]="true"
-                    [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full" size="large"
-                    (onChange)="SelectedProviderOnChange()" />
+                <p-select [options]="viewModel.Providers" [(ngModel)]="viewModel.SelectedProvider"
+                    [disabled]="isDisabled" id="provider-select" [checkmark]="true" [filter]="true" optionLabel="Name"
+                    filterBy="Name" [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38"
+                    class="w-full" size="large" (onChange)="SelectedProviderOnChange()" />
             </div>
         </div>
 
