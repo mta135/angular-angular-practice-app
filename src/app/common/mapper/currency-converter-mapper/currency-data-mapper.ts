@@ -36,6 +36,8 @@ export class CurrencyServiceDataMapper {
 
             rate.Code = data.Code;
             rate.Name = data.Name;
+            rate.Sell = data.Sell;
+            rate.Buy = data.Buy
 
             currencyRate.push(rate);
         }

@@ -3,13 +3,9 @@ import { SelectModule } from 'primeng/select';
 import { CurrencyDataService as CurrencyDataService } from '../../services/exchage-data-service';
 import { firstValueFrom } from 'rxjs';
 import { CurrencyServiceDataMapper } from '../../common/mapper/currency-converter-mapper/currency-data-mapper';
-import { CurrencyProvider, CurrencyRates } from '../../models/currency-converter/provider-mode';
 import { ExchangeProvider } from '../../enums/currencty-converter/currency-exchage-provider-enum';
 import { ExchangeDataViewMode } from '../../models/currency-converter/exchange-data-view-model';
 import { FormsModule } from '@angular/forms';
-import { debug } from 'console';
-import { HotToastService } from '@ngxpert/hot-toast';
-import { NotificationService } from '../../services/notification-service';
 import { UserNotificationService } from '../../services/user-notification-service';
 
 @Component({
@@ -61,7 +57,7 @@ export class CurrencyConverterComponent implements OnInit {
       }
 
     } catch (error) {
-      console.error('A apărut o eroare la preluarea datelor valutare:', error);
+      console.error('Eroare:', error);
     }
   }
 
