@@ -68,6 +68,7 @@ export class CurrencyConverterComponent implements OnInit {
   public SelectedProviderOnChange(): void {
 
     const bankCode = this.viewModel.SelectedProvider?.code ?? '';
+    this.viewModel.DashBoardRates = this.mapper?.GetDashboardRates(bankCode);
 
 
   }
