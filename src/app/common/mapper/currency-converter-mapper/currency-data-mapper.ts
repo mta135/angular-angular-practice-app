@@ -63,4 +63,16 @@ export class CurrencyServiceDataMapper {
         return currencyProvider;
     }
 
+
+    public GetDashboardRates(code: string): CurrencyRates[] {
+
+        let allCurrencyRate = this.GetCurrencyRates(code);
+        const targetCodes = ['EUR', 'USD', 'RON', 'GBP', 'UAH'];
+
+        let rates = allCurrencyRate.filter(rate => targetCodes.includes(rate.Code));
+
+        return rates;
+    }
+
+
 }

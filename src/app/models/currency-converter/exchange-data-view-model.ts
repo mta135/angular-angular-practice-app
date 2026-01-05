@@ -5,6 +5,8 @@ export class ExchangeDataViewMode {
     public Providers: CurrencyProvider[];
     public CurrencyRates: CurrencyRates[];
 
+    public DashBoardRates: CurrencyRates[] | undefined;
+
     public SelectedProvider: CurrencyProvider | null = null;
 
 
@@ -21,6 +23,8 @@ export class ExchangeDataViewMode {
         this.Providers = [];
         this.CurrencyRates = [];
         this.SelectedProvider = null;
+
+        this.DashBoardRates = [];
 
         this.Euro = 0;
         this.USD = 0;
