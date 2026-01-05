@@ -71,7 +71,10 @@ export class CurrencyServiceDataMapper {
         let allCurrencyRate = this.GetCurrencyRates(code);
         const targetCodes = ['EUR', 'USD', 'RON', 'GBP', 'UAH'];
 
-        let rates = allCurrencyRate.filter(rate => targetCodes.includes(rate.Code));
+        let rates = allCurrencyRate.filter(rate => targetCodes.includes(rate.Code))
+            .sort((a, b) => {
+                return targetCodes.indexOf(a.Code) - targetCodes.indexOf(b.Code);
+            });
 
         return rates;
     }

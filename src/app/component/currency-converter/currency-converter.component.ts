@@ -7,10 +7,11 @@ import { ExchangeProvider } from '../../enums/currencty-converter/currency-excha
 import { ExchangeDataViewMode } from '../../models/currency-converter/exchange-data-view-model';
 import { FormsModule } from '@angular/forms';
 import { UserNotificationService } from '../../services/user-notification-service';
+import { NgTemplateOutlet } from "../../../../node_modules/@angular/common/common_module.d-NEF7UaHr";
 
 @Component({
   selector: 'app-currency-converter',
-  imports: [SelectModule, FormsModule],
+  imports: [SelectModule, FormsModule, NgTemplateOutlet],
   templateUrl: './currency-converter.component.html',
   styleUrl: './currency-converter.component.scss'
 })
