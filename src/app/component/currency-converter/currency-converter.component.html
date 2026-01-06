@@ -61,15 +61,15 @@
             <div class="flex flex-row gap-5 w-full">
 
                 <div class="flex-1">
-                    <p-select [options]="viewModel.CurrencyRates" [checkmark]="true" optionLabel="Name"
-                        optionValue="Code" [filter]="true" filterBy="Code" [resetFilterOnHide]="true"
+                    <p-select [options]="viewModel.CurrencyRates" [(ngModel)]="viewModel.LeftSelectedRate"
+                        [checkmark]="true" optionLabel="Name" [filter]="true" filterBy="Name" [resetFilterOnHide]="true"
                         [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full" size="large"
                         (onChange)="LeftSelectedOnChange()" />
                 </div>
 
                 <div class="flex-1">
-                    <p-select [options]="viewModel.CurrencyRates" [checkmark]="true" optionLabel="Name"
-                        optionValue="Code" [filter]="true" filterBy="Code" [virtualScroll]="true"
+                    <p-select [options]="viewModel.CurrencyRates" [(ngModel)]="viewModel.RightSelectedRate"
+                        [checkmark]="true" optionLabel="Name" [filter]="true" filterBy="Name" [virtualScroll]="true"
                         [resetFilterOnHide]="true" [virtualScrollItemSize]="38" class="w-full" size="large"
                         (onChange)="RightSelectedOnChange()" />
                 </div>

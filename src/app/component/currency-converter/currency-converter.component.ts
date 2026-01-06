@@ -8,6 +8,7 @@ import { ExchangeDataViewMode } from '../../models/currency-converter/exchange-d
 import { FormsModule } from '@angular/forms';
 import { UserNotificationService } from '../../services/user-notification-service';
 import { ButtonModule } from 'primeng/button';
+import { CurrencyCode } from '../../enums/currencty-converter/currency-code-enum';
 
 @Component({
   selector: 'app-currency-converter',
@@ -50,6 +51,9 @@ export class CurrencyConverterComponent implements OnInit {
         this.viewModel.CurrencyRates = mapper.GetDashboardRates(ExchangeProvider.Bnm);
 
         this.viewModel.DashBoardRates = this.mapper?.GetDashboardRates(ExchangeProvider.Bnm);
+
+        this.viewModel.LeftSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.MDL);
+        this.viewModel.RightSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.EUR);
 
         console.log('Datele au fost încărcate și mapate cu succes.');
       }

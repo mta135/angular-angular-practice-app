@@ -52,7 +52,6 @@ export class CurrencyServiceDataMapper {
         };
     }
 
-
     public GetSelectedProvider(code: string): CurrencyProvider {
 
         const data = this.currencyData.Provider.find(x => x.Code === code);
@@ -65,7 +64,6 @@ export class CurrencyServiceDataMapper {
         return currencyProvider;
     }
 
-
     public GetDashboardRates(code: string): CurrencyRates[] {
 
         let allCurrencyRate = this.GetCurrencyRates(code);
@@ -77,6 +75,22 @@ export class CurrencyServiceDataMapper {
             });
 
         return rates;
+    }
+
+
+    public GetRateByCode(providerCode: string, rateCode: string): CurrencyRates {
+
+        let allCurrencyRate = this.GetCurrencyRates(providerCode);
+
+        let currency = allCurrencyRate.find(x => x.Code == rateCode);
+
+        let returnedCurrency = new CurrencyRates();
+
+        returnedCurrency.Name = currency?.Name ?? "";
+        returnedCurrency.Code = currency?.Code ?? "";
+
+        return returnedCurrency;
+
     }
 
 
