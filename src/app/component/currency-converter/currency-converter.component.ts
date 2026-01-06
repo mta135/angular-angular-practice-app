@@ -82,8 +82,6 @@ export class CurrencyConverterComponent implements OnInit {
 
   public LeftSelectedOnChange(): void {
 
-
-
   }
 
 
@@ -97,6 +95,21 @@ export class CurrencyConverterComponent implements OnInit {
 
   public RightInputTextBoxEvent(): void {
 
+  }
+
+
+  public GetCurrencyIcon(code: string): string {
+    const icons: Record<string, string> = {
+      'EUR': 'images/euro-icon.png',
+      'USD': 'images/dollar-icon.png',
+      'RON': 'images/leu-icon.png',
+      'GBP': 'images/coin-icon.png',
+      'UAH': 'images/hryvnia-icon.png'
+    };
+
+    let value = icons[code.toLowerCase()];
+
+    return icons[code.toLowerCase()] || 'images/default-icon.png';
   }
 
 }
