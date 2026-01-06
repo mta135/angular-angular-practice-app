@@ -99,7 +99,9 @@ export class CurrencyConverterComponent implements OnInit {
 
 
   public GetCurrencyIcon(code: string): string {
-    const icons: Record<string, string> = {
+
+
+    let icons: Record<string, string> = {
       'EUR': 'images/euro-icon.png',
       'USD': 'images/dollar-icon.png',
       'RON': 'images/leu-icon.png',
@@ -107,9 +109,7 @@ export class CurrencyConverterComponent implements OnInit {
       'UAH': 'images/hryvnia-icon.png'
     };
 
-    let value = icons[code.toLowerCase()];
-
-    return icons[code.toLowerCase()] || 'images/default-icon.png';
+    return icons[code] || 'images/default-icon.png';
   }
 
 }
