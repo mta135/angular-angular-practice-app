@@ -25,7 +25,6 @@ export class ExchangeDataViewMode {
 
         this.RightSelectedRate = new CurrencyRates();
 
-
     }
 
 

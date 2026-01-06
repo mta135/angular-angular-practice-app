@@ -88,6 +88,9 @@ export class CurrencyServiceDataMapper {
 
         returnedCurrency.Name = currency?.Name ?? "";
         returnedCurrency.Code = currency?.Code ?? "";
+        returnedCurrency.Sell = currency?.Sell ?? 0;
+
+        returnedCurrency.Buy = currency?.Buy ?? 0;
 
         return returnedCurrency;
 
