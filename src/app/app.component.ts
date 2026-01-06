@@ -21,7 +21,7 @@ export class AppComponent {
   constructor(private router: Router) {
 
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
-      this.showMenu = event.urlAfterRedirects !== '/currency-converter';
+      this.showMenu = event.urlAfterRedirects !== '/currency-converter' && event.urlAfterRedirects !== '/currency-details';
     });
 
   }

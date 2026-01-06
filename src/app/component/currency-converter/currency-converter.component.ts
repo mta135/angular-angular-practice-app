@@ -9,10 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { UserNotificationService } from '../../services/user-notification-service';
 import { ButtonModule } from 'primeng/button';
 import { CurrencyCode } from '../../enums/currencty-converter/currency-code-enum';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-currency-converter',
-  imports: [SelectModule, FormsModule, ButtonModule],
+  imports: [SelectModule, FormsModule, ButtonModule, RouterLink],
   templateUrl: './currency-converter.component.html',
   styleUrl: './currency-converter.component.scss'
 })
@@ -99,7 +100,6 @@ export class CurrencyConverterComponent implements OnInit {
 
 
   public GetCurrencyIcon(code: string): string {
-
 
     let icons: Record<string, string> = {
       'EUR': 'images/euro-icon.png',
