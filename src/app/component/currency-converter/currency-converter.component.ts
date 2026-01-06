@@ -48,11 +48,12 @@ export class CurrencyConverterComponent implements OnInit {
         this.viewModel.Providers = mapper.GetProviders();
 
         this.viewModel.SelectedProvider = mapper.GetSelectedProvider(ExchangeProvider.Bnm);
-        this.viewModel.CurrencyRates = mapper.GetDashboardRates(ExchangeProvider.Bnm);
+        this.viewModel.CurrencyRates = mapper.GetCurrencyRates(ExchangeProvider.Bnm);
 
         this.viewModel.DashBoardRates = this.mapper?.GetDashboardRates(ExchangeProvider.Bnm);
 
         this.viewModel.LeftSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.MDL);
+
         this.viewModel.RightSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.EUR);
 
         console.log('Datele au fost încărcate și mapate cu succes.');
