@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CurrencyConverterComponent } from './component/currency-converter/currency-converter.component';
+import { CurrencyConverterComponent } from './component/currency-converter/currency-converter-data/currency-converter.component';
 import { ProviderCurrencyDetailsComponent } from './component/currency-converter/provider-currency-details/provider-currency-details.component';
 
 export const routes: Routes = [

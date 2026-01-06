@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SelectModule } from 'primeng/select';
-import { CurrencyDataService as CurrencyDataService } from '../../services/exchage-data-service';
+import { CurrencyDataService as CurrencyDataService } from '../../../services/exchage-data-service';
 import { firstValueFrom } from 'rxjs';
-import { CurrencyServiceDataMapper } from '../../common/mapper/currency-converter-mapper/currency-data-mapper';
-import { ExchangeProvider } from '../../enums/currencty-converter/currency-exchage-provider-enum';
-import { ExchangeDataViewMode } from '../../models/currency-converter/exchange-data-view-model';
+import { CurrencyServiceDataMapper } from '../../../common/mapper/currency-converter-mapper/currency-data-mapper';
+import { ExchangeProvider } from '../../../enums/currencty-converter/currency-exchage-provider-enum';
+import { ExchangeDataViewMode } from '../../../models/currency-converter/exchange-data-view-model';
 import { FormsModule } from '@angular/forms';
-import { UserNotificationService } from '../../services/user-notification-service';
+import { UserNotificationService } from '../../../services/user-notification-service';
 import { ButtonModule } from 'primeng/button';
-import { CurrencyCode } from '../../enums/currencty-converter/currency-code-enum';
+import { CurrencyCode } from '../../../enums/currencty-converter/currency-code-enum';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({

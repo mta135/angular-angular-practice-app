@@ -19,15 +19,15 @@
                         size="large" (onChange)="SelectedProviderOnChange()" />
 
 
-                    <div class="card">
-                        <p-button label="Check" />
+                    <div class="mt-1 flex justify-center">
+                        <img src="images/exchange-icon.png" width="90" height="90">
                     </div>
 
-
-
-                    <a routerLink="/currency-details" target="_blank" rel="noopener">
-                        Dashboard
-                    </a>
+                    <div class="mt-1 text-center">
+                        <a routerLink="/currency-details" target="_blank" rel="noopener" class="font-medium text-900">
+                            Vezi cursul BNM pentru toate valute
+                        </a>
+                    </div>
 
                 </div>
 
@@ -41,7 +41,7 @@
                             @for (rate of viewModel.DashBoardRates; track rate.Code) {
 
                             <div class="flex items-center border-b  border-[#8a2be2] pb-1">
-                                <div class="flex items-center gap-2 w-40">
+                                <div class="flex items-center gap-2 w-36">
                                     <img [src]="GetCurrencyIcon(rate.Code)" width="18" height="18">
                                     <span class=" text-gray-700">{{ rate.Code }}</span>
                                 </div>
