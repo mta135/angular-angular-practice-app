@@ -1,0 +1,15 @@
+// /* În provider-currency-details.component.css */
+// ::ng-deep .p-datatable-tbody>tr {
+
+//     height: 10px;
+//     /* Setează înălțimea rândului */
+// }
+
+::ng-deep .p-datatable-tbody>tr>td {
+    padding: 0 1rem;
+    line-height: 30px;
+    vertical-align: middle;
+
+    text-align: center;
+    justify-content: center;
+}

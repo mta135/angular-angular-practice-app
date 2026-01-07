@@ -10,13 +10,26 @@
 
 
         <div class="mt-2">
-            @if(showGrid) {
-            <div class="w-full h-[500px]">
-                <ag-grid-angular style="width: 100%; height: 100%;" [rowData]="rowData" [columnDefs]="columnDefs"
-                    [class]="'ag-theme-quartz'" />
-            </div>
+            <p-table [value]="currencyRates" [scrollHeight]="'400px'" showGridlines
+                [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template #header>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Sell</th>
+                        <th>Buy</th>
 
-            }
+                    </tr>
+                </ng-template>
+                <ng-template #body let-rate>
+                    <tr>
+                        <td style="font-size: 14px">{{ rate.Code }}</td>
+                        <td style="font-size: 14px">{{ rate.Name }}</td>
+                        <td style="font-size: 14px">{{ rate.Sell }}</td>
+                        <td style="font-size: 14px">{{ rate.Buy }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
 
         </div>
 

@@ -1,26 +1,23 @@
-import { isPlatformServer } from '@angular/common';
 import { Component, inject, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AgGridAngular } from 'ag-grid-angular'; // Importă componenta Angular
-import { ColDef, AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { CurrencyDataService } from '../../../services/exchage-data-service';
 import { firstValueFrom } from 'rxjs';
 import { CurrencyServiceDataMapper } from '../../../common/mapper/currency-converter-mapper/currency-data-mapper';
 import { ExchangeDataViewMode } from '../../../models/currency-converter/exchange-data-view-model';
+import { TableModule } from 'primeng/table';
+import { CurrencyRates } from '../../../models/currency-converter/provider-mode';
 
-// Înregistrează toate modulele Community
-ModuleRegistry.registerModules([AllCommunityModule]);
+
 
 @Component({
   selector: 'app-provider-currency-details',
-  imports: [AgGridAngular],
+  standalone: true,
+  imports: [TableModule],
   templateUrl: './provider-currency-details.component.html',
   styleUrl: './provider-currency-details.component.scss'
 })
 export class ProviderCurrencyDetailsComponent {
-
-  public showGrid: boolean = false;
 
   public selectedProviderCode: string | null = null;
 
@@ -29,12 +26,10 @@ export class ProviderCurrencyDetailsComponent {
   private mapper?: CurrencyServiceDataMapper;
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
-  public rowData: any[] = [];
+  public currencyRates: CurrencyRates[] = [];;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private route: ActivatedRoute) {
-    this.showGrid = !isPlatformServer(this.platformId);
+  constructor(private route: ActivatedRoute) { }
 
-  }
 
 
   async GetCurrencyProviderData(): Promise<void> {
@@ -43,9 +38,8 @@ export class ProviderCurrencyDetailsComponent {
     if (response) {
 
       this.mapper = new CurrencyServiceDataMapper(response);
-
       this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
-      this.rowData = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "").filter(x => x.Code !== "MDL");
+      this.currencyRates = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "").filter(x => x.Code !== "MDL");
 
     }
     else {
@@ -57,14 +51,5 @@ export class ProviderCurrencyDetailsComponent {
   async ngOnInit(): Promise<void> {
     this.GetCurrencyProviderData();
   }
-
-  columnDefs: ColDef[] = [
-    { field: 'Code', headerName: 'Code', flex: 1 },
-    { field: 'Name', headerName: 'Denumire', flex: 2 },
-    { field: 'Sell', headerName: 'Vânzare', flex: 1 },
-    { field: 'Buy', headerName: 'Cumpărare', flex: 1 }
-  ];
-
-  // Datele
 
 }
