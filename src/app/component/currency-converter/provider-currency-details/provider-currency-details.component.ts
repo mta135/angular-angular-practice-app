@@ -45,7 +45,7 @@ export class ProviderCurrencyDetailsComponent {
       this.mapper = new CurrencyServiceDataMapper(response);
 
       this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
-      this.rowData = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "");
+      this.rowData = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "").filter(x => x.Code !== "MDL");
 
     }
     else {
@@ -59,7 +59,7 @@ export class ProviderCurrencyDetailsComponent {
   }
 
   columnDefs: ColDef[] = [
-    { field: 'Code', headerName: 'Valuta', flex: 1 },
+    { field: 'Code', headerName: 'Code', flex: 1 },
     { field: 'Name', headerName: 'Denumire', flex: 2 },
     { field: 'Sell', headerName: 'Vânzare', flex: 1 },
     { field: 'Buy', headerName: 'Cumpărare', flex: 1 }
