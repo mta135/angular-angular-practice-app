@@ -20,10 +20,15 @@ export class AppComponent {
 
   constructor(private router: Router) {
 
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
-      this.showMenu = event.urlAfterRedirects !== '/currency-converter' && event.urlAfterRedirects !== '/currency-details';
-    });
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
 
+        const url = event.urlAfterRedirects;
+        const isExcludedPage = url.startsWith('/currency-converter') ||
+          url.startsWith('/currency-details');
+
+        this.showMenu = !isExcludedPage;
+      });
   }
 
   title = 'angular-practice';

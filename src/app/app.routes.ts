@@ -7,5 +7,5 @@ export const routes: Routes = [
     { path: '', redirectTo: '/currency-converter', pathMatch: 'full' },
     { path: 'currency-converter', component: CurrencyConverterComponent },
 
-    { path: 'currency-details', component: ProviderCurrencyDetailsComponent },
+    { path: 'currency-details/:providerCode', component: ProviderCurrencyDetailsComponent },
 ];
