@@ -1,1 +1,26 @@
-<p>provider-currency-details works!</p>
+<div class="mt-5">
+
+
+    <div
+        class="relative w-[80%] mx-auto min-h-[500px] border border-gray-200 rounded-md hover:!border-[#8a2be2]  bg-white p-4">
+
+        <div class="mt-2 text-center">
+            Vezi cursul BNM pentru toate valutele. La data de 25;
+        </div>
+
+
+        <div class="mt-2">
+            @if(showGrid) {
+            <div class="w-full h-[500px]">
+                <ag-grid-angular style="width: 100%; height: 100%;" [rowData]="rowData" [columnDefs]="columnDefs"
+                    [class]="'ag-theme-quartz'" />
+            </div>
+
+            }
+
+        </div>
+
+    </div>
+
+
+</div>
