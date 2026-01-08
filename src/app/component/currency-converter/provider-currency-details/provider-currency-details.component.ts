@@ -8,9 +8,10 @@ import { ExchangeDataViewMode } from '../../../models/currency-converter/exchang
 import { TableModule } from 'primeng/table';
 import { CurrencyRates } from '../../../models/currency-converter/provider-mode';
 import { AgGridAngular } from 'ag-grid-angular'; // Importă componenta
-import { ColDef } from 'ag-grid-community'; // Importă tipul pentru coloane
+import { ColDef, GridOptions } from 'ag-grid-community'; // Importă tipul pentru coloane
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { isPlatformBrowser } from '@angular/common';
+import { CurrencyGridConfig } from '../../../common/shared/currency-gri-Config';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
@@ -21,6 +22,8 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrl: './provider-currency-details.component.scss'
 })
 export class ProviderCurrencyDetailsComponent {
+
+  public gridOptions: GridOptions = CurrencyGridConfig.getOptions();
 
   public selectedProviderCode: string | null = null;
 
