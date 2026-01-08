@@ -45,16 +45,15 @@ export class CurrencyConverterComponent implements OnInit {
 
         let mapper = new CurrencyServiceDataMapper(response);
         this.mapper = mapper;
-
         this.viewModel.Providers = mapper.GetProviders();
 
         this.viewModel.SelectedProvider = mapper.GetSelectedProvider(ExchangeProvider.Bnm);
-        this.viewModel.CurrencyRates = mapper.GetCurrencyRates(ExchangeProvider.Bnm);
+        this.viewModel.SelectedProviderLabel = this.viewModel.SelectedProvider.code;
 
+        this.viewModel.CurrencyRates = mapper.GetCurrencyRates(ExchangeProvider.Bnm);
         this.viewModel.DashBoardRates = this.mapper?.GetDashboardRates(ExchangeProvider.Bnm);
 
         this.viewModel.LeftSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.MDL);
-
         this.viewModel.RightSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.EUR);
 
         console.log('Datele au fost încărcate și mapate cu succes.');
@@ -76,6 +75,7 @@ export class CurrencyConverterComponent implements OnInit {
     const bankCode = this.viewModel.SelectedProvider?.code ?? '';
     this.viewModel.DashBoardRates = this.mapper?.GetDashboardRates(bankCode);
 
+    this.viewModel.SelectedProviderLabel = bankCode;
 
   }
 

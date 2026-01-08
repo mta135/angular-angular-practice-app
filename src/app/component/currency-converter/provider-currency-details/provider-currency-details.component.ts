@@ -64,7 +64,7 @@ export class ProviderCurrencyDetailsComponent {
 
         this.mapper = new CurrencyServiceDataMapper(data);
         this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
-        this.viewModel.DetailSelectedProviderLabel = this.mapper.GetSelectedProvider(this.selectedProviderCode ?? "").code;
+        this.viewModel.SelectedProviderLabel = this.mapper.GetSelectedProvider(this.selectedProviderCode ?? "").code;
 
         this.currencyRates = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "").filter(x => x.Code !== "MDL");
         this.rowData = this.currencyRates;
