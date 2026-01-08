@@ -16,7 +16,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
   selector: 'app-provider-currency-details',
   standalone: true,
-  imports: [TableModule],
+  imports: [TableModule, AgGridAngular],
   templateUrl: './provider-currency-details.component.html',
   styleUrl: './provider-currency-details.component.scss'
 })
@@ -55,25 +55,26 @@ export class ProviderCurrencyDetailsComponent {
   };
 
 
-  async GetCurrencyProviderData(): Promise<void> {
+  GetCurrencyProviderData() {
 
-    let response = await firstValueFrom(this.currencyService.GetCurrencyProvidersData());
-    if (response) {
+    this.currencyService.GetCurrencyProvidersData().subscribe({
 
-      this.mapper = new CurrencyServiceDataMapper(response);
-      this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
-      this.currencyRates = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "").filter(x => x.Code !== "MDL");
+      next: (data) => {
 
-      this.rowData = this.currencyRates;
+        this.mapper = new CurrencyServiceDataMapper(data);
+        this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
 
-    }
-    else {
-      // error handler
-    }
+        this.currencyRates = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "").filter(x => x.Code !== "MDL");
+        this.rowData = this.currencyRates;
+
+      }, error: (error) => {
+        console.error('Error fetching users:', error); // Handle any errors
+      }
+    });
 
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
     this.GetCurrencyProviderData();
   }
 
