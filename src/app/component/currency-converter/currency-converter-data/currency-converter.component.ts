@@ -31,20 +31,18 @@ export class CurrencyConverterComponent implements OnInit {
 
   public isDisabled: boolean = false;
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.GetCurrencyProviderData();
   }
 
-  async GetCurrencyProviderData(): Promise<void> {
-    try {
+  GetCurrencyProviderData(): void {
 
-      let response = await firstValueFrom(this.currencyService.GetCurrencyProvidersData());
+    this.currencyService.GetCurrencyProvidersData().subscribe({
+      next: (data) => {
 
-      if (response) {
-        console.log(response);
-
-        let mapper = new CurrencyServiceDataMapper(response);
+        let mapper = new CurrencyServiceDataMapper(data);
         this.mapper = mapper;
+
         this.viewModel.Providers = mapper.GetProviders();
 
         this.viewModel.SelectedProvider = mapper.GetSelectedProvider(ExchangeProvider.Bnm);
@@ -57,16 +55,14 @@ export class CurrencyConverterComponent implements OnInit {
         this.viewModel.RightSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.EUR);
 
         console.log('Datele au fost încărcate și mapate cu succes.');
-      }
-      else {
+
+      }, error: (error) => {
+        console.error('Error:', error); // Handle any errors
 
         this.userNotification.ShowToast();
         this.isDisabled = true;
       }
-
-    } catch (error) {
-      console.error('Eroare:', error);
-    }
+    });
   }
 
 
