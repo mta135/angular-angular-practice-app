@@ -29,7 +29,7 @@ export class ProviderCurrencyDetailsComponent {
   private mapper?: CurrencyServiceDataMapper;
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
-  public currencyRates: CurrencyRates[] = [];;
+  public currencyRates: CurrencyRates[] = [];
 
   isBrowser: boolean;
 
@@ -48,7 +48,7 @@ export class ProviderCurrencyDetailsComponent {
     { field: 'Buy', headerName: 'Cumpărare' }
   ];
 
-  // 3. Setări implicite (opțional, dar recomandat pentru resize)
+
   public defaultColDef: ColDef = {
     flex: 1,
     minWidth: 100
