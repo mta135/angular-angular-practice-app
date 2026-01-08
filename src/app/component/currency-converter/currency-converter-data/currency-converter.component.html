@@ -64,16 +64,16 @@
 
                 <div class="flex-1">
                     <p-select [options]="viewModel.CurrencyRates" [(ngModel)]="viewModel.LeftSelectedRate"
-                        [checkmark]="true" optionLabel="Name" [filter]="true" filterBy="Name" [resetFilterOnHide]="true"
-                        [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full" size="large"
-                        (onChange)="LeftSelectedOnChange()" />
+                        [checkmark]="true" optionLabel="Name" [filter]="true" dataKey="Code" filterBy="Name"
+                        [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full"
+                        size="large" (onChange)="LeftSelectedOnChange()" />
                 </div>
 
                 <div class="flex-1">
                     <p-select [options]="viewModel.CurrencyRates" [(ngModel)]="viewModel.RightSelectedRate"
-                        [checkmark]="true" optionLabel="Name" [filter]="true" filterBy="Name" [resetFilterOnHide]="true"
-                        [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full" size="large"
-                        (onChange)="RightSelectedOnChange()" />
+                        [checkmark]="true" optionLabel="Name" [filter]="true" dataKey="Code" filterBy="Name"
+                        [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full"
+                        size="large" (onChange)="RightSelectedOnChange()" />
                 </div>
 
             </div>

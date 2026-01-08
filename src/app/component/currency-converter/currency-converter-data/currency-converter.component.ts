@@ -1,15 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SelectModule } from 'primeng/select';
-import { CurrencyDataService as CurrencyDataService } from '../../../services/exchage-data-service';
-import { firstValueFrom } from 'rxjs';
-import { CurrencyServiceDataMapper } from '../../../common/mapper/currency-converter-mapper/currency-data-mapper';
 import { ExchangeProvider } from '../../../enums/currencty-converter/currency-exchage-provider-enum';
 import { ExchangeDataViewMode } from '../../../models/currency-converter/exchange-data-view-model';
 import { FormsModule } from '@angular/forms';
 import { UserNotificationService } from '../../../services/user-notification-service';
 import { ButtonModule } from 'primeng/button';
 import { CurrencyCode } from '../../../enums/currencty-converter/currency-code-enum';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { CurrencyDataServiceV2 } from '../../../services/currency-data-service';
 
 @Component({
   selector: 'app-currency-converter',
@@ -21,11 +19,9 @@ export class CurrencyConverterComponent implements OnInit {
 
   constructor() { }
 
-  private currencyService = inject(CurrencyDataService);
+  private currencyServiceV2 = inject(CurrencyDataServiceV2);
 
   private userNotification = inject(UserNotificationService);
-
-  private mapper?: CurrencyServiceDataMapper;
 
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
@@ -37,42 +33,53 @@ export class CurrencyConverterComponent implements OnInit {
 
   GetCurrencyProviderData(): void {
 
-    this.currencyService.GetCurrencyProvidersData().subscribe({
-      next: (data) => {
+    this.currencyServiceV2.loadCurrencyData().subscribe({
 
-        console.log(data);
-        let mapper = new CurrencyServiceDataMapper(data);
-        this.mapper = mapper;
-
-        this.viewModel.Providers = mapper.GetProviders();
-
-        this.viewModel.SelectedProvider = mapper.GetSelectedProvider(ExchangeProvider.Bnm);
-        this.viewModel.SelectedProviderLabel = this.viewModel.SelectedProvider.code;
-
-        this.viewModel.CurrencyRates = mapper.GetCurrencyRates(ExchangeProvider.Bnm);
-        this.viewModel.DashBoardRates = this.mapper?.GetDashboardRates(ExchangeProvider.Bnm);
-
-        this.viewModel.LeftSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.MDL);
-        this.viewModel.RightSelectedRate = this.mapper?.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.EUR);
-
-        console.log('Datele au fost încărcate și mapate cu succes.');
-
-      }, error: (error) => {
-        console.error('Error:', error); // Handle any errors
+      next: () => {
+        this.UpdateUI();
+      },
+      error: (err) => {
+        console.log(err);
 
         this.userNotification.ShowToast();
         this.isDisabled = true;
       }
     });
+
+  }
+
+
+  private UpdateUI(): void {
+
+    let vm = this.viewModel;
+    let service = this.currencyServiceV2;
+
+    vm.Providers = service.GetProviders();
+
+    vm.SelectedProvider = service.GetSelectedProvider(ExchangeProvider.Bnm);
+    vm.SelectedProviderLabel = vm.SelectedProvider.code;
+
+    vm.CurrencyRates = service.GetCurrencyRates(ExchangeProvider.Bnm);
+    vm.DashBoardRates = service.GetDashboardRates(ExchangeProvider.Bnm);
+
+
+    vm.LeftSelectedRate = service.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.MDL);
+    vm.RightSelectedRate = service.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.EUR);
+
+    console.log('Datele au fost încărcate și mapate cu succes.');
   }
 
 
   public SelectedProviderOnChange(): void {
 
-    const bankCode = this.viewModel.SelectedProvider?.code ?? '';
-    this.viewModel.DashBoardRates = this.mapper?.GetDashboardRates(bankCode);
+    let bankCode = this.viewModel.SelectedProvider?.code ?? '';
+    let service = this.currencyServiceV2;
 
+    this.viewModel.DashBoardRates = service.GetDashboardRates(bankCode);
     this.viewModel.SelectedProviderLabel = bankCode;
+
+    this.viewModel.LeftSelectedRate = service.GetRateByCode(bankCode, CurrencyCode.MDL);
+    this.viewModel.RightSelectedRate = service.GetRateByCode(bankCode, CurrencyCode.EUR);
 
   }
 
