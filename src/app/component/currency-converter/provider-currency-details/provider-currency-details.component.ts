@@ -27,11 +27,12 @@ export class ProviderCurrencyDetailsComponent {
   private currencyService = inject(CurrencyDataService);
 
   private mapper?: CurrencyServiceDataMapper;
+
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
   public currencyRates: CurrencyRates[] = [];
 
-  isBrowser: boolean;
+  public isBrowser: boolean;
 
   constructor(private route: ActivatedRoute, @Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -63,6 +64,7 @@ export class ProviderCurrencyDetailsComponent {
 
         this.mapper = new CurrencyServiceDataMapper(data);
         this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
+        this.viewModel.DetailSelectedProviderLabel = this.mapper.GetSelectedProvider(this.selectedProviderCode ?? "").code;
 
         this.currencyRates = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "").filter(x => x.Code !== "MDL");
         this.rowData = this.currencyRates;

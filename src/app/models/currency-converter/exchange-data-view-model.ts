@@ -13,6 +13,8 @@ export class ExchangeDataViewMode {
 
     public RightSelectedRate: CurrencyRates;
 
+    public DetailSelectedProviderLabel: string;
+
 
     constructor() {
         this.Providers = [];
@@ -24,6 +26,8 @@ export class ExchangeDataViewMode {
         this.LeftSelectedRate = new CurrencyRates();
 
         this.RightSelectedRate = new CurrencyRates();
+
+        this.DetailSelectedProviderLabel = "";
 
     }
 
