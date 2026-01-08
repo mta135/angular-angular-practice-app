@@ -16,7 +16,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
   selector: 'app-provider-currency-details',
   standalone: true,
-  imports: [TableModule, AgGridAngular],
+  imports: [TableModule],
   templateUrl: './provider-currency-details.component.html',
   styleUrl: './provider-currency-details.component.scss'
 })
