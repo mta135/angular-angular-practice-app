@@ -44,20 +44,6 @@ export class ProviderCurrencyDetailsComponent {
 
   public rowData: any[] = [];
 
-  // 2. Definirea coloanelor
-  public columnDefs: ColDef[] = [
-    { field: 'Code', headerName: 'Cod' },
-    { field: 'Name', headerName: 'Valuta' },
-    { field: 'Sell', headerName: 'Vânzare' },
-    { field: 'Buy', headerName: 'Cumpărare' }
-  ];
-
-
-  public defaultColDef: ColDef = {
-    flex: 1,
-    minWidth: 100
-  };
-
 
   GetCurrencyProviderData() {
 
@@ -79,8 +65,11 @@ export class ProviderCurrencyDetailsComponent {
 
   }
 
+
   ngOnInit() {
     this.GetCurrencyProviderData();
   }
+
+
 
 }
