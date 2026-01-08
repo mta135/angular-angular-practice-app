@@ -40,6 +40,7 @@ export class CurrencyConverterComponent implements OnInit {
     this.currencyService.GetCurrencyProvidersData().subscribe({
       next: (data) => {
 
+        console.log(data);
         let mapper = new CurrencyServiceDataMapper(data);
         this.mapper = mapper;
 
