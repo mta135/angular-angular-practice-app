@@ -4,10 +4,22 @@ export class CurrencyGridConfig {
     public static getOptions(): GridOptions {
         return {
             columnDefs: [
-                { field: 'Code', headerName: 'Cod', maxWidth: 200 },
+                {
+                    field: 'Code',
+                    headerName: 'Cod',
+                    maxWidth: 200,
+                    filter: 'agTextColumnFilter',
+                    filterParams: {
+                        maxNumConditions: 1,
+                        filterOptions: ['contains', 'equals', 'startsWith'],
+                        defaultOption: 'contains',
+                        buttons: ['reset', 'apply'], // Adaugă butoane de control în meniu
+                        closeOnApply: true
+                    }
+                },
                 { field: 'Name', headerName: 'Valuta' },
-                { field: 'Sell', headerName: 'Vânzare', type: 'numericColumn' },
-                { field: 'Buy', headerName: 'Cumpărare', type: 'numericColumn', resizable: false }
+                { field: 'Sell', headerName: 'Vânzare', filter: false },
+                { field: 'Buy', headerName: 'Cumpărare', resizable: false, filter: false }
             ],
             defaultColDef: {
                 flex: 1,
