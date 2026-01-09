@@ -23,8 +23,6 @@ export class ProviderCurrencyDetailsComponent {
 
   public gridOptions: GridOptions = CurrencyGridConfig.getOptions();
 
-  public selectedProviderCode: string | null = null;
-
   private currencyService = inject(CurrencyDataService);
 
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
@@ -44,8 +42,8 @@ export class ProviderCurrencyDetailsComponent {
     this.currencyService.loadCurrencyData().subscribe({
       next: () => {
 
-        this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
-        this.UpdateUI(this.selectedProviderCode ?? "");
+        let selectedProviderCode = this.route.snapshot.paramMap.get('code');
+        this.UpdateUI(selectedProviderCode ?? "");
 
       },
       error: (err) => {
