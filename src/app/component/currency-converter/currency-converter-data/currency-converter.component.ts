@@ -8,10 +8,13 @@ import { ButtonModule } from 'primeng/button';
 import { CurrencyCode } from '../../../enums/currencty-converter/currency-code-enum';
 import { RouterLink } from '@angular/router';
 import { CurrencyDataService } from '../../../services/currency-data-service';
+import { NumbersOnlyDirective } from '../../../directive/input-only-numbers-directive';
+import { ExchangeSide } from '../../../enums/currency/exchenge-side-enum';
+import { Session } from '../../../utils/session-storage';
 
 @Component({
   selector: 'app-currency-converter',
-  imports: [SelectModule, FormsModule, ButtonModule, RouterLink],
+  imports: [SelectModule, FormsModule, ButtonModule, RouterLink, NumbersOnlyDirective],
   templateUrl: './currency-converter.component.html',
   styleUrl: './currency-converter.component.scss'
 })
@@ -23,6 +26,8 @@ export class CurrencyConverterComponent implements OnInit {
 
   private userNotification = inject(UserNotificationService);
 
+  private session = inject(Session);
+
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
   ngOnInit(): void {
@@ -33,7 +38,12 @@ export class CurrencyConverterComponent implements OnInit {
 
     this.currencyService.loadCurrencyData().subscribe({
       next: () => {
+
         this.UpdateUI(ExchangeProvider.Bnm, CurrencyCode.MDL, CurrencyCode.EUR);
+
+        this.session.SetItem(ExchangeSide.Left, this.viewModel.LeftSelectedRate?.Code ?? "");
+        this.session.SetItem(ExchangeSide.Right, this.viewModel.RightSelectedRate?.Code ?? "");
+
       },
       error: (err) => {
         console.log(err);
@@ -45,7 +55,6 @@ export class CurrencyConverterComponent implements OnInit {
     });
 
   }
-
 
   private UpdateUI(providerCode: string, leftCurrencyCode: string, rigthCurrencyCode: string): void {
 
@@ -66,7 +75,6 @@ export class CurrencyConverterComponent implements OnInit {
     console.log('Datele au fost încărcate și mapate cu succes.');
   }
 
-
   public SelectedProviderOnChange(): void {
 
     let bankCode = this.viewModel.SelectedProvider?.code ?? '';
@@ -74,14 +82,47 @@ export class CurrencyConverterComponent implements OnInit {
 
   }
 
-
-
   public LeftSelectedOnChange(): void {
 
+    let vm = this.viewModel;
+    let previousLeftCode = this.session.GetItem(ExchangeSide.Left) ?? "";
+
+    this.session.SetItem(ExchangeSide.Left, this.viewModel.LeftSelectedRate?.Code ?? "");
+
+    if (vm.LeftSelectedRate?.Code == vm.RightSelectedRate?.Code) {
+
+      let providerCode = this.viewModel.SelectedProvider?.code;
+
+      this.UpdateSelectedRates(providerCode ?? "", vm.LeftSelectedRate?.Code ?? "", previousLeftCode);
+      this.session.SetItem(ExchangeSide.Right, previousLeftCode);
+
+    }
   }
 
+  private UpdateSelectedRates(providerCode: string, left: string, right: string): void {
+
+    let service = this.currencyService;
+
+    this.viewModel.LeftSelectedRate = service.GetRateByCode(providerCode, left);
+    this.viewModel.RightSelectedRate = service.GetRateByCode(providerCode, right);
+  }
 
   public RightSelectedOnChange(): void {
+
+    let vm = this.viewModel;
+
+    let lastCode = this.session.GetItem(ExchangeSide.Right) ?? "";
+
+    this.session.SetItem(ExchangeSide.Right, vm.RightSelectedRate?.Code ?? "");
+
+    if (vm.LeftSelectedRate?.Code == vm.RightSelectedRate?.Code) {
+
+      let providerCode = vm.SelectedProvider?.code;
+      this.UpdateSelectedRates(providerCode ?? "", lastCode, vm.LeftSelectedRate?.Code ?? "");
+
+      this.session.SetItem(ExchangeSide.Left, lastCode);
+
+    }
 
   }
 
