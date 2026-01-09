@@ -25,8 +25,6 @@ export class CurrencyConverterComponent implements OnInit {
 
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
-  public isDisabled: boolean = false;
-
   ngOnInit(): void {
     this.GetCurrencyProviderData();
   }
@@ -34,37 +32,36 @@ export class CurrencyConverterComponent implements OnInit {
   GetCurrencyProviderData(): void {
 
     this.currencyService.loadCurrencyData().subscribe({
-
       next: () => {
-        this.UpdateUI();
+        this.UpdateUI(ExchangeProvider.Bnm, CurrencyCode.MDL, CurrencyCode.EUR);
       },
       error: (err) => {
         console.log(err);
 
         this.userNotification.ShowToast();
-        this.isDisabled = true;
+        this.viewModel.IsDisabled = true;
+
       }
     });
 
   }
 
 
-  private UpdateUI(): void {
+  private UpdateUI(providerCode: string, leftCurrencyCode: string, rigthCurrencyCode: string): void {
 
     let vm = this.viewModel;
     let service = this.currencyService;
 
     vm.Providers = service.GetProviders();
 
-    vm.SelectedProvider = service.GetSelectedProvider(ExchangeProvider.Bnm);
+    vm.SelectedProvider = service.GetSelectedProvider(providerCode);
     vm.SelectedProviderLabel = vm.SelectedProvider.code;
 
-    vm.CurrencyRates = service.GetCurrencyRates(ExchangeProvider.Bnm);
-    vm.DashBoardRates = service.GetDashboardRates(ExchangeProvider.Bnm);
+    vm.CurrencyRates = service.GetCurrencyRates(providerCode);
+    vm.DashBoardRates = service.GetDashboardRates(providerCode);
 
-
-    vm.LeftSelectedRate = service.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.MDL);
-    vm.RightSelectedRate = service.GetRateByCode(ExchangeProvider.Bnm, CurrencyCode.EUR);
+    vm.LeftSelectedRate = service.GetRateByCode(providerCode, leftCurrencyCode);
+    vm.RightSelectedRate = service.GetRateByCode(providerCode, rigthCurrencyCode);
 
     console.log('Datele au fost încărcate și mapate cu succes.');
   }
@@ -73,13 +70,7 @@ export class CurrencyConverterComponent implements OnInit {
   public SelectedProviderOnChange(): void {
 
     let bankCode = this.viewModel.SelectedProvider?.code ?? '';
-    let service = this.currencyService;
-
-    this.viewModel.DashBoardRates = service.GetDashboardRates(bankCode);
-    this.viewModel.SelectedProviderLabel = bankCode;
-
-    this.viewModel.LeftSelectedRate = service.GetRateByCode(bankCode, CurrencyCode.MDL);
-    this.viewModel.RightSelectedRate = service.GetRateByCode(bankCode, CurrencyCode.EUR);
+    this.UpdateUI(bankCode, CurrencyCode.MDL, CurrencyCode.EUR);
 
   }
 

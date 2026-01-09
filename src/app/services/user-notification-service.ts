@@ -24,7 +24,7 @@ export class UserNotificationService {
             position: 'top-right', // Aici setezi poziția
             duration: 5000,
             style: {
-                marginTop: '32px', // Adaugă spațiu deasupra acestui toast specific
+                marginTop: '10px', // Adaugă spațiu deasupra acestui toast specific
                 border: '1px solid #713200',
                 padding: '24px',        // Mărește spațiul interior
                 color: '#713200',

@@ -16,9 +16,9 @@
                     <label class="font-medium text-900 leading-tight">Provider</label>
 
                     <p-select [options]="viewModel.Providers" [(ngModel)]="viewModel.SelectedProvider"
-                        [disabled]="isDisabled" [checkmark]="true" [filter]="true" optionLabel="Name" filterBy="Name"
-                        [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38" class="w-full"
-                        size="large" (onChange)="SelectedProviderOnChange()" />
+                        [disabled]="viewModel.IsDisabled" [checkmark]="true" [filter]="true" optionLabel="Name"
+                        filterBy="Name" [resetFilterOnHide]="true" [virtualScroll]="true" [virtualScrollItemSize]="38"
+                        class="w-full" size="large" (onChange)="SelectedProviderOnChange()" />
 
                     <div class="mt-1 flex justify-center">
                         <img src="images/exchange-icon.png" width="90" height="90">

@@ -15,6 +15,8 @@ export class ExchangeDataViewMode {
 
     public SelectedProviderLabel: string;
 
+    public IsDisabled: boolean;
+
 
     constructor() {
         this.Providers = [];
@@ -29,6 +31,7 @@ export class ExchangeDataViewMode {
 
         this.SelectedProviderLabel = "";
 
+        this.IsDisabled = false;
     }
 
 
