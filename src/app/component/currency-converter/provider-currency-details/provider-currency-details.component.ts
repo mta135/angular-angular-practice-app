@@ -12,6 +12,8 @@ import { ColDef, GridOptions } from 'ag-grid-community'; // Importă tipul pentr
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { isPlatformBrowser } from '@angular/common';
 import { CurrencyGridConfig } from '../../../common/shared/currency-gri-Config';
+import { CurrencyDataServiceV2 } from '../../../services/currency-data-service';
+import { CurrencyCode } from '../../../enums/currencty-converter/currency-code-enum';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
@@ -27,13 +29,9 @@ export class ProviderCurrencyDetailsComponent {
 
   public selectedProviderCode: string | null = null;
 
-  private currencyService = inject(CurrencyDataService);
-
-  private mapper?: CurrencyServiceDataMapper;
+  private currencyServiceV2 = inject(CurrencyDataServiceV2);
 
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
-
-  public currencyRates: CurrencyRates[] = [];
 
   public isBrowser: boolean;
 
@@ -41,35 +39,36 @@ export class ProviderCurrencyDetailsComponent {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-
-  public rowData: any[] = [];
-
+  ngOnInit() {
+    this.GetCurrencyProviderData();
+  }
 
   GetCurrencyProviderData() {
 
-    this.currencyService.GetCurrencyProvidersData().subscribe({
+    this.currencyServiceV2.loadCurrencyData().subscribe({
+      next: () => {
 
-      next: (data) => {
-
-        this.mapper = new CurrencyServiceDataMapper(data);
         this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
-        this.viewModel.SelectedProviderLabel = this.mapper.GetSelectedProvider(this.selectedProviderCode ?? "").code;
+        this.UpdateUI(this.selectedProviderCode ?? "");
 
-        this.currencyRates = this.mapper.GetCurrencyRates(this.selectedProviderCode ?? "").filter(x => x.Code !== "MDL");
-        this.rowData = this.currencyRates;
-
-      }, error: (error) => {
-        console.error('Error fetching users:', error); // Handle any errors
+      },
+      error: (err) => {
+        console.log(err);
       }
+
     });
 
   }
 
 
-  ngOnInit() {
-    this.GetCurrencyProviderData();
+  private UpdateUI(provideCode: string): void {
+
+    let vm = this.viewModel;
+    let service = this.currencyServiceV2;
+
+    vm.SelectedProviderLabel = service.GetSelectedProvider(provideCode).code;
+    vm.CurrencyRates = service.GetCurrencyRates(provideCode).filter(x => x.Code != CurrencyCode.MDL);
+
   }
-
-
 
 }
