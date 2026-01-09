@@ -1,18 +1,14 @@
 import { Component, inject, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { CurrencyDataService } from '../../../services/exchage-data-service';
-import { firstValueFrom } from 'rxjs';
-import { CurrencyServiceDataMapper } from '../../../common/mapper/currency-converter-mapper/currency-data-mapper';
 import { ExchangeDataViewMode } from '../../../models/currency-converter/exchange-data-view-model';
 import { TableModule } from 'primeng/table';
-import { CurrencyRates } from '../../../models/currency-converter/provider-mode';
 import { AgGridAngular } from 'ag-grid-angular'; // Importă componenta
-import { ColDef, GridOptions } from 'ag-grid-community'; // Importă tipul pentru coloane
+import { GridOptions } from 'ag-grid-community'; // Importă tipul pentru coloane
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { isPlatformBrowser } from '@angular/common';
 import { CurrencyGridConfig } from '../../../common/shared/currency-gri-Config';
-import { CurrencyDataServiceV2 } from '../../../services/currency-data-service';
+import { CurrencyDataService } from '../../../services/currency-data-service';
 import { CurrencyCode } from '../../../enums/currencty-converter/currency-code-enum';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -29,7 +25,7 @@ export class ProviderCurrencyDetailsComponent {
 
   public selectedProviderCode: string | null = null;
 
-  private currencyServiceV2 = inject(CurrencyDataServiceV2);
+  private currencyService = inject(CurrencyDataService);
 
   public viewModel: ExchangeDataViewMode = new ExchangeDataViewMode();
 
@@ -45,7 +41,7 @@ export class ProviderCurrencyDetailsComponent {
 
   GetCurrencyProviderData() {
 
-    this.currencyServiceV2.loadCurrencyData().subscribe({
+    this.currencyService.loadCurrencyData().subscribe({
       next: () => {
 
         this.selectedProviderCode = this.route.snapshot.paramMap.get('code');
@@ -64,7 +60,7 @@ export class ProviderCurrencyDetailsComponent {
   private UpdateUI(provideCode: string): void {
 
     let vm = this.viewModel;
-    let service = this.currencyServiceV2;
+    let service = this.currencyService;
 
     vm.SelectedProviderLabel = service.GetSelectedProvider(provideCode).code;
     vm.CurrencyRates = service.GetCurrencyRates(provideCode).filter(x => x.Code != CurrencyCode.MDL);

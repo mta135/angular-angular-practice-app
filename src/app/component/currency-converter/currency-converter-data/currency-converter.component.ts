@@ -7,7 +7,7 @@ import { UserNotificationService } from '../../../services/user-notification-ser
 import { ButtonModule } from 'primeng/button';
 import { CurrencyCode } from '../../../enums/currencty-converter/currency-code-enum';
 import { RouterLink } from '@angular/router';
-import { CurrencyDataServiceV2 } from '../../../services/currency-data-service';
+import { CurrencyDataService } from '../../../services/currency-data-service';
 
 @Component({
   selector: 'app-currency-converter',
@@ -19,7 +19,7 @@ export class CurrencyConverterComponent implements OnInit {
 
   constructor() { }
 
-  private currencyServiceV2 = inject(CurrencyDataServiceV2);
+  private currencyService = inject(CurrencyDataService);
 
   private userNotification = inject(UserNotificationService);
 
@@ -33,7 +33,7 @@ export class CurrencyConverterComponent implements OnInit {
 
   GetCurrencyProviderData(): void {
 
-    this.currencyServiceV2.loadCurrencyData().subscribe({
+    this.currencyService.loadCurrencyData().subscribe({
 
       next: () => {
         this.UpdateUI();
@@ -52,7 +52,7 @@ export class CurrencyConverterComponent implements OnInit {
   private UpdateUI(): void {
 
     let vm = this.viewModel;
-    let service = this.currencyServiceV2;
+    let service = this.currencyService;
 
     vm.Providers = service.GetProviders();
 
@@ -73,7 +73,7 @@ export class CurrencyConverterComponent implements OnInit {
   public SelectedProviderOnChange(): void {
 
     let bankCode = this.viewModel.SelectedProvider?.code ?? '';
-    let service = this.currencyServiceV2;
+    let service = this.currencyService;
 
     this.viewModel.DashBoardRates = service.GetDashboardRates(bankCode);
     this.viewModel.SelectedProviderLabel = bankCode;

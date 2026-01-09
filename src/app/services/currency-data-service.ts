@@ -9,7 +9,7 @@ import { CurrencyProvider, CurrencyRates } from "../models/currency-converter/pr
     providedIn: 'root'
 })
 
-export class CurrencyDataServiceV2 {
+export class CurrencyDataService {
 
     private currencyData: ExchangeCurrencyData = new ExchangeCurrencyData();
 
