@@ -1,6 +1,6 @@
 
 import { ExchangeCurrencyData, Provider, Rates } from "../../models/currency-converter/exchange-currency-data";
-import { ExhcengeServiceDataMapper } from "../../common/mapper/currency-converter-mapper/exchange-service-data-mapper";
+import { ExchangeDescriptionsEnum } from "../../enums/currencty-converter/exchange-descriptions-enum";
 import { Injectable } from "@angular/core";
 
 import { HttpClient } from '@angular/common/http';

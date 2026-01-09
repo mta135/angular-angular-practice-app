@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { CurrencyDataRepository } from "../data/repository/currency-data-repository";
 import { map, Observable } from "rxjs";
 import { ExchangeCurrencyData, Provider, Rates } from "../models/currency-converter/exchange-currency-data";
-import { ExhcengeServiceDataMapper } from "../common/mapper/currency-converter-mapper/exchange-service-data-mapper";
+import { ExchangeDescriptionsEnum } from "../enums/currencty-converter/exchange-descriptions-enum";
 import { CurrencyProvider, CurrencyRates } from "../models/currency-converter/provider-mode";
 
 @Injectable({
@@ -28,7 +28,7 @@ export class CurrencyDataService {
 
                     let provider = new Provider();
                     provider.Code = providerKey;
-                    provider.Name = ExhcengeServiceDataMapper.SetProviderFullName(provider.Code);
+                    provider.Name = ExchangeDescriptionsEnum.SetProviderFullName(provider.Code);
                     provider.Date = new Date(providerRawObj.date);
                     provider.Expire = providerRawObj.expired;
                     provider.Id = i++;
@@ -41,7 +41,7 @@ export class CurrencyDataService {
                             rate.Code = currencyCode;
                             rate.Buy = parseFloat(rateValues.buy);
                             rate.Sell = parseFloat(rateValues.sell);
-                            rate.Name = ExhcengeServiceDataMapper.SetCodeFullName(rate.Code);
+                            rate.Name = ExchangeDescriptionsEnum.SetCodeFullName(rate.Code);
                             provider.Rate.push(rate);
                         }
                     }

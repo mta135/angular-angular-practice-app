@@ -1,7 +1,7 @@
-import { CurrencyCode } from "../../../enums/currencty-converter/currency-code-enum";
-import { ExchangeProvider } from "../../../enums/currencty-converter/currency-exchage-provider-enum";
+import { CurrencyCode } from "./currency-code-enum";
+import { ExchangeProvider } from "./currency-exchage-provider-enum";
 
-export class ExhcengeServiceDataMapper {
+export class ExchangeDescriptionsEnum {
 
     private static readonly CodeFullName: Record<string, string> = {
 
