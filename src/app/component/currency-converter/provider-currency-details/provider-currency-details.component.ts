@@ -7,7 +7,7 @@ import { AgGridAngular } from 'ag-grid-angular'; // Importă componenta
 import { GridOptions } from 'ag-grid-community'; // Importă tipul pentru coloane
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { isPlatformBrowser } from '@angular/common';
-import { CurrencyGridConfig } from '../../../common/shared/currency-gri-Config';
+import { CurrencyGridConfig } from '../../../common/shared/currency-grid-Config';
 import { CurrencyDataService } from '../../../services/currency-data-service';
 import { CurrencyCode } from '../../../enums/currencty-converter/currency-code-enum';
 
