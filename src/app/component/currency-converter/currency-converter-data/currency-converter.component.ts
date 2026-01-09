@@ -41,9 +41,6 @@ export class CurrencyConverterComponent implements OnInit {
 
         this.UpdateUI(ExchangeProvider.Bnm, CurrencyCode.MDL, CurrencyCode.EUR);
 
-        this.session.SetItem(ExchangeSide.Left, this.viewModel.LeftSelectedRate?.Code ?? "");
-        this.session.SetItem(ExchangeSide.Right, this.viewModel.RightSelectedRate?.Code ?? "");
-
       },
       error: (err) => {
         console.log(err);
@@ -71,6 +68,9 @@ export class CurrencyConverterComponent implements OnInit {
 
     vm.LeftSelectedRate = service.GetRateByCode(providerCode, leftCurrencyCode);
     vm.RightSelectedRate = service.GetRateByCode(providerCode, rigthCurrencyCode);
+
+    this.session.SetItem(ExchangeSide.Left, this.viewModel.LeftSelectedRate?.Code ?? "");
+    this.session.SetItem(ExchangeSide.Right, this.viewModel.RightSelectedRate?.Code ?? "");
 
     console.log('Datele au fost încărcate și mapate cu succes.');
   }
@@ -112,7 +112,6 @@ export class CurrencyConverterComponent implements OnInit {
     let vm = this.viewModel;
 
     let lastCode = this.session.GetItem(ExchangeSide.Right) ?? "";
-
     this.session.SetItem(ExchangeSide.Right, vm.RightSelectedRate?.Code ?? "");
 
     if (vm.LeftSelectedRate?.Code == vm.RightSelectedRate?.Code) {
@@ -121,7 +120,6 @@ export class CurrencyConverterComponent implements OnInit {
       this.UpdateSelectedRates(providerCode ?? "", lastCode, vm.LeftSelectedRate?.Code ?? "");
 
       this.session.SetItem(ExchangeSide.Left, lastCode);
-
     }
 
   }
@@ -133,7 +131,6 @@ export class CurrencyConverterComponent implements OnInit {
   public RightInputTextBoxEvent(): void {
 
   }
-
 
   public GetCurrencyIcon(code: string): string {
 

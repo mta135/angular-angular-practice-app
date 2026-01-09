@@ -54,7 +54,6 @@ export class ProviderCurrencyDetailsComponent {
 
   }
 
-
   private UpdateUI(provideCode: string): void {
 
     let vm = this.viewModel;
