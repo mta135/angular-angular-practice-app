@@ -146,6 +146,8 @@ export class CurrencyConverterComponent implements OnInit {
 
     if (direction === "LEFT") {
 
+      if (leftVal == 0) return "";
+
       if (leftCurrency.Code === "MDL") {
 
         let temp = Number(vm.LeftInputRate) / rightCurrency.Sell;
@@ -164,6 +166,8 @@ export class CurrencyConverterComponent implements OnInit {
     }
 
     else if (direction === "RIGHT") {
+
+      if (rightVal == 0) return "";
 
       if (rightCurrency.Code === "MDL") {
         result = rightVal / leftCurrency.Sell;
