@@ -126,15 +126,15 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   public LeftInputTextBoxEvent(): void {
-    this.viewModel.RigthInputRate = this.CalculationRate(ExchangeSide.Left);
+    this.viewModel.RigthInputRate = this.CalculatRate(ExchangeSide.Left);
   }
 
   public RightInputTextBoxEvent(): void {
-    this.viewModel.LeftInputRate = this.CalculationRate(ExchangeSide.Right);
+    this.viewModel.LeftInputRate = this.CalculatRate(ExchangeSide.Right);
 
   }
 
-  private CalculationRate(direction: string): string {
+  private CalculatRate(direction: string): string {
 
     let result: number = 0;
     let vm = this.viewModel;
