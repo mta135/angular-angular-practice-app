@@ -139,43 +139,43 @@ export class CurrencyConverterComponent implements OnInit {
     let result: number = 0;
     let vm = this.viewModel;
 
-    if (direction === "LEFT") {
+    const leftCurrency = vm.LeftSelectedRate;
+    const rightCurrency = vm.RightSelectedRate;
+    const leftVal = Number(vm.LeftInputRate) || 0;
+    const rightVal = Number(vm.RigthInputRate) || 0;
 
-      let leftCurrency = vm.LeftSelectedRate;
-      let rightCurrency = vm.RightSelectedRate
+    if (direction === "LEFT") {
 
       if (leftCurrency.Code === "MDL") {
 
         let temp = Number(vm.LeftInputRate) / rightCurrency.Sell;
         result = temp;
 
-      } else {
+      } else if (rightCurrency.Code == "MDL") {
+        result = leftVal * leftCurrency.Buy;
 
-        let tempBuy = Number(vm.LeftInputRate) * leftCurrency.Buy;
-        let tempSell = tempBuy / rightCurrency.Sell;
+      }
+      else {
 
-        result = tempSell;
+        let inMDL = leftVal * leftCurrency.Buy;
+        result = inMDL / rightCurrency.Sell;
       }
 
     }
 
     else if (direction === "RIGHT") {
 
-      let rightCurrency = vm.RightSelectedRate
-      let leftCurrency = vm.LeftSelectedRate;
+      if (rightCurrency.Code === "MDL") {
+        result = rightVal / leftCurrency.Sell;
 
-      if (rightCurrency.Code == "MDL") {
+      } else if (leftCurrency.Code === "MDL") {
 
-        let temp = Number(vm.RigthInputRate) * leftCurrency.Buy;
-        result = temp;
+        result = rightVal * rightCurrency.Buy;
 
-      }
-      else {
-        let tempBuy = Number(vm.RigthInputRate) * rightCurrency.Buy;
-        let tempSell = tempBuy / leftCurrency.Sell;
+      } else {
 
-        result = tempSell;
-
+        let inMDL = rightVal * rightCurrency.Buy;
+        result = inMDL / leftCurrency.Sell;
       }
 
     }
