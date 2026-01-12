@@ -126,12 +126,11 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   public LeftInputTextBoxEvent(): void {
-
     this.viewModel.RigthInputRate = this.CalculationRate(ExchangeSide.Left);
-
   }
 
   public RightInputTextBoxEvent(): void {
+    this.viewModel.LeftInputRate = this.CalculationRate(ExchangeSide.Right);
 
   }
 
@@ -164,6 +163,20 @@ export class CurrencyConverterComponent implements OnInit {
 
       let rightCurrency = vm.RightSelectedRate
       let leftCurrency = vm.LeftSelectedRate;
+
+      if (rightCurrency.Code == "MDL") {
+
+        let temp = Number(vm.RigthInputRate) * leftCurrency.Buy;
+        result = temp;
+
+      }
+      else {
+        let tempBuy = Number(vm.RigthInputRate) * leftCurrency.Buy;
+        let tempSell = tempBuy / leftCurrency.Sell;
+
+        result = tempSell;
+
+      }
 
     }
 
