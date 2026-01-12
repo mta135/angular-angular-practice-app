@@ -11,6 +11,7 @@ import { CurrencyDataService } from '../../../services/currency-data-service';
 import { NumbersOnlyDirective } from '../../../directive/input-only-numbers-directive';
 import { ExchangeSide } from '../../../enums/currency/exchenge-side-enum';
 import { Session } from '../../../utils/session-storage';
+import e from 'express';
 
 @Component({
   selector: 'app-currency-converter',
@@ -126,9 +127,47 @@ export class CurrencyConverterComponent implements OnInit {
 
   public LeftInputTextBoxEvent(): void {
 
+    this.viewModel.RigthInputRate = this.CalculationRate(ExchangeSide.Left);
+
   }
 
   public RightInputTextBoxEvent(): void {
+
+  }
+
+  private CalculationRate(direction: string): string {
+
+    let result: number = 0;
+    let vm = this.viewModel;
+
+    if (direction === "LEFT") {
+
+      let leftCurrency = vm.LeftSelectedRate;
+      let rightCurrency = vm.RightSelectedRate
+
+      if (leftCurrency.Code === "MDL") {
+
+        let temp = Number(vm.LeftInputRate) / rightCurrency.Sell;
+        result = temp;
+
+      } else {
+
+        let tempBuy = Number(vm.LeftInputRate) * leftCurrency.Buy;
+        let tempSell = tempBuy / rightCurrency.Sell;
+
+        result = tempSell;
+      }
+
+    }
+
+    else if (direction === "RIGHT") {
+
+      let rightCurrency = vm.RightSelectedRate
+      let leftCurrency = vm.LeftSelectedRate;
+
+    }
+
+    return result.toFixed(2);
 
   }
 

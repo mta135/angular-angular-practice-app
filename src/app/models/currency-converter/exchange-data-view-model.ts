@@ -15,6 +15,10 @@ export class ExchangeDataViewMode {
 
     public SelectedProviderLabel: string;
 
+    public LeftInputRate: string;
+
+    public RigthInputRate: string
+
     public IsDisabled: boolean;
 
 
@@ -32,6 +36,9 @@ export class ExchangeDataViewMode {
         this.SelectedProviderLabel = "";
 
         this.IsDisabled = false;
+
+        this.LeftInputRate = "";
+        this.RigthInputRate = "";
     }
 
 
