@@ -171,7 +171,7 @@ export class CurrencyConverterComponent implements OnInit {
 
       }
       else {
-        let tempBuy = Number(vm.RigthInputRate) * leftCurrency.Buy;
+        let tempBuy = Number(vm.RigthInputRate) * rightCurrency.Buy;
         let tempSell = tempBuy / leftCurrency.Sell;
 
         result = tempSell;
