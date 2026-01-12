@@ -144,46 +144,46 @@ export class CurrencyConverterComponent implements OnInit {
     const leftVal = Number(vm.LeftInputRate) || 0;
     const rightVal = Number(vm.RigthInputRate) || 0;
 
-    if (direction === "LEFT") {
+    switch (direction) {
+      case ExchangeSide.Left:
 
-      if (leftVal == 0) return "";
+        if (leftVal == 0) return "";
 
-      if (leftCurrency.Code === "MDL") {
+        if (leftCurrency.Code === "MDL") {
 
-        let temp = Number(vm.LeftInputRate) / rightCurrency.Sell;
-        result = temp;
+          let temp = Number(vm.LeftInputRate) / rightCurrency.Sell;
+          result = temp;
 
-      } else if (rightCurrency.Code == "MDL") {
-        result = leftVal * leftCurrency.Buy;
+        } else if (rightCurrency.Code == "MDL") {
+          result = leftVal * leftCurrency.Buy;
 
-      }
-      else {
+        }
+        else {
 
-        let inMDL = leftVal * leftCurrency.Buy;
-        result = inMDL / rightCurrency.Sell;
-      }
+          let inMDL = leftVal * leftCurrency.Buy;
+          result = inMDL / rightCurrency.Sell;
+        }
 
+        break;
+
+      case ExchangeSide.Right:
+        if (rightVal == 0) return "";
+
+        if (rightCurrency.Code === "MDL") {
+          result = rightVal / leftCurrency.Sell;
+
+        } else if (leftCurrency.Code === "MDL") {
+
+          result = rightVal * rightCurrency.Buy;
+
+        } else {
+
+          let inMDL = rightVal * rightCurrency.Buy;
+          result = inMDL / leftCurrency.Sell;
+        }
+
+        break;
     }
-
-    else if (direction === "RIGHT") {
-
-      if (rightVal == 0) return "";
-
-      if (rightCurrency.Code === "MDL") {
-        result = rightVal / leftCurrency.Sell;
-
-      } else if (leftCurrency.Code === "MDL") {
-
-        result = rightVal * rightCurrency.Buy;
-
-      } else {
-
-        let inMDL = rightVal * rightCurrency.Buy;
-        result = inMDL / leftCurrency.Sell;
-      }
-
-    }
-
     return result.toFixed(2);
 
   }
