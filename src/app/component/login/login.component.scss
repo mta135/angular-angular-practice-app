@@ -1,0 +1,114 @@
+.main-container {
+    min-width: 90vh;
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.login-card {
+    position: relative;
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 85%;
+    min-height: 80vh;
+    animation: fadein 1s ease-in-out;
+
+}
+
+
+.login-content {
+    flex: 2 2;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadein 1.5s ease-in-out;
+    min-height: 100%;
+}
+
+.login-header {
+    font-size: 2.5rem;
+    display: block;
+    margin-top: 2rem;
+    color: #0c1066;
+    letter-spacing: 0.2rem;
+    font-weight: bold;
+    animation: fadein 1.75s ease-in-out;
+}
+
+
+.login-form {
+    display: flex;
+    flex-flow: column;
+    width: 80%;
+    align-items: center;
+    animation: slidedown 2s ease-in-out;
+}
+
+.login-input {
+    margin: 1rem 0;
+    padding: 1.5rem;
+    border-radius: 5rem;
+    outline: none;
+    border: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 255, 0.3);
+    width: 80%;
+
+}
+
+
+.signup-link-wrapper {
+    margin-top: 3rem;
+    animation: slideup 1s ease-in-out;
+
+}
+
+.signup-link {
+    text-transform: uppercase;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: #ff3a82;
+    margin-left: 1rem;
+}
+
+.login-aside {
+    animation: fadein 2.25s ease-in-out;
+    flex: 3 3;
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: column;
+    min-height: 100%;
+    border-radius: 0 10px 10px 0;
+    background: url('https://source.unsplash.com/random/1200x900?mountain') no-repeat center center;
+
+    background-size: cover;
+    position: relative;
+}
+
+.login-aside-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 0 10px 10px 0;
+}
+
+input[type="text"] {
+    color: #333;
+    /* Change text color to dark gray */
+    font-family: Arial, sans-serif;
+    /* Change the font */
+    font-size: 16px;
+    /* Change the font size */
+    text-align: center;
+    /* Center the text horizontally */
+    padding: 10px;
+    /* Add padding inside the field */
+}
