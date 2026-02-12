@@ -23,7 +23,7 @@ export class AppComponent {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
 
       const url = event.urlAfterRedirects;
-      const isExcludedPage = url.startsWith('/currency-converter') || url.startsWith('/currency-details');
+      const isExcludedPage = url.startsWith('/currency-converter') || url.startsWith('/currency-details') || url.startsWith('/calc');
 
       this.showMenu = !isExcludedPage;
     });

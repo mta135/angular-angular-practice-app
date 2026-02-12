@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { CurrencyConverterComponent } from './component/currency-converter/currency-converter-data/currency-converter.component';
 import { ProviderCurrencyDetailsComponent } from './component/currency-converter/provider-currency-details/provider-currency-details.component';
 import { LoginComponent } from './component/login/login.component';
+import { CalculatorComponent } from './component/calculator/calculator.component';
 
 export const routes: Routes = [
 
@@ -11,6 +12,9 @@ export const routes: Routes = [
     // { path: 'currency-details/:code', component: ProviderCurrencyDetailsComponent },
 
 
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
+    // { path: '', redirectTo: '/login', pathMatch: 'full' },
+    // { path: 'login', component: LoginComponent },
+
+    { path: '', redirectTo: '/calculator', pathMatch: 'full' },
+    { path: 'calculator', component: CalculatorComponent },
 ];
