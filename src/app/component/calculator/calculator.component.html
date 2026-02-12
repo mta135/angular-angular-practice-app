@@ -3,36 +3,31 @@
 
 
 <div class="calculator">
-    <input type="text" id="result" , readonly>
+    <input type="text" id="result" readonly [(ngModel)]="calculationResult">
 
     <div class="buttons">
         <button class="clear">C</button>
-        <button class="operator">/</button>
-        <button class="operator">*</button>
-        <button class="operator">-</button>
+        <button class="operator" (click)="GetOperation('/')">/</button>
+        <button class="operator" (click)="GetOperation('*')">*</button>
+        <button class="operator" (click)="GetOperation('-')">-</button>
 
-        <button class="number">7</button>
-        <button class="number">8</button>
-        <button class="number">9</button>
-        <button class="operator">+</button>
+        <button class="number" (click)="GetNumber('7')">7</button>
+        <button class="number" (click)="GetNumber('8')">8</button>
+        <button class="number" (click)="GetNumber('9')">9</button>
+        <button class="operator" (click)="GetOperation('+')">+</button>
 
-        <button class="number">4</button>
-        <button class="number">5</button>
-        <button class="number">6</button>
-
+        <button type="button" class="number" (click)="GetNumber('4')">4</button>
+        <button type="button" class="number" (click)="GetNumber('5')">5</button>
+        <button type="button" class="number" (click)="GetNumber('5')">6</button>
 
         <button class="equal">=</button>
 
-
-        <button class="number">1</button>
-        <button class="number">2</button>
-        <button class="number">3</button>
-        <button class="number">0</button>
+        <button class="number" (click)="GetNumber('1')">1</button>
+        <button class="number" (click)="GetNumber('2')">2</button>
+        <button class="number" (click)="GetNumber('3')">3</button>
+        <button class="number" (click)="GetNumber('0')">0</button>
 
         <button class="decimal">.</button>
-
-
-
 
     </div>
 

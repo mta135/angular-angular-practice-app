@@ -1,11 +1,38 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-calculator',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.scss'
 })
 export class CalculatorComponent {
+
+
+  public calculationResult: string = ''
+
+
+
+  public GetNumber(number: string): void {
+
+    this.calculationResult += number;
+    console.log(number);
+
+  }
+
+
+  public GetOperation(operation: string): string {
+
+    this.calculationResult += operation;
+    return operation;
+
+  }
+
+
+
+  private DoOperation(): void {
+
+  }
 
 }
