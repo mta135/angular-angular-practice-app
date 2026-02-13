@@ -6,7 +6,7 @@
     <input type="text" id="result" readonly [(ngModel)]="calculationResult">
 
     <div class="buttons">
-        <button class="clear">C</button>
+        <button class="clear" (click)="Clear()">C</button>
         <button class="operator" (click)="GetOperation('/')">/</button>
         <button class="operator" (click)="GetOperation('*')">*</button>
         <button class="operator" (click)="GetOperation('-')">-</button>

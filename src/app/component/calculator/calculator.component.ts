@@ -9,12 +9,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class CalculatorComponent {
 
-
-  public calculationResult: string = ''
-
+  public calculationResult: string = '0'
 
 
   public GetNumber(number: string): void {
+
+    this.ClearCalculationResult();
 
     this.calculationResult += number;
     console.log(number);
@@ -30,8 +30,21 @@ export class CalculatorComponent {
   }
 
 
-
   private DoOperation(): void {
+
+  }
+
+
+  public Clear() {
+    this.calculationResult = "0";
+  }
+
+
+  public ClearCalculationResult(): void {
+
+    let input = this.calculationResult;
+    if (input === "0")
+      this.calculationResult = '';
 
   }
 
