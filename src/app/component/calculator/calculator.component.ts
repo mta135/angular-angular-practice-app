@@ -92,4 +92,8 @@ export class CalculatorComponent {
 
   }
 
+  public GetDecimal(): void {
+
+  }
+
 }

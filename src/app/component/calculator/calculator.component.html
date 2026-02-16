@@ -1,4 +1,4 @@
-<!-- <p>calculator works!</p> -->
+<!-- <p>calculator works!</p>
 
 
 
@@ -29,6 +29,76 @@
 
         <button class="decimal">.</button>
 
+    </div>
+
+</div> -->
+
+
+<!-- <div class="calculator">
+
+    <input type="text" class="calculator-screen" [value]="calculationResult" disabled />
+
+    <div class="calculator-keys">
+
+        <button type="button" (click)="GetOperation('+')" class="operator" value="+">+</button>
+        <button type="button" (click)="GetOperation('-')" class="operator" value="-">-</button>
+        <button type="button" (click)="GetOperation('*')" class="operator" value="*">&times;</button>
+        <button type="button" (click)="GetOperation('/')" class="operator" value="/">&divide;</button>
+
+        <button type="button" (click)="GetNumber('7')" value="7">7</button>
+        <button type="button" (click)="GetNumber('8')" value="8">8</button>
+        <button type="button" (click)="GetNumber('9')" value="9">9</button>
+
+
+        <button type="button" (click)="GetNumber('4')" value="4">4</button>
+        <button type="button" (click)="GetNumber('5')" value="5">5</button>
+        <button type="button" (click)="GetNumber('6')" value="6">6</button>
+
+
+        <button type="button" (click)="GetNumber('1')" value="1">1</button>
+        <button type="button" (click)="GetNumber('2')" value="2">2</button>
+        <button type="button" (click)="GetNumber('3')" value="3">3</button>
+
+
+        <button type="button" (click)="GetNumber('0')" value="0">0</button>
+        <button type="button" (click)="GetDecimal()" class="decimal" value=".">.</button>
+        <button type="button" (click)="Clear()" class="all-clear" value="all-clear">AC</button>
+
+        <button type="button" (click)="GetOperation('=')" class="equal-sign" value="=">=</button>
+
+    </div>
+</div> -->
+
+
+<div class="card">
+    <!-- <h1>Card 1</h1>
+    <p>
+        asdasdadasda
+    </p> -->
+
+    <!-- <input type="text" class="calculator-screen" [value]="calculationResult" disabled /> -->
+
+    <input type="text" class="calculator-screen" value="0" disabled />
+
+    <div class="calculator-keys">
+        <button type="button">7</button>
+        <button type="button">8</button>
+        <button type="button">9</button>
+        <button type="button" class="operator">+</button>
+
+        <button type="button">4</button>
+        <button type="button">5</button>
+        <button type="button">6</button>
+        <button type="button" class="operator">-</button>
+
+        <button type="button">1</button>
+        <button type="button">2</button>
+        <button type="button">3</button>
+        <button type="button" class="equal-sign"> = </button>
+
+        <button type="button" class="zero-btn">0</button>
+        <button type="button">.</button>
+        <button type="button" class="operator">*</button>
     </div>
 
 </div>
