@@ -9,6 +9,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class CalculatorComponent {
 
+
+
+  public display: string = "";
+
   public calculationResult: string = '0'
 
   firstOperand: number | null = null;
@@ -95,5 +99,11 @@ export class CalculatorComponent {
   public GetDecimal(): void {
 
   }
+
+  appendInput(input: string): void {
+
+    this.display += input;
+  }
+
 
 }

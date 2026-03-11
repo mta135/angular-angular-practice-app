@@ -78,7 +78,7 @@
 
     <!-- <input type="text" class="calculator-screen" [value]="calculationResult" disabled /> -->
 
-    <input type="text" class="calculator-screen" value="0" disabled />
+    <input type="text" [(ngModel)]="display" readonly class="calculator-screen" value="0" disabled />
 
     <div class="calculator-keys">
 
@@ -105,7 +105,7 @@
 
         <button type="button">tan</button>
         <button type="button">√</button>
-        <button type="button">1</button>
+        <button type="button" (click)="appendInput('1')">1</button>
         <button type="button">2</button>
         <button type="button">3</button>
         <button type="button" class="operator">-</button>
