@@ -66,13 +66,13 @@ export class CalculatorComponent {
 
       case '-':
 
-        return this.firstOperand -= secondOp;
+      // return this.firstOperand -= secondOp;
       case '*':
 
-        return this.firstOperand *= secondOp;
+      // return this.firstOperand *= secondOp;
       case '/':
 
-        return this.firstOperand /= secondOp;
+      //return this.firstOperand /= secondOp;
 
       case '=':
         return secondOp;
